@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= full_title(yield(:title)) %></title>
+  <title>convenience-shift</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  # （下の行を追記）webpackがCSSを扱えるようにする
   <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  # JavaScriptはデフォルトでwebpacerが pack フォルダをコンパイルして出力している
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   <!--[if lt IE 9]>
       <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
@@ -16,6 +14,9 @@
 </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/header' %>
+    <div class="container">
+      <%= yield %>
+    </div>  
   </body>
 </html>
