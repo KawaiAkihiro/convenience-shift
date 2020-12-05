@@ -1,0 +1,12 @@
+<% if @master.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      <%= @master.errors.count %> つの記入エラーがありました。
+    </div>
+    <ul>
+    <% @master.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
