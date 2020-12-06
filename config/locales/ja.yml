@@ -1,0 +1,8 @@
+ja:
+  activerecord:
+      attributes:
+        master:
+          store_name: 店舗名
+          user_name:  氏名
+          password:   パスワード
+          password_confirmation: パスワード(確認用)
