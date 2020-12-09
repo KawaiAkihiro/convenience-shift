@@ -22,6 +22,8 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'jquery-rails'
+
 gem 'rails-i18n'
 
 # Use Active Storage variant
@@ -49,6 +51,8 @@ gem 'rspec-rails'
 gem 'spring-commands-rspec'
 gem 'guard'
 gem 'guard-rspec', require: false
+gem 'capybara'
+gem 'webdrivers'
 
 # Test enviroment: Fake date generator
 gem 'factory_bot_rails'

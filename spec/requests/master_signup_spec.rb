@@ -14,6 +14,7 @@ RSpec.describe "Masters signup", type: :request do
 
         expect(response).to render_template('masters/show')
         expect(flash).to_not be_empty
+        expect(is_logged_in?).to be_truthy
     end
 
     example "不完全な情報による登録" do
