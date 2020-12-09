@@ -5,6 +5,7 @@ RSpec.describe "Master login", type: :request do
   example "不正確なログイン" do
     get login_path
     post login_path, params: { session: { store_name:"", password:""}}
+    expect(is_logged_in?).to_not be_truthy
     expect(response).to render_template('sessions/new')
     expect(flash).to_not be_empty
     get root_path
@@ -20,6 +21,11 @@ RSpec.describe "Master login", type: :request do
       expect(is_logged_in?).to be_truthy
       follow_redirect!
       expect(response).to render_template('masters/show')
+      delete logout_path
+      expect(is_logged_in?).to_not be_truthy
+      expect(response).to redirect_to root_path
+      follow_redirect!
+      expect(response).to render_template('static_pages/home')
     end
   end
 
