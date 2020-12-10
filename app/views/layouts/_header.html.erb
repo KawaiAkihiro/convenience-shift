@@ -1,12 +1,16 @@
-<div class="fixed-top">
+
     <header class="navbar navbar-expand-lg navbar-dark bg-dark mr-auto">
        <div class="container">
-          <%= link_to "７ルール", "#", id: "logo" %>
+          <%= link_to "７ルール", root_path, id: "logo" %>
           <ul class="navbar-nav">
-              <li class="nav-item"><%= link_to "ヘルプ",  "#", class:"nav-link" %></li>
-              <li class="nav-item"><%= link_to "新規登録", "#", class:"nav-link" %></li>
-              <li class="nav-item"><%= link_to "ログイン", "#", class:"nav-link" %></li>
+              <li class="nav-link"><%= link_to "ヘルプ", help_path %></li>
+              <% if logged_in? %>
+                <li class="nav-link"><%= link_to "設定", "#" %></li>
+                <li class="nav-link"><%= button_to "ログアウト", logout_path, {method: :delete} %></li>
+              <% else %>
+                <li class="nav-link"><%= link_to "新規登録", signup_path %></li>
+                <li class="nav-link"><%= link_to "ログイン", login_path %></li>
+              <% end %>  
           </ul>   
        </div>  
     </header>  
-</div>

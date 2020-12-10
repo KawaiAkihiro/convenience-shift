@@ -45,7 +45,4 @@ RSpec.describe Master, type: :model do
     expect(master).to_not be_valid
   end
 
-
-
-
 end

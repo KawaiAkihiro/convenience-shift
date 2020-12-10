@@ -1,0 +1,16 @@
+#ログイン機能のレイアウトテスト(保留中)
+describe 'ログイン' do
+    let!(:master){ create(:master,store_name: 'loginStore')}
+    before do
+      find(".form_text").set("loginStore")
+      find(".form_pass").set("foobar")
+      click_button 'ログイン'
+    end
+    subject { page }
+
+    example 'ログイン時のレイアウトテスト' do
+      is_expected.to have_current_path user_path(master)
+      is_expected.to_not have_link nil, href: login_path
+      is_expected.to     have_link 'ログアウト', href: logout_path
+    end
+end
