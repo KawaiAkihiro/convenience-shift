@@ -14,7 +14,7 @@ RSpec.describe "Master login", type: :request do
 
   describe 'ログイン確認' do
     let!(:master) { create(:master) }
-    example "正確なログイン" do
+    example "正確なログインとログアウト" do
       get login_path
       post login_path, params: {session: { store_name: master.store_name, password: master.password}}
       expect(response).to redirect_to master_path(master)
@@ -26,6 +26,18 @@ RSpec.describe "Master login", type: :request do
       expect(response).to redirect_to root_path
       follow_redirect!
       expect(response).to render_template('static_pages/home')
+    end
+
+    example "記憶付きのログイン" do
+      log_in_as2(master, remember_me:'1')
+      expect(cookies[:remember_token]).to_not be_empty
+    end
+
+    example "記憶なしのログイン" do
+      log_in_as2(master, remember_me:'1')
+      delete logout_path
+      log_in_as2(master, remember_me:'0')
+      expect(cookies[:remember_token]).to be_empty
     end
   end
 
