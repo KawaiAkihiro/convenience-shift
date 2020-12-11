@@ -1,0 +1,10 @@
+<h1>従業員</h1>
+
+<ul class="staffs">
+  <% @staffs.each do |staff| %>
+     <li>
+        <%= staff.staff_number %>
+        <%= link_to staff.staff_name, staff %>
+     </li>
+  <% end %>
+</ul>        

@@ -45,4 +45,11 @@ RSpec.describe Master, type: :model do
     expect(master).to_not be_valid
   end
 
+  it "ユーザーを消去すると投稿も消える" do
+    master.save
+    master.staffs.create!(staff_name: "aki", staff_number: 1)
+    expect{
+      master.destroy
+    }.to change(Staff, :count).by(-1)
+  end
 end

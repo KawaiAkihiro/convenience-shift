@@ -6,7 +6,7 @@
               <li class="nav-link"><%= link_to "ヘルプ", help_path %></li>
               <% if logged_in? %>
                 <li class="nav-link"><%= link_to "設定", "#" %></li>
-                <li class="nav-link"><%= button_to "ログアウト", logout_path, {method: :delete} %></li>
+                <li class="nav-link"><%= button_to "ログアウト", logout_path, {method: :delete, class: "btn-link btn-outline-dark bg-dark "} %></li>
               <% else %>
                 <li class="nav-link"><%= link_to "新規登録", signup_path %></li>
                 <li class="nav-link"><%= link_to "ログイン", login_path %></li>

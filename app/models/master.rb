@@ -1,4 +1,6 @@
 class Master < ApplicationRecord
+    has_many :staffs, dependent: :destroy
+
     attr_accessor :remember_token 
     validates :store_name, presence: true, length: { maximum: 20}, uniqueness: true
     validates :user_name,  presence: true, length: { maximum: 20}
