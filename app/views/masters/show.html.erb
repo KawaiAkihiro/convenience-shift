@@ -5,6 +5,7 @@
         <%= @master.store_name %> <br>
         <%= @master.user_name %>
       </h1>
+      <%= link_to "プロフィールを変更する", edit_master_path(current_master) %> <br><br>
       <%= link_to "従業員登録", new_staff_path %> <br>
       <%= link_to "従業員一覧", staffs_path %>
     </section>
