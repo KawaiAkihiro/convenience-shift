@@ -20,6 +20,10 @@ class MastersController < ApplicationController
     @master = Master.find(params[:id])
   end
 
+  def edit
+    @master = Master.find(params[:id])
+  end
+
   private
     def master_params
       params.require(:master).permit(:store_name, :user_name, :password, :password_confirmation)
