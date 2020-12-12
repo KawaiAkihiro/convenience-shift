@@ -6,7 +6,7 @@ class Master < ApplicationRecord
     validates :user_name,  presence: true, length: { maximum: 20}
 
     has_secure_password
-    validates :password,   presence: true, length: { minimum: 6}
+    validates :password,   presence: true, length: { minimum: 6}, allow_nil: true
 
     def Master.digest(string)
         cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

@@ -16,6 +16,10 @@ module SessionsHelper
         end
     end
 
+    def current_master?(master)
+        master && master == current_master
+    end
+
     def logged_in?
         !current_master.nil?
     end
