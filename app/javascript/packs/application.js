@@ -13,7 +13,6 @@ require("bootstrap");
 require("@fortawesome/fontawesome-free");
 
 
-//require('test.js')
 import '@fortawesome/fontawesome-free/js/all';
 import "../stylesheets/application.scss";
 //import "../stylesheets/custom.scss";
