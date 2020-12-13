@@ -1,10 +1,16 @@
 <h1>従業員</h1>
 
+<%= will_paginate %>
+
 <ul class="staffs">
   <% @staffs.each do |staff| %>
      <li>
         <%= staff.staff_number %>
-        <%= link_to staff.staff_name, staff %>
+        <%= staff.staff_name %>
+        <%= button_to "編集", edit_staff_path(staff) %>
+        <%= button_to "削除", staff, {method: :delete,data: { confirm: 'この従業員を削除して間違いありませんか？'}} %>
      </li>
-  <% end %>
-</ul>        
+  <% end %>　
+</ul>      
+
+<%= will_paginate %>

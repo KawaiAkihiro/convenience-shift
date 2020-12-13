@@ -14,3 +14,7 @@ describe 'ログイン' do
       is_expected.to     have_link 'ログアウト', href: logout_path
     end
 end
+
+
+#_header.html.erb button_to のクラス
+class: "btn-link btn-outline-dark bg-dark "
