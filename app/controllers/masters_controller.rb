@@ -43,7 +43,7 @@ class MastersController < ApplicationController
 
     def logged_in_master
       unless logged_in?
-        flash[:danger] = "Please log in"
+        flash[:danger] = "ログインしてください"
         redirect_to login_url
       end
     end

@@ -15,10 +15,7 @@ gem 'jbuilder',   '2.9.1'
 gem 'bootsnap',   '1.4.5', require: false
 gem 'bcrypt',         '3.1.13'
 
-#gem 'jquery-rails'
-
 gem 'rails-i18n'
-gem 'bootstrap', '~> 4.3.1'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
