@@ -47,7 +47,7 @@ RSpec.describe Master, type: :model do
 
   it "ユーザーを消去すると投稿も消える" do
     master.save
-    master.staffs.create!(staff_name: "aki", staff_number: 1)
+    master.staffs.create!(staff_name: "aki", staff_number: 1,password: "0000", password_confirmation: "0000")
     expect{
       master.destroy
     }.to change(Staff, :count).by(-1)

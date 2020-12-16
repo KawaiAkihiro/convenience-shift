@@ -1,4 +1,5 @@
 class MastersController < ApplicationController
+
   before_action :logged_in_master, only: [:edit, :update]
   before_action :corrent_master, only: [:edit, :update]
 
@@ -43,7 +44,7 @@ class MastersController < ApplicationController
 
     def logged_in_master
       unless logged_in?
-        flash[:danger] = "Please log in"
+        flash[:danger] = "ログインしてください"
         redirect_to login_url
       end
     end

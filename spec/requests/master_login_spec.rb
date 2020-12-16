@@ -21,7 +21,7 @@ RSpec.describe "Master login", type: :request do
       expect(is_logged_in?).to be_truthy
       follow_redirect!
       expect(response).to render_template('masters/show')
-      delete logout_path
+      post logout_path
       expect(is_logged_in?).to_not be_truthy
       expect(response).to redirect_to root_path
       follow_redirect!
@@ -35,7 +35,7 @@ RSpec.describe "Master login", type: :request do
 
     example "記憶なしのログイン" do
       log_in_as2(master, remember_me:'1')
-      delete logout_path
+      post logout_path
       log_in_as2(master, remember_me:'0')
       expect(cookies[:remember_token]).to be_empty
     end

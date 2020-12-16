@@ -7,8 +7,8 @@
      <li>
         <%= staff.staff_number %>
         <%= staff.staff_name %>
-        <%= button_to "編集", edit_staff_path(staff) %>
-        <%= button_to "削除", staff, {method: :delete,data: { confirm: 'この従業員を削除して間違いありませんか？'}} %>
+        <%= link_to "編集", edit_staff_path(staff) %>
+        <%= link_to "削除", staff, {method: :delete, data: { confirm: 'この従業員を削除して間違いありませんか？'}} %>
      </li>
   <% end %>　
 </ul>      

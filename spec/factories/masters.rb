@@ -12,4 +12,11 @@ FactoryBot.define do
     password { "foobar" }
     password_confirmation { "foobar" }
   end
+
+  factory :master_staff, class: Master do
+    store_name {"store"}
+    user_name  {"name"}
+    password {"foobar"}
+    password_confirmation {"foobar"}
+  end
 end

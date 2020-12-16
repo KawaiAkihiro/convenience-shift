@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_11_021740) do
+ActiveRecord::Schema.define(version: 2020_12_14_044807) do
 
   create_table "masters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "store_name"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_021740) do
     t.bigint "master_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "password_digest"
     t.index ["master_id", "created_at"], name: "index_staffs_on_master_id_and_created_at"
     t.index ["master_id"], name: "index_staffs_on_master_id"
   end
