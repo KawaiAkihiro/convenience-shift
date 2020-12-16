@@ -11,5 +11,16 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe StaffsSessionsHelper, type: :helper do
-  
+  describe "current_staffに関するテスト" do
+    let!(:master) { FactoryBot.create(:master) }
+    let!(:staff)  { FactoryBot.create(:staff, master_id: master.id) }
+     before do
+         log_in_staff(staff)
+     end
+
+     example "current_staffは正しいstaffを返してくれるのか" do
+         expect(current_staff).to eq (staff)
+         expect(is_logged_in_staff?).to be_truthy
+     end
+  end
 end

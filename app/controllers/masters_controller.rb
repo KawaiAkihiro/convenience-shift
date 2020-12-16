@@ -1,4 +1,5 @@
 class MastersController < ApplicationController
+
   before_action :logged_in_master, only: [:edit, :update]
   before_action :corrent_master, only: [:edit, :update]
 
