@@ -53,3 +53,14 @@ li{
     width: auto;
     margin-left: 0;
 }
+
+.form-inline{
+    padding-top: 20px;
+    .form-control{
+        margin-right: 10px;
+    }
+}
+
+.control-label{
+    padding-right: 10px;
+}

@@ -1,7 +1,7 @@
 class MastersController < ApplicationController
 
-  before_action :logged_in_master, only: [:edit, :update]
-  before_action :corrent_master, only: [:edit, :update]
+  before_action :logged_in_master, only: [:show, :edit, :update]
+  before_action :corrent_master, only: [:show, :edit, :update]
 
   def new
     @master = Master.new
@@ -21,6 +21,7 @@ class MastersController < ApplicationController
 
   def show
     @master = Master.find(params[:id])
+    @shift_separations = current_master.shift_separations.all
   end
 
   def edit

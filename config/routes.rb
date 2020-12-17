@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
   root 'static_pages#home'
   get '/help',      to: 'static_pages#help'
   get  '/signup',   to: 'masters#new'
@@ -11,7 +10,12 @@ Rails.application.routes.draw do
   post '/staffs/login',  to: 'staffs_sessions#create'
   post '/staffs/logout', to: 'staffs_sessions#destroy'
 
-  resources :masters
+  resources :masters do
+    resources :shift_separations, :except => [:show]
+  end
+
   resources :staffs
+  #resources :shift_separations, :except => [:show]
+  
 
 end
