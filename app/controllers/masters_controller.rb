@@ -42,16 +42,4 @@ class MastersController < ApplicationController
     def master_params
       params.require(:master).permit(:store_name, :user_name, :password, :password_confirmation)
     end
-
-    def logged_in_master
-      unless logged_in?
-        flash[:danger] = "ログインしてください"
-        redirect_to login_url
-      end
-    end
-
-    def corrent_master
-      @master = Master.find(params[:id])
-      redirect_to(root_url) unless current_master?(@master)
-    end 
 end

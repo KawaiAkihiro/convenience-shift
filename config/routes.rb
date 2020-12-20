@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   end
 
   resources :staffs
-  #resources :shift_separations, :except => [:show]
   
 
 end

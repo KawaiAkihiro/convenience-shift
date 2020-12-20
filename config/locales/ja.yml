@@ -6,3 +6,8 @@ ja:
           user_name:  氏名
           password:   パスワード
           password_confirmation: パスワード(確認用)
+
+        shift_separation:
+          name: 時間帯名
+          start_time: 開始時刻
+          finish_time: 終了時刻  

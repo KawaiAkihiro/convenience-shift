@@ -1,5 +1,5 @@
 <div class="row">
-  <aside class="col-md-4">
+  <aside class="col-md-6">
     <section class="user_info">
       <h1>
         <%= @master.store_name %> <br>
@@ -8,15 +8,8 @@
       <%= link_to "プロフィールを変更する", edit_master_path(current_master) %> <br><br>
       <%= link_to "従業員登録", new_staff_path %> <br>
       <%= link_to "従業員一覧", staffs_path %><br><br>
-      <%= link_to "シフトのコマを設定する", new_master_shift_separation_path(params[:id]) %>
-
-      <% @shift_separations.each do |shift_separation| %>
-        <li> 
-          <%= shift_separation.name %>
-          業務開始時刻： <%= shift_separation.start_time.hour %> : <%= shift_separation.start_time.min %>
-          業務終了時刻： <%= shift_separation.finish_time.hour %> : <%= shift_separation.finish_time.min %>
-        </li>
-      <% end %>    
+      <%= link_to "シフトのコマを設定する", new_master_shift_separation_path(params[:id]) %><br>
+      <%= link_to "シフトのコマを編集/削除する", master_shift_separations_path(current_master) %>
     </section>
   </aside>
 </div>

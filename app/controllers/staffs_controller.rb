@@ -1,4 +1,5 @@
 class StaffsController < ApplicationController
+    before_action :logged_in_master, only: [:index, :new, :create]
     before_action :corrent_staff,   only: [:show, :edit, :update]
 
     def index
@@ -6,7 +7,15 @@ class StaffsController < ApplicationController
     end
 
     def show
-        @staff  = current_staff
+        if logged_in?
+            begin
+                @staff = current_master.staffs.find(params[:id])
+            rescue
+                redirect_to current_master
+            end
+        else
+            @staff  = current_staff
+        end
     end
 
     def new
@@ -26,22 +35,29 @@ class StaffsController < ApplicationController
     
     def edit
         if logged_in?
-          @staff = current_master.staffs.find(params[:id])
+            begin
+                @staff = current_master.staffs.find(params[:id])  
+            rescue
+                redirect_to root_url
+            end
         else
           @staff = current_staff
         end
     end  
 
-    #店長側が編集を確定する
     def update
         if logged_in?
-          @staff = current_master.staffs.find(params[:id])
-          if @staff.update(staff_params)
-              flash[:success] = "従業員情報を変更しました"
-              redirect_to staffs_path
-          else
-              render 'edit'
-          end
+            begin
+                @staff = current_master.staffs.find(params[:id])
+                if @staff.update(staff_params)
+                    flash[:success] = "従業員情報を変更しました"
+                    redirect_to staffs_path
+                else
+                    render 'edit'
+                end
+            rescue
+                redirect_to root_url
+            end
         else
           @staff = current_staff
           if @staff.update(staff_params)
@@ -70,12 +86,16 @@ class StaffsController < ApplicationController
                     flash[:danger] = "ログインしてください"
                     redirect_to staffs_login_url
                 else
-                    @master = Master.find(current_staff.master_id)
-                    @other_staff = @master.staffs.find(params[:id])
-                    unless current_staff?(@other_staff) 
-                      flash[:danger] = "他のユーザの情報は見ることができません"
-                      redirect_to(current_staff) 
-                    end
+                    begin
+                        @master = Master.find(current_staff.master_id)
+                        @other_staff = @master.staffs.find(params[:id])
+                        unless current_staff?(@other_staff) 
+                            flash[:danger] = "他のユーザの情報は見ることができません"
+                            redirect_to(current_staff) 
+                        end
+                    rescue
+                        redirect_to current_staff
+                    end  
                 end
             end
         end 
