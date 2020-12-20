@@ -6,7 +6,6 @@ FactoryBot.define do
     created_at { 10.minutes.ago }
     password { "0000" }
     password_confirmation { "0000" }
-    
   end
 
   factory :leader, class: Staff do

@@ -1,7 +1,7 @@
 class MastersController < ApplicationController
 
-  before_action :logged_in_master, only: [:edit, :update]
-  before_action :corrent_master, only: [:edit, :update]
+  before_action :logged_in_master, only: [:show, :edit, :update]
+  before_action :corrent_master, only: [:show, :edit, :update]
 
   def new
     @master = Master.new
@@ -21,6 +21,7 @@ class MastersController < ApplicationController
 
   def show
     @master = Master.find(params[:id])
+    @shift_separations = current_master.shift_separations.all
   end
 
   def edit
@@ -41,16 +42,4 @@ class MastersController < ApplicationController
     def master_params
       params.require(:master).permit(:store_name, :user_name, :password, :password_confirmation)
     end
-
-    def logged_in_master
-      unless logged_in?
-        flash[:danger] = "ログインしてください"
-        redirect_to login_url
-      end
-    end
-
-    def corrent_master
-      @master = Master.find(params[:id])
-      redirect_to(root_url) unless current_master?(@master)
-    end 
 end

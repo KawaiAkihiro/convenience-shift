@@ -34,4 +34,29 @@ RSpec.describe "Staffs signup", type: :request do
             expect(response.body).to include '2 つの記入エラーがありました。'
         end
     end
+
+    describe "スタッフ作成、全体表示のアクセス制限" do
+      let!(:master){ create(:master) }
+
+      example "ログインしてない状態で新規staff登録フォーム入れない" do
+        get new_staff_path
+        expect(flash).to_not be_empty
+        expect(response).to redirect_to login_url
+      end
+
+      example "ログインしてないと直接スタッフ作成できない" do
+        post staffs_path, params: { staff: { staff_name: "kawai",
+                                               staff_number: 145,
+                                               password:     "0000",
+                                               password_confirmation: "0000"} }
+        expect(flash).to_not be_empty
+        expect(response).to redirect_to login_url
+      end
+
+      example "ログインしてないと従業員一覧ページを開けない" do
+        get staffs_path
+        expect(flash).to_not be_empty
+        expect(response).to redirect_to login_url
+      end
+    end
 end
