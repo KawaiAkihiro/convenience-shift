@@ -9,6 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 
 require("bootstrap");
+require("jquery")
 //require("@fortawesome/fontawesome-free");
 
 
@@ -21,7 +22,3 @@ import "../stylesheets/application.scss";
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
-//= require jquery3
-//= require popper
-//= require bootstrap
-//= require jquery_ujs
