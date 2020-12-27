@@ -1,0 +1,2 @@
+module IndividualShiftsHelper
+end

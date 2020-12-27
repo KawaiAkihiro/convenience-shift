@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_16_095441) do
+ActiveRecord::Schema.define(version: 2020_12_26_081812) do
+
+  create_table "individual_shifts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "start"
+    t.datetime "finish"
+    t.bigint "staff_id", null: false
+    t.boolean "confirm", default: false, null: false
+    t.boolean "Temporary", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["staff_id"], name: "index_individual_shifts_on_staff_id"
+  end
 
   create_table "masters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "store_name"
@@ -44,6 +55,7 @@ ActiveRecord::Schema.define(version: 2020_12_16_095441) do
     t.index ["master_id"], name: "index_staffs_on_master_id"
   end
 
+  add_foreign_key "individual_shifts", "staffs"
   add_foreign_key "shift_separations", "masters"
   add_foreign_key "staffs", "masters"
 end

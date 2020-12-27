@@ -1,5 +1,7 @@
 class Staff < ApplicationRecord
   belongs_to :master
+  has_many :individual_shifts
+  
   default_scope -> { order(staff_number: :desc) }
   validates :master_id,    presence: true
   validates :staff_name,   presence: true

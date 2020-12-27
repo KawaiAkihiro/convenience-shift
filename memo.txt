@@ -18,3 +18,25 @@ end
 
 #_header.html.erb button_to のクラス
 class: "btn-link btn-outline-dark bg-dark "
+
+＃individual＿shifts_controlloer
+
+ def new
+        @form = Form::ShiftCollection.new
+    end
+
+    def create
+        @form = Form::ShiftCollection.new(params_shift)
+        if @form.save
+            redirect_to current_staff
+        else
+            flash.now[:danger] = "シフト登録に失敗しました"
+            render :new
+        end
+    end
+
+    private
+      def params_shift
+        params.require(:form_shift_collection).permit(shifts_attributes: [:start_time, :finish_time])
+      end
+end      

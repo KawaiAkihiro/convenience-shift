@@ -14,7 +14,10 @@ Rails.application.routes.draw do
     resources :shift_separations, :except => [:show]
   end
 
-  resources :staffs
-  
+  resources :staffs 
+
+  resources :individual_shifts 
+
+  patch '/staffs/:staff_id/individual_shifts/confirm', to: 'individual_shifts#confirm'
 
 end
