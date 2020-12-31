@@ -2,40 +2,58 @@ class IndividualShiftsController < ApplicationController
     require 'date'
 
     def new
-        @shift = current_staff.individual_shifts.build
+        @shift = current_staff.individual_shifts.new
         @shifts = current_staff.individual_shifts.where(confirm: false)
     end
 
     def create
-        @shift = current_staff.individual_shifts.build(params_shift)
-        
-            change_finishDate
-            if @shift.save
-              #ボタンで連続投稿を可能にしている。
-                if params[:commit] == "登録"
-                    flash[:success] = "登録が完了しましたが確定はまだしていません！"
+        @shift = current_staff.individual_shifts.new(params_shift)
+        change_finishDate
+        if @shift.save
+            #ボタンで連続投稿を可能にしている。
+            if params[:commit] == "登録"
+                 flash[:success] = "登録が完了しましたが確定はまだしていません！"
                 
-                    redirect_to current_staff
-                elsif params[:commit] == "もう一度"
-                    flash[:success] = "もう一度登録してください" 
-                    redirect_to new_individual_shift_path
-                end
-            else
-                render 'new'
+                 redirect_to current_staff
+            elsif params[:commit] == "もう一度"
+                flash[:success] = "もう一度登録してください" 
+                redirect_to new_individual_shift_path
             end
+        else
+            render 'new'
+        end
     end
 
     def index
         @shifts = current_master.individual_shifts.all
     end
+
+    def confirm_form
+        @shifts = current_staff.individual_shifts.where(confirm: false)
+    end
         
 
     def confirm
         @shifts = current_staff.individual_shifts.where(confirm: false)
-        @shifts.each do |shift|
-            shift.update(confirm: true)
+        if @shifts.count == 0
+            redirect_to new_individual_shift_path
+        else
+            @shifts.each do |shift|
+                shift.confirm = true
+                shift.save
+            end
+            redirect_to current_staff
         end
-        redirect_to current_staff
+    end
+
+    def confirmed
+        @shifts = current_staff.individual_shifts.where(confirm: true)
+    end
+
+    def destroy
+        @shift = current_staff.individual_shifts.find(params[:id]).destroy
+        flash[:danger] = "消去完了しました。"
+        redirect_to new_individual_shift_path
     end
 
     private
@@ -44,11 +62,13 @@ class IndividualShiftsController < ApplicationController
       end
 
       #退勤時間の日付を出勤時間の日付に合わせる
-      def change_finishDate  
-        
-          #日付を跨がない場合はそのまま,日付を跨ぐ場合は1日プラスする。 
-        if @shift.start.hour < @shift.finish.hour
-            @shift.finish = @shift.finish.change(year: @shift.start.year, month: @shift.start.month,day: @shift.start.day) 
+      def change_finishDate 
+     if @shift.start.nil? || @shift.finish.nil?
+            flash[:danger] = "時間が記入されていません"
+            render new_individual_shift_path
+     else
+        if @shift.start.hour < @shift.finish.hour #日付を跨がない場合はそのまま,日付を跨ぐ場合は1日プラスする。
+            @shift.finish = @shift.finish.change(year: @shift.start.year, month: @shift.start.month, day: @shift.start.day) 
         else  
             last_day = Date.new(@shift.start.year,@shift.start.month,-1).day #月末の日にちを取得
             if @shift.start.month == 12 && @shift.start.day == 31            #大晦日
@@ -58,7 +78,8 @@ class IndividualShiftsController < ApplicationController
             else #月末でもない日
                 @shift.finish = @shift.finish.change(year: @shift.start.year,  month: @shift.start.month,     day: @shift.start.day + 1)
             end
-        end  
-      end 
+        end
+     end
+      end
 end
 

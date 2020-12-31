@@ -11,13 +11,19 @@ Rails.application.routes.draw do
   post '/staffs/logout', to: 'staffs_sessions#destroy'
 
   resources :masters do
+    patch     :shift_onoff   , on: :member
     resources :shift_separations, :except => [:show]
   end
 
   resources :staffs 
 
-  resources :individual_shifts 
-
-  patch '/staffs/:staff_id/individual_shifts/confirm', to: 'individual_shifts#confirm'
+  resources :individual_shifts do
+    collection do
+      get    :confirm,  to: 'individual_shifts#confirm_form'
+      patch  :confirm,  to: 'individual_shifts#confirm'
+      get    :confirmed
+    end
+    
+  end
 
 end

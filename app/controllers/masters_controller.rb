@@ -21,7 +21,19 @@ class MastersController < ApplicationController
 
   def show
     @master = Master.find(params[:id])
+    @shifts = @master.individual_shifts.where(confirm: true)
     @shift_separations = current_master.shift_separations.all
+  end
+
+  def shift_onoff
+    @master = Master.find(params[:id])
+    if @master.shift_onoff == false
+      @master.shift_onoff = true
+    elsif @master.shift_onoff == true
+      @master.shift_onoff = false
+    end
+    @master.save
+    redirect_to @master
   end
 
   def edit
