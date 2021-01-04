@@ -9,10 +9,11 @@ require("@rails/activestorage").start()
 require("channels")
 
 require("bootstrap");
-//require("@fortawesome/fontawesome-free");
+require("@fortawesome/fontawesome-free");
 
+//require("custom.js");
 
-//import '@fortawesome/fontawesome-free/js/all';
+import '@fortawesome/fontawesome-free/js/all';
 import "../stylesheets/application.scss";
 //import "../stylesheets/custom.scss";
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -21,7 +22,4 @@ import "../stylesheets/application.scss";
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
-//= require jquery3
-//= require popper
-//= require bootstrap
-//= require jquery_ujs
+

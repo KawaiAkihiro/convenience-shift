@@ -15,6 +15,7 @@ class StaffsController < ApplicationController
             end
         else
             @staff  = current_staff
+            @master = Master.find(@staff.master_id)
         end
     end
 

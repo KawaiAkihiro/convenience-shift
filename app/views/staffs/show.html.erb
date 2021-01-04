@@ -1,1 +1,7 @@
-<h1><%= @staff.staff_name %></h1>
+<h1><%= @staff.staff_name %></h1> <br>
+
+<% if @master.shift_onoff == true %>
+  <h2><%= link_to "シフト提出",new_individual_shift_path %></h2>
+
+  <h2><%= link_to "提出したシフトを確認する", confirmed_individual_shifts_path %></h2>
+<% end %>  
