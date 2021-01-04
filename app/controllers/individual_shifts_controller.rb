@@ -1,4 +1,6 @@
 class IndividualShiftsController < ApplicationController
+    before_action :logged_in_staff
+
     require 'date'
 
     def new
@@ -22,10 +24,6 @@ class IndividualShiftsController < ApplicationController
         else
             render 'new'
         end
-    end
-
-    def index
-        @shifts = current_master.individual_shifts.all
     end
 
     def confirm_form
@@ -63,23 +61,30 @@ class IndividualShiftsController < ApplicationController
 
       #退勤時間の日付を出勤時間の日付に合わせる
       def change_finishDate 
-     if @shift.start.nil? || @shift.finish.nil?
-            flash[:danger] = "時間が記入されていません"
-            render new_individual_shift_path
-     else
-        if @shift.start.hour < @shift.finish.hour #日付を跨がない場合はそのまま,日付を跨ぐ場合は1日プラスする。
-            @shift.finish = @shift.finish.change(year: @shift.start.year, month: @shift.start.month, day: @shift.start.day) 
-        else  
-            last_day = Date.new(@shift.start.year,@shift.start.month,-1).day #月末の日にちを取得
-            if @shift.start.month == 12 && @shift.start.day == 31            #大晦日
-                @shift.finish = @shift.finish.change(year: @shift.start.year + 1 ,  month: 1, day: 1)
-            elsif !(@shift.start.month == 12) && @shift.start.day == last_day #普通の月末
-                @shift.finish = @shift.finish.change(year: @shift.start.year,  month: @shift.start.month + 1, day: 1)
-            else #月末でもない日
-                @shift.finish = @shift.finish.change(year: @shift.start.year,  month: @shift.start.month,     day: @shift.start.day + 1)
+        if @shift.start.nil? || @shift.finish.nil?
+                flash[:danger] = "時間が記入されていません"
+                render new_individual_shift_path
+        else
+            if @shift.start.hour < @shift.finish.hour #日付を跨がない場合はそのまま,日付を跨ぐ場合は1日プラスする。
+                @shift.finish = @shift.finish.change(year: @shift.start.year, month: @shift.start.month, day: @shift.start.day) 
+            else  
+                last_day = Date.new(@shift.start.year,@shift.start.month,-1).day #月末の日にちを取得
+                if @shift.start.month == 12 && @shift.start.day == 31            #大晦日
+                    @shift.finish = @shift.finish.change(year: @shift.start.year + 1 ,  month: 1, day: 1)
+                elsif !(@shift.start.month == 12) && @shift.start.day == last_day #普通の月末
+                    @shift.finish = @shift.finish.change(year: @shift.start.year,  month: @shift.start.month + 1, day: 1)
+                else #月末でもない日
+                    @shift.finish = @shift.finish.change(year: @shift.start.year,  month: @shift.start.month,     day: @shift.start.day + 1)
+                end
             end
         end
-     end
+      end
+
+      def logged_in_staff
+        unless logged_in_staff?
+            flash[:danger] = "ログインしてください"
+            redirect_to staffs_login_path
+        end
       end
 end
 

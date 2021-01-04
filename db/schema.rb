@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_30_204413) do
+ActiveRecord::Schema.define(version: 2021_01_03_030212) do
 
   create_table "individual_shifts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "start"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2020_12_30_204413) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
     t.string "remember_digest"
-    t.boolean "shift_onoff"
+    t.boolean "shift_onoff", default: false, null: false
   end
 
   create_table "shift_separations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

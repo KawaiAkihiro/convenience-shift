@@ -69,7 +69,7 @@ RSpec.describe "staff edit", type: :request do
 
     describe "他ユーザの編集権限テスト" do
         let!(:master){ create(:master_staff) }
-        let!(:other_master){ create(:master_staff) }
+        let!(:other_master){ create(:other_master) }
         let!(:staff) { create(:staff, master_id: master.id)}
         let!(:other_staff){ create(:leader, master_id: master.id)}
 
@@ -105,29 +105,29 @@ RSpec.describe "staff edit", type: :request do
             expect(response).to redirect_to other_staff                                    
         end
 
-        before do
-            log_in_as2(other_master)
-        end
+        describe "他のmasterのアクセス制限" do
+            before do
+                log_in_as2(other_master)
+            end
 
-        exapmle "masterは他のmasterのstaffの個人ページを開けない" do
-            get staff
-            expect(response).to redirect_to root_url
-        end
+            example "masterは他のmasterのstaffの個人ページを開けない" do
+                get staff_path(staff)
+                expect(response).to redirect_to master_path(other_master)
+            end
 
-        example "masterは他のmasterのstaffの編集フォームには入れない" do
-            get edit_staff_path(staff)
-            expect(response).to redirect_to root_url
-        end
+            example "masterは他のmasterのstaffの編集フォームには入れない" do
+                get edit_staff_path(staff)
+                expect(response).to redirect_to root_url
+            end
 
-        example "masterは他のmasterのstaffを直接編集できない" do
-            patch staff_path(staff), params: { staff: { staff_name: "kawai",
-                                                       staff_number: 145,
-                                                       password:"",
-                                                       password_confirmation:"" }} 
-            expect(response).to redirect_to root_url
-        end
-
-        
+            example "masterは他のmasterのstaffを直接編集できない" do
+                patch staff_path(staff), params: { staff: { staff_name: "kawai",
+                                                        staff_number: 145,
+                                                        password:"",
+                                                        password_confirmation:"" }} 
+                expect(response).to redirect_to root_url
+            end
+        end     
     end
 end
             
