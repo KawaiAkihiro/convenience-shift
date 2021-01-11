@@ -16,6 +16,7 @@ gem 'bootsnap',   '1.4.5', require: false
 gem 'bcrypt',         '3.1.13'
 
 gem 'rails-i18n'
+gem "simple_calendar"
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

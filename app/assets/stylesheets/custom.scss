@@ -1,3 +1,7 @@
+body{
+    height:max-content;
+}
+
 #logo{
     font-size: 40px;
     color:#fff;
@@ -68,3 +72,27 @@ li{
 .control-label{
     padding-right: 10px;
 }
+
+.fc-day-other {
+    .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
+      color: darkgrey;
+    }
+  }
+  
+  // 土曜日
+  .fc-day-sat {
+    .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
+      color: blue;
+    }
+  }
+  
+  // 日曜日
+  .fc-day-sun{
+    .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
+      color: red;
+    }
+  }
+
+  .fc-event-time{
+    display : none;
+ }

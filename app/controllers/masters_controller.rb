@@ -22,7 +22,6 @@ class MastersController < ApplicationController
   def show
     @master = Master.find(params[:id])
     @shifts = @master.individual_shifts.where(confirm: true)
-    @shift_separations = current_master.shift_separations.all
   end
 
   def shift_onoff
@@ -48,6 +47,11 @@ class MastersController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def confirmed_shift
+    @master = Master.find(params[:id])
+    @shifts = @master.individual_shifts.where(confirm: true).where(Temporary: false).where(deletable: false)
   end
 
   private

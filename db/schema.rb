@@ -10,16 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_03_030212) do
+ActiveRecord::Schema.define(version: 2021_01_09_213702) do
 
   create_table "individual_shifts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "start"
     t.datetime "finish"
     t.bigint "staff_id", null: false
     t.boolean "confirm", default: false, null: false
-    t.boolean "Temporary", default: true
+    t.boolean "Temporary", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "deletable", default: false, null: false
     t.index ["staff_id"], name: "index_individual_shifts_on_staff_id"
   end
 

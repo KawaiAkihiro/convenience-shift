@@ -1,7 +1,10 @@
 class IndividualShiftsController < ApplicationController
-    before_action :logged_in_staff
+    before_action :logged_in_staff ,except: [:index, :deletable, :perfect]
 
     require 'date'
+
+    def index
+    end
 
     def new
         @shift = current_staff.individual_shifts.new
@@ -53,6 +56,36 @@ class IndividualShiftsController < ApplicationController
         flash[:danger] = "消去完了しました。"
         redirect_to new_individual_shift_path
     end
+
+    def deletable
+        @shift = current_master.individual_shifts.find(params[:id])
+        @shift.deletable = true
+        if @shift.save!
+            redirect_to confirmed_shift_master_path(current_master)  
+        else
+            render "show"
+        end
+        
+    end
+
+    def perfect
+        @shifts = current_master.individual_shifts.where(confirm: true).where(Temporary: false)
+        @shifts.each do |shift|
+            if shift.deletable == true
+                shift.destroy!
+            else
+                shift.Temporary = true
+                shift.save
+            end
+        end
+        # @perfect_shifts = current_master.individual_shifts.where(confirm: true).where(Temporary: false).where(deletable: false)
+        # @perfect_shifts.each do |shift|
+        #     shift.Temporary = true
+        #     shift.save
+        # end
+        redirect_to current_master
+    end
+
 
     private
       def params_shift
