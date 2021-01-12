@@ -8,5 +8,5 @@ class PerfectShiftsController < ApplicationController
         @master = current_staff.master
         @events = @master.individual_shifts.where(Temporary: true)
     end
-end
+  end
 end
