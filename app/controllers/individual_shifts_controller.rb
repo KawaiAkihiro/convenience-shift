@@ -1,7 +1,7 @@
 class IndividualShiftsController < ApplicationController
     before_action :logged_in_staff ,except: [:index, :deletable, :perfect]
-
     require 'date'
+
 
     def index
         @events = current_staff.individual_shifts.where(confirm: false)
@@ -15,44 +15,42 @@ class IndividualShiftsController < ApplicationController
     def create
         @event = current_staff.individual_shifts.new(params_shift)
         change_finishDate
-        @event.save
+        if @event.save  
+            redirect_to individual_shifts_path
+        else
+            render 'index'
+        end
+
         # respond_to do |format|
         #     if @event.save
         #         format.html { redirect_to individual_shifts_path }
+        #         format.js
         #     else
-        #         format.html { render :new}
+        #         format.html { render :new }
         #     end
         # end
-        
-        
-    end
-
-    def confirm_form
-        @events = current_staff.individual_shifts.where(confirm: false)
-    end
-        
+    end 
 
     def confirm
         @events = current_staff.individual_shifts.where(confirm: false)
         if @events.count == 0
-            redirect_to new_individual_shift_path
+            flash[:danger] = "提出されたシフトがありません"
+            # render "index"
+            redirect_to individual_shifts_path
         else
             @events.each do |shift|
                 shift.confirm = true
                 shift.save
             end
-            redirect_to current_staff
+            redirect_to individual_shifts_path
         end
     end
 
-    def confirmed
-        @events = current_staff.individual_shifts.where(confirm: true)
-    end
 
     def destroy
         @event = current_staff.individual_shifts.find(params[:id]).destroy
         flash[:danger] = "消去完了しました。"
-        redirect_to new_individual_shift_path
+        redirect_to individual_shifts_path
     end
 
     def deletable
@@ -76,11 +74,6 @@ class IndividualShiftsController < ApplicationController
                 shift.save
             end
         end
-        # @perfect_shifts = current_master.individual_shifts.where(confirm: true).where(Temporary: false).where(deletable: false)
-        # @perfect_shifts.each do |shift|
-        #     shift.Temporary = true
-        #     shift.save
-        # end
         redirect_to current_master
     end
 

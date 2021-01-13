@@ -1,4 +1,6 @@
 <div id="calendar"></div>
+
+<%= link_to  "確定する", confirm_individual_shifts_path, method: :patch, class:"btn btn-primary", data: { confirm: 'Are you sure?' }%>
 <div id="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -13,4 +15,19 @@
   </div>
 </div>
 
+<div id="modal2" tabindex="1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header2">
+        <button type="button" class="close2" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body2">
+      </div>
+    </div>
+  </div>
+</div>
+
 <%= javascript_pack_tag 'individual_shifts/calendar' %>
+<%= javascript_pack_tag 'individual_shifts/index' %>

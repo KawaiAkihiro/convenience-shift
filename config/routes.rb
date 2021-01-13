@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   root 'static_pages#home'
   get '/help',      to: 'static_pages#help'
   get  '/signup',   to: 'masters#new'
@@ -20,12 +20,14 @@ Rails.application.routes.draw do
   resources :staffs 
 
   get :perfect_shifts, to: 'perfect_shifts#index' 
+  get :comfirmed_shifts,  to: 'comfirmed_shifts#index'
+  
 
   resources :individual_shifts do
+    
     collection do
-      get    :confirm,  to: 'individual_shifts#confirm_form'
+      get :set_content
       patch  :confirm,  to: 'individual_shifts#confirm'
-      get    :confirmed
       patch  :perfect
     end
 

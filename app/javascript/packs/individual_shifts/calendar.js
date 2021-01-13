@@ -32,9 +32,15 @@ document.addEventListener('turbolinks:load', function() {
                 // 成功処理
             }).fail(function (result) {
                 // 失敗処理
-                var error_message = result.toString();
                 alert("failed");
             });
+        },
+        eventClick: function(info){
+            var shift_id = info.event.id
+            var str = '<a class="btn btn-primary" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="individual_shifts/' + shift_id + '">削除する</a>'
+            
+            $('.modal-body2').html(str)
+            $('#modal2').fadeIn();
         }
     });
 
