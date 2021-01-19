@@ -7,3 +7,5 @@
 
   <h2><%= link_to "提出したシフトを確認する", comfirmed_shifts_path %></h2>
 <% end %>  
+
+<%= link_to "ログアウト", logout_master_path(@master), {:method=> :delete} %>

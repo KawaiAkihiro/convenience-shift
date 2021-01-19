@@ -36,11 +36,20 @@ document.addEventListener('turbolinks:load', function() {
             });
         },
         eventClick: function(info){
-            var shift_id = info.event.id
-            var str = '<a class="btn btn-primary" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="individual_shifts/' + shift_id + '">削除する</a>'
+            var id = info.event.id
+            $.ajax({
+                type: "GET",
+                url:  "/individual_shifts/remove",
+                data: { shift_id : id },
+                datatype: "html",
+            }).done(function(res){
             
-            $('.modal-body2').html(str)
+            $('.modal-body2').html(res)
             $('#modal2').fadeIn();
+            }).fail(function (result) {
+                // 失敗処理
+                alert("failed");
+            });
         }
     });
 

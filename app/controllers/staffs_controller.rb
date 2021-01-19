@@ -10,6 +10,7 @@ class StaffsController < ApplicationController
         if logged_in?
             begin
                 @staff = current_master.staffs.find(params[:id])
+                @master = current_master
             rescue
                 redirect_to current_master
             end

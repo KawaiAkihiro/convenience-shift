@@ -19,7 +19,7 @@
                       従業員 <b class="caret"></b>
                    </a>
                    <ul class="dropdown-menu">
-                      <li class="nav-link"><%= link_to "ログアウト", staffs_logout_path, {:method=> :post} %></li>
+                      <li class="nav-link"><%= link_to "設定", staff_path(current_staff) %></li>
                    </ul>   
                 </li>   
 
@@ -30,7 +30,6 @@
                    </a>
                    <ul class="dropdown-menu">
                       <li class="nav-link"><%= link_to "個人ページ",      staff_path(current_staff) %></li>
-                      <li class="nav-link"><%= link_to "ログアウト", staffs_logout_path, {:method=> :post} %></li>
                    </ul>   
                 </li>   
                 <li class="nav-link"><%= link_to "店長ログイン",     login_path %></li>
@@ -45,11 +44,9 @@
                       <li class="nav-link"><%= link_to "ログアウト",   logout_path, {:method=> :post} %></li>
                    </ul>   
                 </li>
-                <li class="nav-link"><%= link_to "従業員ログイン", staffs_login_path %></li>
                 
               <% else %>
                 <li class="nav-link"><%= link_to "店長ログイン", login_path %></li>
-                <li class="nav-link"><%= link_to "従業員ログイン",staffs_login_path %></li>
               <% end %>  
           </ul>   
        </div>  

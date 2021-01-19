@@ -19,15 +19,9 @@
       <% end %> 
 
       <br><br>
-      <%= link_to "シフトを調整する", confirmed_shift_master_path(current_master) %>
-
-      <% @shifts.each do |shift|%> 
-      <li>
-        <%= shift.staff.staff_name%>
-        <%= shift.start%> 〜
-        <%= shift.finish%>
-      </li>
-      <% end %>
+      <%= link_to "シフトを調整する", temporary_shifts_path %>
+      <br>
+      <%= link_to "スタッフとしてログインする", login_master_path(current_master) %>
     </section>
   </aside>
 </div>

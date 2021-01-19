@@ -111,3 +111,9 @@ class: "btn-link btn-outline-dark bg-dark "
 // });
 
 
+
+<div class="row">
+    <%= form_with(model: @event, url: individual_shifts_path, html: { method: :delete }, remote: true) do |f| %>
+        <%= f.submit "Unfollow", class: "btn btn-primary" %>
+    <% end %>
+</div>    

@@ -21,7 +21,6 @@ class MastersController < ApplicationController
 
   def show
     @master = Master.find(params[:id])
-    @shifts = @master.individual_shifts.where(confirm: true)
   end
 
   def shift_onoff
@@ -49,9 +48,30 @@ class MastersController < ApplicationController
     end
   end
 
-  def confirmed_shift
+  def login_form
     @master = Master.find(params[:id])
-    @shifts = @master.individual_shifts.where(confirm: true).where(Temporary: false).where(deletable: false)
+     if logged_in_staff?
+      redirect_to current_staff
+      flash[:success] = "現在　#{current_staff.staff_name}さん　としてログイン中です"
+     end
+  end
+
+  def login
+    @master = Master.find(params[:id])
+    @staff  = @master.staffs.find_by(staff_number: params[:staffs_session][:staff_number])  
+    if @staff && @staff.authenticate(params[:staffs_session][:password])
+      log_in_staff(@staff)
+      #params[:session][:remember_me] == '1' ? remember(staff): forget(staff)
+      redirect_to perfect_shifts_path
+    else
+      flash.now[:danger] = "従業員番号もしくはパスワードが間違っています"
+      render 'login_form'
+    end
+  end
+
+  def logout
+    log_out_staff if logged_in_staff?
+    redirect_to root_url
   end
 
   private

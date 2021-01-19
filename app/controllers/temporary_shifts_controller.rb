@@ -1,0 +1,76 @@
+class TemporaryShiftsController < ApplicationController
+
+  def index
+    @events = current_master.individual_shifts.where(confirm: true).where(Temporary: false).where(deletable: false)
+  end
+
+  def new_shift
+    @event = current_master.individual_shifts.new
+    render plain: render_to_string(partial: 'form_new_shift', layout: false, locals: { event: @event })
+  end
+
+  def new_plan
+    @event = current_master.individual_shifts.new
+    render plain: render_to_string(partial: 'form_new_plan', layout: false, locals: { event: @event })
+  end
+
+  def create_shift
+    @event = current_master.individual_shifts.new(params_shift)
+    @event.staff = current_master.staffs.find_by(staff_number: 0)
+    @event.confirm = true
+    @event.content = "　"
+    change_finishDate
+    @event.save
+    respond_to do |format|
+      format.html { redirect_to temporary_shifts_path }
+      format.js
+    end
+    
+  end
+
+  def create_plan
+    @event = current_master.individual_shifts.new(params_plan)
+    @event.staff = current_master.staffs.find_by(staff_number: 0)
+    @event.confirm = true
+    @event.save
+    respond_to do |format|
+      format.html { redirect_to temporary_shifts_path }
+      format.js
+    end
+  end
+
+  def delete 
+    @id = params[:shift_id]
+    @event = current_master.individual_shifts.find(@id)
+    render plain: render_to_string(partial: 'form_deletable', layout: false, locals: { event: @event })
+  end
+
+  def deletable
+    @event = current_master.individual_shifts.find(params[:id])
+    @event.deletable = true
+    @event.save
+  end
+
+  def perfect
+    @events = current_master.individual_shifts.where(confirm: true).where(Temporary: false)
+    @events.each do |shift|
+        if shift.deletable == true
+            shift.destroy!
+        else
+            shift.Temporary = true
+            shift.save
+        end
+    end
+    flash[:success] = "シフトが完成しました！従業員の皆さんに共有しましょう！"
+    redirect_to root_path
+  end
+
+  private
+    def params_shift
+      params.require(:individual_shift).permit(:start, :finish)
+    end
+
+    def params_plan
+      params.require(:individual_shift).permit(:content, :start)
+    end
+end

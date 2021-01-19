@@ -1,0 +1,7 @@
+<h1><%= @event.id %></h1>
+
+<div class="row">
+    <%= form_with(model: @event, url: deletable_temporary_shift_path(@event), html: { method: :patch }, remote: true) do |f| %>
+        <%= f.submit "消去(仮)", class: "btn btn-primary" %>
+    <% end %>
+</div>    

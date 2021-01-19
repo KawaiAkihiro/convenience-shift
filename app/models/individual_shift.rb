@@ -4,8 +4,6 @@ class IndividualShift < ApplicationRecord
   has_one :master, through: :staff
 
   default_scope -> { order(start: :asc) }
-  validates :start,  presence:true
-  # validates :finish, presence:true
   validate  :start_end_check
   
   #startとfinishの大小関係を制限(start < finish => true)
@@ -21,7 +19,12 @@ class IndividualShift < ApplicationRecord
   end
 
   def parent
-    self.staff.staff_name
+    if self.staff.staff_number == 0
+      self.content
+    else
+      self.staff.staff_name
+    end
+    
   end
 
   def id_parent
@@ -39,9 +42,9 @@ class IndividualShift < ApplicationRecord
 
   def color
     if self.staff.training_mode == true
-      "yellow"
+      "red"
     else
-      "white"
+      "black"
     end
   end
 
@@ -50,5 +53,13 @@ class IndividualShift < ApplicationRecord
     str2 = str.join(" ~ ")
     str3 = [ "#{self.id}", "#{str2}"]
     return str3.join("  ")
+  end
+
+  def backgroundColor
+    if self.staff.staff_number == 0 && self.finish != nil
+      "yellow"
+    else
+      "white"
+    end
   end
 end
