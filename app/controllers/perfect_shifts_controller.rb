@@ -30,5 +30,4 @@ class PerfectShiftsController < ApplicationController
     @event.staff = current_staff
     @event.save
   end
-
 end

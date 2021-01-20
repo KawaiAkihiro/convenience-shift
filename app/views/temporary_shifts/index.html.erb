@@ -28,6 +28,8 @@
   </div>
 </div>
 
+<%= link_to "仮削除一覧", deletable_shifts_path %><br>
+
 <%= link_to "確定する", perfect_temporary_shifts_path, method: :patch, class:"btn btn-primary", data: { confirm: 'Are you sure?' } %>
 
 <%= javascript_pack_tag 'temporary_shifts/calendar' %>

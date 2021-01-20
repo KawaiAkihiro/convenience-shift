@@ -49,6 +49,11 @@ Rails.application.routes.draw do
       patch :deletable
     end
   end
+
+  resources :deletable_shifts, :only => [:index] do
+    get :restore , on: :collection
+    patch :reborn, on: :member
+  end
   
   resources :individual_shifts do
     
