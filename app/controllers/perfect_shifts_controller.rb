@@ -31,7 +31,4 @@ class PerfectShiftsController < ApplicationController
     @event.save
   end
 
-  def info
-    
-  end
 end

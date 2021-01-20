@@ -10,8 +10,12 @@ class TemporaryShiftsController < ApplicationController
   end
 
   def new_plan
-    @event = current_master.individual_shifts.new
-    render plain: render_to_string(partial: 'form_new_plan', layout: false, locals: { event: @event })
+    if logged_in?
+      @event = current_master.individual_shifts.new
+      render plain: render_to_string(partial: 'form_new_plan', layout: false, locals: { event: @event })
+    else
+      render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
+    end
   end
 
   def create_shift
