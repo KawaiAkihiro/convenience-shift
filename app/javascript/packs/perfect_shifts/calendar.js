@@ -25,6 +25,25 @@ document.addEventListener('turbolinks:load', function() {
             }else{
                 return [ 'vertical' ]
             }
+        },
+        eventClick: function(info){
+            var id = info.event.id
+
+            if(info.el.style.backgroundColor == "yellow"){
+                $.ajax({
+                    type: "GET",
+                    url:  "/perfect_shifts/fill",
+                    data: { shift_id : id },
+                    datatype: "html",
+                }).done(function(res){
+                
+                    $('.modal-body').html(res)
+                    $('#modal').fadeIn();
+                }).fail(function (result) {
+                    // 失敗処理
+                    alert("failed");
+                });
+            }
         }
     });
     calendar.render();

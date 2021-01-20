@@ -20,9 +20,20 @@ Rails.application.routes.draw do
 
   resources :staffs 
 
-  get :perfect_shifts, to: 'perfect_shifts#index' 
+  # get :chnage_form,      to: 'perfect_shifts#change_form'
+  # patch :change,         to: 'perfect_shifts#change'
+
+  resources :perfect_shifts, :only => [:index] do
+    collection do
+      get :fill
+    end
+
+    member do
+      patch :fill_in
+    end
+  end
+
   get :comfirmed_shifts,  to: 'comfirmed_shifts#index'
-  #get :temporary_shifts,  to: 'temporary_shifts#index'
 
   resources :temporary_shifts , :only => [:index, :destroy] do
     collection do
@@ -37,10 +48,8 @@ Rails.application.routes.draw do
     member do
       patch :deletable
     end
-
   end
   
-
   resources :individual_shifts do
     
     collection do
