@@ -1,3 +1,4 @@
+
 import { Calendar, whenTransitionDone } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid'
@@ -54,4 +55,8 @@ document.addEventListener('turbolinks:load', function() {
     });
 
     calendar.render();
+
+    $('button').click(function(){
+        calendar.refetchEvents();
+    })
 });
