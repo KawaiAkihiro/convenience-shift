@@ -21,6 +21,7 @@ class MastersController < ApplicationController
 
   def show
     @master = Master.find(params[:id])
+    @notices = @master.notices.all
   end
 
   def shift_onoff

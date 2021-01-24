@@ -84,8 +84,26 @@ document.addEventListener('turbolinks:load', function() {
                     // 失敗処理
                     alert("failed");
                 });
+            }else if(info.el.style.backgroundColor == "white"){
+                $.ajax({
+                    type: "GET",
+                    url:  "/perfect_shifts/change",
+                    data: { shift_id : id },
+                    datatype: "html",
+                }).done(function(res){
+                
+                    $('.modal-body').html(res)
+                    $('#modal').fadeIn();
+                }).fail(function (result) {
+                    // 失敗処理
+                    alert("failed");
+                });
             }
         }
     });
     calendar.render();
+
+    $('button').click(function(){
+        calendar.refetchEvents();
+    });
 });

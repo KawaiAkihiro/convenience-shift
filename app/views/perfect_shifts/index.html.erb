@@ -1,4 +1,10 @@
-<% if logged_in_staff? || logged_in?%>
+<% if logged_in_staff? || logged_in?%> 
+    <button type="button" name="name" class="reload">カレンダーを更新する</button><br>
+    <% @shift_separation.each do |shift|%>
+        <%= shift.name %>
+        <%= shift.start_time.strftime("%H:%M")%> ~ 
+        <%= shift.finish_time.strftime("%H:%M") %>
+    <% end %>
     <div id="calendar"></div>
     <div id="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">

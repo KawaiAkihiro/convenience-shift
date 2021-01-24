@@ -22,7 +22,6 @@ class TemporaryShiftsController < ApplicationController
     @event = current_master.individual_shifts.new(params_shift)
     @event.staff = current_master.staffs.find_by(staff_number: 0)
     @event.confirm = true
-    @event.content = "　"
     change_finishDate
     @event.save
     respond_to do |format|
@@ -75,6 +74,6 @@ class TemporaryShiftsController < ApplicationController
     end
 
     def params_plan
-      params.require(:individual_shift).permit(:content, :start)
+      params.require(:individual_shift).permit(:plan, :start)
     end
 end

@@ -20,7 +20,11 @@ class IndividualShift < ApplicationRecord
 
   def parent
     if self.staff.staff_number == 0
-      self.content
+      if self.plan == nil
+        " "
+      else
+        self.plan
+      end
     else
       self.staff.staff_name
     end
@@ -59,7 +63,11 @@ class IndividualShift < ApplicationRecord
     if self.staff.staff_number == 0 && self.finish != nil
       "yellow"
     else
-      "white"
+      if self.mode == nil || self.mode == "delete"
+        "white"
+      elsif self.mode == "instead"
+        "lightcoral"
+      end
     end
   end
 end

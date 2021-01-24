@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_17_042101) do
+ActiveRecord::Schema.define(version: 2021_01_24_205130) do
 
   create_table "individual_shifts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "start"
@@ -21,7 +21,8 @@ ActiveRecord::Schema.define(version: 2021_01_17_042101) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "deletable", default: false, null: false
-    t.string "content"
+    t.string "mode"
+    t.string "plan"
     t.index ["staff_id"], name: "index_individual_shifts_on_staff_id"
   end
 
@@ -33,6 +34,17 @@ ActiveRecord::Schema.define(version: 2021_01_17_042101) do
     t.string "password_digest"
     t.string "remember_digest"
     t.boolean "shift_onoff", default: false, null: false
+  end
+
+  create_table "notices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "mode"
+    t.integer "shift_id"
+    t.integer "staff_id"
+    t.bigint "master_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "comment"
+    t.index ["master_id"], name: "index_notices_on_master_id"
   end
 
   create_table "shift_separations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -58,6 +70,7 @@ ActiveRecord::Schema.define(version: 2021_01_17_042101) do
   end
 
   add_foreign_key "individual_shifts", "staffs"
+  add_foreign_key "notices", "masters"
   add_foreign_key "shift_separations", "masters"
   add_foreign_key "staffs", "masters"
 end
