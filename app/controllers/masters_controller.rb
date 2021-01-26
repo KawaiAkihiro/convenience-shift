@@ -28,7 +28,7 @@ class MastersController < ApplicationController
     @master = Master.find(params[:id])
     if @master.shift_onoff == false
       @master.shift_onoff = true
-    elsif @master.shift_onoff == true
+    else
       @master.shift_onoff = false
     end
     @master.save

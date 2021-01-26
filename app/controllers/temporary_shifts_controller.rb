@@ -50,8 +50,13 @@ class TemporaryShiftsController < ApplicationController
 
   def deletable
     @event = current_master.individual_shifts.find(params[:id])
-    @event.deletable = true
-    @event.save
+    if @event.allDay == true
+      @event.destroy
+    else
+      @event.deletable = true
+      @event.save
+    end
+    
   end
 
   def perfect

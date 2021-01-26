@@ -55,6 +55,15 @@ class PerfectShiftsController < ApplicationController
         render plain: render_to_string(partial: 'form_delete', layout: false, locals: { event: @event }) 
       end
     end
+
+    if logged_in?
+      @event = current_master.individual_shifts.find(params[:shift_id])
+      unless @event.allDay
+        render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
+      else
+        render plain: render_to_string(partial: 'plan_delete', layout: false, locals: { event: @event })
+      end
+    end
   end
 
   def instead

@@ -1,5 +1,5 @@
 class IndividualShiftsController < ApplicationController
-    before_action :logged_in_staff ,except: [:index, :deletable, :perfect]
+    before_action :logged_in_staff ,except: [:index, :deletable, :perfect, :destroy]
     require 'date'
 
     def index
@@ -41,7 +41,14 @@ class IndividualShiftsController < ApplicationController
 
 
     def destroy
-        @event = current_staff.individual_shifts.find(params[:id]).destroy
+        if logged_in_staff?
+            @event = current_staff.individual_shifts.find(params[:id]).destroy
+        end
+
+        if logged_in?
+            @event = current_master.individual_shifts.find(params[:id]).destroy
+        end
+        
         # flash[:danger] = "消去完了しました。"
         # redirect_to individual_shifts_path
     end
