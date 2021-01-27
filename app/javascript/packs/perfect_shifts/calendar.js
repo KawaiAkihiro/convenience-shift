@@ -43,7 +43,7 @@ document.addEventListener('turbolinks:load', function() {
             if(hour == 9){
                 $.ajax({
                     type: 'GET',
-                    url:  '/temporary_shifts/new_plan',
+                    url:  '/perfect_shifts/new_plan',
                 }).done(function (res) {
                     //イベント登録用のhtmlを作成
                     $('.modal-body').html(res);
@@ -105,5 +105,23 @@ document.addEventListener('turbolinks:load', function() {
 
     $('button').click(function(){
         calendar.refetchEvents();
+    });
+});
+
+$(function(){
+    $('button.plan').click(function(){
+        $.ajax({
+            type: 'GET',
+            url:  '/perfect_shifts/new_plan',
+        }).done(function (res) {
+            //イベント登録用のhtmlを作成
+            $('.modal-body').html(res);
+        
+            $('#modal').fadeIn();
+            // 成功処理
+        }).fail(function (result) {
+            // 失敗処理
+            alert("failed");
+        });
     });
 });

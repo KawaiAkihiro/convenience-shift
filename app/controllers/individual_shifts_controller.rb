@@ -41,11 +41,11 @@ class IndividualShiftsController < ApplicationController
 
 
     def destroy
-        if logged_in_staff?
+        if logged_in_staff? && logged_in?
+            @event = current_master.individual_shifts.find(params[:id]).destroy
+        elsif logged_in_staff? && !logged_in?
             @event = current_staff.individual_shifts.find(params[:id]).destroy
-        end
-
-        if logged_in?
+        elsif logged_in? && !logged_in_staff?
             @event = current_master.individual_shifts.find(params[:id]).destroy
         end
         

@@ -1,3 +1,6 @@
+<% if logged_in? %>
+    <button type="button" name="name" class="plan">予定を追加する</button>
+<% end %>
 <% if logged_in_staff? || logged_in?%> 
     <button type="button" name="name" class="reload">カレンダーを更新する</button><br>
     <% @shift_separation.each do |shift|%>

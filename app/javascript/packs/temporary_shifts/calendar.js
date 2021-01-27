@@ -104,4 +104,42 @@ document.addEventListener('turbolinks:load', function() {
     });
 
     calendar.render();
+
+    $('button.reload').click(function(){
+        calendar.refetchEvents();
+    });
+});
+
+$(function(){
+    $('button.plan').click(function(){
+        $.ajax({
+            type: 'GET',
+            url:  '/temporary_shifts/new_plan',
+        }).done(function (res) {
+            //イベント登録用のhtmlを作成
+            $('.modal-body').html(res);
+        
+            $('#modal').fadeIn();
+            // 成功処理
+        }).fail(function (result) {
+            // 失敗処理
+            alert("failed");
+        });
+    });
+
+    $('button.shift').click(function(){
+        $.ajax({
+            type: 'GET',
+            url:  '/temporary_shifts/new_shift',
+        }).done(function (res) {
+            //イベント登録用のhtmlを作成
+            $('.modal-body').html(res);
+        
+            $('#modal').fadeIn();
+            // 成功処理
+        }).fail(function (result) {
+            // 失敗処理
+            alert("failed");
+        });
+    })
 });

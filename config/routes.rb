@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     collection do
       get :fill
       get :change
+      get :new_plan
+      post :create_plan
     end
 
     member do

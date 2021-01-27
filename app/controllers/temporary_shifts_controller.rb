@@ -1,6 +1,7 @@
 class TemporaryShiftsController < ApplicationController
 
   def index
+    @event = current_master.individual_shifts.new
     @events = current_master.individual_shifts.where(confirm: true).where(Temporary: false).where(deletable: false)
   end
 
@@ -53,8 +54,12 @@ class TemporaryShiftsController < ApplicationController
     if @event.allDay == true
       @event.destroy
     else
-      @event.deletable = true
-      @event.save
+      if @event.staff.staff_number != 0
+        @event.deletable = true
+        @event.save
+      else
+        @event.destroy
+      end
     end
     
   end
