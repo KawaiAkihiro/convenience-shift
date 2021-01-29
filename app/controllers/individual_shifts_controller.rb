@@ -8,13 +8,22 @@ class IndividualShiftsController < ApplicationController
 
     def new
         @event = current_staff.individual_shifts.new
-        render plain: render_to_string(partial: 'form_new', layout: false, locals: { event: @event })
+        @patterns = current_staff.patterns.all
+        render plain: render_to_string(partial: 'form_new', layout: false, locals: { event: @event, patterns: @patterns })
     end
 
     def create
         @event = current_staff.individual_shifts.new(params_shift)
+        @pattern = current_staff.patterns.new(params_shift)
+        @already_pattern = current_staff.patterns.where(start: @pattern.start).where(finish: @pattern.finish)
+        unless @already_pattern.present?
+            @pattern.save
+        end
         change_finishDate
         @event.save  
+
+        
+        
     end 
 
     def confirm

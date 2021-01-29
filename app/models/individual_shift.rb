@@ -54,9 +54,8 @@ class IndividualShift < ApplicationRecord
 
   def time
     str = [ "#{self.start.strftime("%H")}" + "時", "#{self.finish.strftime("%H")}" + "時" ]
-    str2 = str.join(" ~ ")
-    str3 = [ "#{self.id}", "#{str2}"]
-    return str3.join("  ")
+    return str.join(" ~ ")
+    
   end
 
   def backgroundColor

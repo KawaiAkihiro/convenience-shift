@@ -117,3 +117,9 @@ class: "btn-link btn-outline-dark bg-dark "
         <%= f.submit "Unfollow", class: "btn btn-primary" %>
     <% end %>
 </div>    
+
+<% @patterns.count > 0 %>
+    <% @patterns.each do |pattern| %>
+          <%= link_to "#{pattern.start.strftime("%H:%M")}-#{pattern.finish.strftime("%H:%M")}"%>
+    <% end %>
+<% end %>   
