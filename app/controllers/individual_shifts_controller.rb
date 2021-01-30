@@ -14,13 +14,18 @@ class IndividualShiftsController < ApplicationController
 
     def create
         @event = current_staff.individual_shifts.new(params_shift)
+        change_finishDate
+        @already_event = current_staff.individual_shifts.where(start:@event.start).where(finish:@event.finish)
+        
         @pattern = current_staff.patterns.new(params_shift)
         @already_pattern = current_staff.patterns.where(start: @pattern.start).where(finish: @pattern.finish)
         unless @already_pattern.present?
             @pattern.save
         end
-        change_finishDate
-        @event.save  
+        
+        unless @already_event.present?
+            @event.save 
+        end
 
         
         
