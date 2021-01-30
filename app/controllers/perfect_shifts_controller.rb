@@ -24,7 +24,6 @@ class PerfectShiftsController < ApplicationController
   def create_plan
     @event = current_master.individual_shifts.new(params_plan)
     @event.staff = current_master.staffs.find_by(staff_number: 0)
-    @event.confirm = true
     @event.Temporary = true
     @event.save
     respond_to do |format|

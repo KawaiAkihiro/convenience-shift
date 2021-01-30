@@ -12,11 +12,16 @@ document.addEventListener('turbolinks:load', function() {
         locale: 'ja',
         timeZone: 'Asia/Tokyo',
         scrollTime: '07:00:00',
+        firstDay: 1,
         headerToolbar: {
             start: '',
             center: 'title',
             end: 'today prev,next' 
         },
+        buttonText: {
+            today: '今日'
+        }, 
+        allDayText: '営業催事',
         height: "auto",
         dateClick: function(info){
             const year  = info.date.getFullYear();
@@ -87,8 +92,8 @@ document.addEventListener('turbolinks:load', function() {
                 datatype: "html",
             }).done(function(res){
             
-            $('.modal-body2').html(res)
-            $('#modal2').fadeIn();
+            $('.modal-body').html(res)
+            $('#modal').fadeIn();
             }).fail(function (result) {
                 // 失敗処理
                 alert("failed");

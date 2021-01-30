@@ -3,7 +3,7 @@ class IndividualShiftsController < ApplicationController
     require 'date'
 
     def index
-        @events = current_staff.individual_shifts.where(confirm: false)
+        @events = current_staff.individual_shifts.where(Temporary: false)
     end
 
     def new
@@ -25,27 +25,8 @@ class IndividualShiftsController < ApplicationController
         
         unless @already_event.present?
             @event.save 
-        end
-
-        
-        
+        end 
     end 
-
-    def confirm
-        @events = current_staff.individual_shifts.where(confirm: false)
-        if @events.count == 0
-            flash[:danger] = "提出されたシフトがありません"
-            # render "index"
-            redirect_to individual_shifts_path
-        else
-            @events.each do |shift|
-                shift.confirm = true
-                shift.save
-            end
-            flash[:success] = "提出が完了しました"
-            redirect_to current_staff
-        end
-    end
 
     def remove
         @id = params[:shift_id]

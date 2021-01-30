@@ -10,7 +10,11 @@ class Pattern < ApplicationRecord
   end
 
   def finish_h
-    self.finish.hour
+    if self.finish.hour < 10
+      "0#{self.finish.hour}"
+    else
+      self.finish.hour
+    end
   end
 
   def start_to_finish

@@ -1,6 +1,6 @@
 class DeletableShiftsController < ApplicationController
     def index
-        @events = current_master.individual_shifts.where(confirm: true).where(Temporary: false).where(deletable: true)
+        @events = current_master.individual_shifts.where(Temporary: false).where(deletable: true)
     end
 
     def restore

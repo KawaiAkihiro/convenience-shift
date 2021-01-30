@@ -18,6 +18,11 @@ document.addEventListener('turbolinks:load', function() {
             center: 'title',
             right: 'today prev,next' 
         },
+        firstDay: 1,
+        buttonText: {
+            today: '今日'
+        }, 
+        allDayText: '営業催事',
         height: "auto",
         dateClick: function(info){
             const year  = info.date.getFullYear();

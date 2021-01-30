@@ -12,11 +12,16 @@ document.addEventListener('turbolinks:load', function() {
         locale: 'ja',
         timeZone: 'Asia/Tokyo',
         scrollTime: '07:00:00',
+        firstDay: 1,
         headerToolbar: {
             start: '',
             center: 'title',
             end: 'today prev,next' 
         },
+        buttonText: {
+            today: '今日'
+        }, 
+        allDayText: '営業催事',
         height: "auto",
         eventClick: function(info){
             var id = info.event.id

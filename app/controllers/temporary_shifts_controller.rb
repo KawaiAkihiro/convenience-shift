@@ -2,12 +2,13 @@ class TemporaryShiftsController < ApplicationController
 
   def index
     @event = current_master.individual_shifts.new
-    @events = current_master.individual_shifts.where(confirm: true).where(Temporary: false).where(deletable: false)
+    @events = current_master.individual_shifts.where(Temporary: false).where(deletable: false)
   end
 
   def new_shift
     @event = current_master.individual_shifts.new
-    render plain: render_to_string(partial: 'form_new_shift', layout: false, locals: { event: @event })
+    @separations = current_master.shift_separations.all
+    render plain: render_to_string(partial: 'form_new_shift', layout: false, locals: { event: @event, separations:@separations })
   end
 
   def new_plan
@@ -22,7 +23,6 @@ class TemporaryShiftsController < ApplicationController
   def create_shift
     @event = current_master.individual_shifts.new(params_shift)
     @event.staff = current_master.staffs.find_by(staff_number: 0)
-    @event.confirm = true
     change_finishDate
     @event.save
     respond_to do |format|
@@ -35,7 +35,6 @@ class TemporaryShiftsController < ApplicationController
   def create_plan
     @event = current_master.individual_shifts.new(params_plan)
     @event.staff = current_master.staffs.find_by(staff_number: 0)
-    @event.confirm = true
     @event.save
     respond_to do |format|
       format.html { redirect_to temporary_shifts_path }
@@ -65,7 +64,7 @@ class TemporaryShiftsController < ApplicationController
   end
 
   def perfect
-    @events = current_master.individual_shifts.where(confirm: true).where(Temporary: false)
+    @events = current_master.individual_shifts.where(Temporary: false)
     @events.each do |shift|
         if shift.deletable == true
             shift.destroy!

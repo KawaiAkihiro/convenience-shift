@@ -67,7 +67,7 @@ Rails.application.routes.draw do
   resources :individual_shifts do
     
     collection do
-      patch  :confirm,  to: 'individual_shifts#confirm'
+      # patch  :confirm,  to: 'individual_shifts#confirm'
       patch  :perfect
       get  :remove
     end

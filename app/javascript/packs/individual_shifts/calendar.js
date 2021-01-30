@@ -11,7 +11,20 @@ document.addEventListener('turbolinks:load', function() {
         events: '/individual_shifts.json',
         locale: 'ja',
         timeZone: 'Asia/Tokyo',
-        //scrollTime: '07:00:00',
+        firstDay: 1,
+        theme: false,
+        dayCellContent: function(e) {
+            e.dayNumberText = e.dayNumberText.replace('日', '');
+
+        },
+        buttonText: {
+            today: '今日'
+        }, 
+        headerToolbar: {
+            start: '',
+            center: 'title',
+            end: 'today prev,next' 
+        },
         dateClick: function(info){
             const year  = info.date.getFullYear();
             const month = (info.date.getMonth() + 1);
@@ -45,8 +58,8 @@ document.addEventListener('turbolinks:load', function() {
                 datatype: "html",
             }).done(function(res){
             
-            $('.modal-body2').html(res)
-            $('#modal2').fadeIn();
+            $('.modal-body').html(res)
+            $('#modal').fadeIn();
             }).fail(function (result) {
                 // 失敗処理
                 alert("failed");

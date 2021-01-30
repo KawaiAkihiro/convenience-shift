@@ -16,6 +16,10 @@ document.addEventListener('turbolinks:load', function() {
             center: 'title',
             right: 'today prev,next' 
         },
+        dayCellContent: function(e) {
+            e.dayNumberText = e.dayNumberText.replace('日', '');
+
+        },
         eventClick: function(info){
             var id = info.event.id
             $.ajax({
@@ -25,8 +29,8 @@ document.addEventListener('turbolinks:load', function() {
                 datatype: "html",
             }).done(function(res){
             
-            $('.modal-body2').html(res)
-            $('#modal2').fadeIn();
+            $('.modal-body').html(res)
+            $('#modal').fadeIn();
             }).fail(function (result) {
                 // 失敗処理
                 alert("failed");
@@ -35,4 +39,8 @@ document.addEventListener('turbolinks:load', function() {
     });
 
     calendar.render();
+
+    $('button').click(function(){
+        calendar.refetchEvents();
+    })
 });

@@ -73,34 +73,68 @@ li{
     padding-right: 10px;
 }
 
-.fc-day-other {
-    .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
-      color: darkgrey;
-    }
+
+.fc-day-mon{
+  .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
+    color: black;
   }
+}
+
+.fc-day-tue{
+  .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
+    color: black;
+  }
+}
+
+.fc-day-wed{
+  .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
+    color: black;
+  }
+}
+
+.fc-day-thu{
+  .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
+    color: black;
+  }
+}
+
+.fc-day-fri{
+  .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
+    color: black;
+  }
+}
+
+// 土曜日
+.fc-day-sat {
+  .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
+    color: blue;
+  }
+}
+
+// 日曜日
+.fc-day-sun{
+  .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
+    color: red;
+  }
+}
+
+td.fc-day-sat {
+  background-color: #eaf4ff;
   
-  // 土曜日
-  .fc-day-sat {
-    .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
-      color: blue;
-    }
-  }
-  
-  // 日曜日
-  .fc-day-sun{
-    .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
-      color: red;
-    }
-  }
+}
 
-  .horizon{
-    writing-mode: horizontal-tb;
-  }
+td.fc-day-sun {
+  background-color: #ffeaea;
+}
+.horizon{
+  writing-mode: horizontal-tb;
+}
 
-  .vertical{
-    writing-mode: vertical-lr;
-  }
+.vertical{
+  writing-mode: vertical-lr;
+}
 
-  #calendar{
-    padding-top: 50px;
-  }
+#calendar{
+  padding-top: 50px;
+  font-size: 20px;
+}

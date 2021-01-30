@@ -14,4 +14,24 @@ class ShiftSeparation < ApplicationRecord
     end
   end
 
+  def start_h
+    if self.start_time.hour < 10
+      "0#{self.start_time.hour}"
+    else
+      self.start_time.hour
+    end
+  end
+
+  def finish_h
+    if self.finish_time.hour < 10
+      "0#{self.finish_time.hour}"
+    else
+      self.finish_time.hour
+    end
+  end
+
+  def start_to_finish
+    "#{self.start_time.strftime("%H:%M")}-#{self.finish_time.strftime("%H:%M")}"
+  end
+
 end
