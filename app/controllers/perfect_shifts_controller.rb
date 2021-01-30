@@ -57,15 +57,27 @@ class PerfectShiftsController < ApplicationController
 
     elsif logged_in? && !logged_in_staff?
       @event = current_master.individual_shifts.find(params[:shift_id])
-      render plain: render_to_string(partial: 'info_event', layout: false, locals: { event: @event })
+      render plain: render_to_string(partial: 'form_fill', layout: false, locals: { event: @event })
     
     end
   end
 
   def fill_in
-    @master = current_staff.master
-    @event = @master.individual_shifts.find(params[:id])
-    @event.staff = current_staff
+    if logged_in? && logged_in_staff?
+      @master = current_staff.master
+      @event = @master.individual_shifts.find(params[:id])
+      @event.staff = current_staff
+
+    elsif !logged_in? && logged_in_staff?
+      @master = current_staff.master
+      @event = @master.individual_shifts.find(params[:id])
+      @event.staff = current_staff
+
+    elsif logged_in? && !logged_in_staff?  
+      @event = current_master.individual_shifts.find(params[:id])
+      @event.staff = current_master.staffs.find_by(staff_number:current_master.staff_number)
+    end
+    
     @event.save
   end
 

@@ -18,13 +18,12 @@ document.addEventListener('turbolinks:load', function() {
         },
         dayCellContent: function(e) {
             e.dayNumberText = e.dayNumberText.replace('日', '');
-
         },
         eventClick: function(info){
             var id = info.event.id
             $.ajax({
                 type: "GET",
-                url:  "/individual_shifts/remove",
+                url:  "/perfect_shifts/change",
                 data: { shift_id : id },
                 datatype: "html",
             }).done(function(res){
@@ -40,7 +39,7 @@ document.addEventListener('turbolinks:load', function() {
 
     calendar.render();
 
-    $('button').click(function(){
-        calendar.refetchEvents();
-    })
+    // $('button').click(function(){
+    //     calendar.refetchEvents();
+    // })
 });

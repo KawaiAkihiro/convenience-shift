@@ -11,7 +11,15 @@ class MastersController < ApplicationController
     @master = Master.new(master_params)
     if @master.save
       log_in @master
-      flash[:success] = "ユーザー登録が完了しました！次はシフト時間帯の設定をしていきましょう！"
+
+      @staff = current_master.staffs.new
+      @staff.staff_name = current_master.user_name
+      @staff.staff_number = current_master.staff_number
+      @staff.password = "0000"
+      @staff.password_confirmation = "0000"
+      @staff.save
+
+      flash[:success] = "ユーザー登録が完了しました！"
       redirect_to @master
       #最終的にはsettingページに飛ばしたい。
     else
@@ -77,6 +85,6 @@ class MastersController < ApplicationController
 
   private
     def master_params
-      params.require(:master).permit(:store_name, :user_name, :password, :password_confirmation)
+      params.require(:master).permit(:store_name, :user_name, :staff_number, :password, :password_confirmation)
     end
 end
