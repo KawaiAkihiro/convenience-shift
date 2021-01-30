@@ -1,83 +1,56 @@
 class IndividualShiftsController < ApplicationController
-    before_action :logged_in_staff
-
+    before_action :logged_in_staff ,except: [:index, :deletable, :perfect, :destroy]
     require 'date'
 
+    def index
+        @events = current_staff.individual_shifts.where(Temporary: false)
+    end
+
     def new
-        @shift = current_staff.individual_shifts.new
-        @shifts = current_staff.individual_shifts.where(confirm: false)
+        @event = current_staff.individual_shifts.new
+        @patterns = current_staff.patterns.all
+        render plain: render_to_string(partial: 'form_new', layout: false, locals: { event: @event, patterns: @patterns })
     end
 
     def create
-        @shift = current_staff.individual_shifts.new(params_shift)
+        @event = current_staff.individual_shifts.new(params_shift)
         change_finishDate
-        if @shift.save
-            #ボタンで連続投稿を可能にしている。
-            if params[:commit] == "登録"
-                 flash[:success] = "登録が完了しましたが確定はまだしていません！"
-                
-                 redirect_to current_staff
-            elsif params[:commit] == "もう一度"
-                flash[:success] = "もう一度登録してください" 
-                redirect_to new_individual_shift_path
-            end
-        else
-            render 'new'
-        end
-    end
-
-    def confirm_form
-        @shifts = current_staff.individual_shifts.where(confirm: false)
-    end
+        @already_event = current_staff.individual_shifts.where(start:@event.start).where(finish:@event.finish)
         
-
-    def confirm
-        @shifts = current_staff.individual_shifts.where(confirm: false)
-        if @shifts.count == 0
-            redirect_to new_individual_shift_path
-        else
-            @shifts.each do |shift|
-                shift.confirm = true
-                shift.save
-            end
-            redirect_to current_staff
+        @pattern = current_staff.patterns.new(params_shift)
+        @already_pattern = current_staff.patterns.where(start: @pattern.start).where(finish: @pattern.finish)
+        unless @already_pattern.present?
+            @pattern.save
         end
+        
+        unless @already_event.present?
+            @event.save 
+        end 
+    end 
+
+    def remove
+        @id = params[:shift_id]
+        @event = current_staff.individual_shifts.find(@id)
+        render plain: render_to_string(partial: 'form_delete', layout: false, locals: { event: @event })
     end
 
-    def confirmed
-        @shifts = current_staff.individual_shifts.where(confirm: true)
-    end
 
     def destroy
-        @shift = current_staff.individual_shifts.find(params[:id]).destroy
-        flash[:danger] = "消去完了しました。"
-        redirect_to new_individual_shift_path
+        if logged_in_staff? && logged_in?
+            @event = current_master.individual_shifts.find(params[:id]).destroy
+        elsif logged_in_staff? && !logged_in?
+            @event = current_staff.individual_shifts.find(params[:id]).destroy
+        elsif logged_in? && !logged_in_staff?
+            @event = current_master.individual_shifts.find(params[:id]).destroy
+        end
+        
+        # flash[:danger] = "消去完了しました。"
+        # redirect_to individual_shifts_path
     end
 
     private
       def params_shift
         params.require(:individual_shift).permit(:start, :finish)
-      end
-
-      #退勤時間の日付を出勤時間の日付に合わせる
-      def change_finishDate 
-        if @shift.start.nil? || @shift.finish.nil?
-                flash[:danger] = "時間が記入されていません"
-                render new_individual_shift_path
-        else
-            if @shift.start.hour < @shift.finish.hour #日付を跨がない場合はそのまま,日付を跨ぐ場合は1日プラスする。
-                @shift.finish = @shift.finish.change(year: @shift.start.year, month: @shift.start.month, day: @shift.start.day) 
-            else  
-                last_day = Date.new(@shift.start.year,@shift.start.month,-1).day #月末の日にちを取得
-                if @shift.start.month == 12 && @shift.start.day == 31            #大晦日
-                    @shift.finish = @shift.finish.change(year: @shift.start.year + 1 ,  month: 1, day: 1)
-                elsif !(@shift.start.month == 12) && @shift.start.day == last_day #普通の月末
-                    @shift.finish = @shift.finish.change(year: @shift.start.year,  month: @shift.start.month + 1, day: 1)
-                else #月末でもない日
-                    @shift.finish = @shift.finish.change(year: @shift.start.year,  month: @shift.start.month,     day: @shift.start.day + 1)
-                end
-            end
-        end
       end
 
       def logged_in_staff

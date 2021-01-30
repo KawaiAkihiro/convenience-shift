@@ -1,0 +1,5 @@
+<div class="row">
+      <%= form_with(model: @event, url: instead_perfect_shift_path(@event), html: {method: :patch},remote: true) do |f| %>
+         <%= f.submit "交代する",   class: "btn btn-primary js-event-create-btn", data: { confirm: 'Are you sure?' }%>
+      <% end %>
+</div>        

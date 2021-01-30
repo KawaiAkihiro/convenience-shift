@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
     include SessionsHelper
-    include StaffsSessionsHelper
     include MastersHelper
+    include IndividualShiftsHelper
 end

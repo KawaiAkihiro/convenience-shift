@@ -2,6 +2,7 @@ class Master < ApplicationRecord
     has_many :staffs, dependent: :destroy
     has_many :shift_separations, dependent: :destroy
     has_many :individual_shifts, through: :staffs
+    has_many :notices
 
     attr_accessor :remember_token 
     validates :store_name, presence: true, length: { maximum: 20}, uniqueness: true

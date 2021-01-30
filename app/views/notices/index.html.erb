@@ -1,0 +1,11 @@
+<% if @notices.count != 0 %>
+    <% @notices.each do |notice| %>
+        <%= notice.id %>
+        <% if notice.mode == "instead"%>
+            <p>交代申請</p>
+        <% elsif notice.mode == "delete" %>
+            <p>削除申請</p>
+        <% end %> 
+        <%= link_to "詳細", notice_path(notice) %><br>
+    <% end %>
+<% end %>

@@ -1,3 +1,28 @@
 // Place all the styles related to the IndividualShifts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+#calendar{
+    z-index: 1;
+}
+
+#modal{
+    z-index: 2;
+    display: none;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    width: 1000px;
+    top: 0;
+    left: 0;
+}
+
+#modal2{
+    z-index: 3;
+    display: none;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    width: 1000px;
+    top: 0;
+    left: 0;
+}

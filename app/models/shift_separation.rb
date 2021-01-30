@@ -13,4 +13,25 @@ class ShiftSeparation < ApplicationRecord
       errors.add(:finish_time, "が開始時刻を上回っています。正しく記入してください。") if self.start_time > self.finish_time && self.start_time.hour < 21
     end
   end
+
+  def start_h
+    if self.start_time.hour < 10
+      "0#{self.start_time.hour}"
+    else
+      self.start_time.hour
+    end
+  end
+
+  def finish_h
+    if self.finish_time.hour < 10
+      "0#{self.finish_time.hour}"
+    else
+      self.finish_time.hour
+    end
+  end
+
+  def start_to_finish
+    "#{self.start_time.strftime("%H:%M")}-#{self.finish_time.strftime("%H:%M")}"
+  end
+
 end

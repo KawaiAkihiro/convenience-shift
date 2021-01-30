@@ -1,0 +1,25 @@
+<button type="button" name="name" class="reload">カレンダーを更新する</button><br><br>
+<button type="button" name="name" class="shift">イエローラインを追加する</button>
+<button type="button" name="name" class="plan">予定を追加する</button>
+<div id="calendar"></div>
+
+<div id="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= link_to "仮削除一覧", deletable_shifts_path %><br>
+
+<%= link_to "確定する", perfect_temporary_shifts_path, method: :patch, class:"btn btn-primary", data: { confirm: 'Are you sure?' } %>
+
+<%= javascript_pack_tag 'temporary_shifts/calendar' %>
+<%= javascript_pack_tag 'shared/index' %>

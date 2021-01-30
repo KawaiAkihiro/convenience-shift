@@ -1,0 +1,37 @@
+<% if logged_in? %>
+    <button type="button" name="name" class="plan">予定を追加する</button>
+<% end %>
+<% if logged_in_staff? || logged_in?%> 
+    <button type="button" name="name" class="reload">カレンダーを更新する</button><br>
+    <% @shift_separation.each do |shift|%>
+        <%= shift.name %>
+        <%= shift.start_time.strftime("%H:%M")%> ~ 
+        <%= shift.finish_time.strftime("%H:%M") %>
+    <% end %>
+    <div id="calendar"></div>
+    <div id="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+<% else %>
+    <div class="center jumbtron ">
+        <div class="container">
+            <h1 class="display-3">シフト管理アプリへようこそ</h1>
+            <h2>今すぐシフトを決めてしまおう！</h2>
+
+            <%= link_to "新規登録", signup_path, class:"btn btn-lg btn-primary" %>
+        </div>
+    </div>  
+<% end %>   
+
+<%= javascript_pack_tag 'perfect_shifts/calendar' %>
+<%= javascript_pack_tag 'shared/index' %>

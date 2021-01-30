@@ -18,13 +18,12 @@
         <%= link_to "募集を終了する",shift_onoff_master_path, method: :patch, class: "btn btn-danger" %>
       <% end %> 
 
-      <% @shifts.each do |shift|%> 
-      <li>
-        <%= shift.staff.staff_name%>
-        <%= shift.start%> 〜
-        <%= shift.finish%>
-      </li>
-      <% end %>
+      <br><br>
+      <%= link_to "シフトを調整する", temporary_shifts_path %>
+      <br>
+      <%= link_to "スタッフとしてログインする", login_master_path(current_master) %>
+      <br>
+      <%= link_to "通知", notices_path %>
     </section>
   </aside>
 </div>

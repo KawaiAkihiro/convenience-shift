@@ -3,13 +3,14 @@ class StaffsController < ApplicationController
     before_action :corrent_staff,   only: [:show, :edit, :update]
 
     def index
-        @staffs = current_master.staffs.paginate(page:params[:page])
+        @staffs = current_master.staffs.where.not(staff_number:0).paginate(page:params[:page])
     end
 
     def show
         if logged_in?
             begin
                 @staff = current_master.staffs.find(params[:id])
+                @master = current_master
             rescue
                 redirect_to current_master
             end
