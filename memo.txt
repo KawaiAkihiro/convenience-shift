@@ -122,4 +122,6 @@ class: "btn-link btn-outline-dark bg-dark "
     <% @patterns.each do |pattern| %>
           <%= link_to "#{pattern.start.strftime("%H:%M")}-#{pattern.finish.strftime("%H:%M")}"%>
     <% end %>
-<% end %>   
+<% end %>  
+
+test
