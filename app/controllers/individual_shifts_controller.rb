@@ -51,6 +51,10 @@ class IndividualShiftsController < ApplicationController
         end
     end
 
+    def finish
+        redirect_to root_path
+    end
+
     private
       def params_shift
         params.require(:individual_shift).permit(:start, :finish)
