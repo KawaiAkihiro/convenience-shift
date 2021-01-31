@@ -24,21 +24,25 @@ class TemporaryShiftsController < ApplicationController
     @event = current_master.individual_shifts.new(params_shift)
     @event.staff = current_master.staffs.find_by(staff_number: 0)
     change_finishDate
-    @event.save
-    respond_to do |format|
-      format.html { redirect_to temporary_shifts_path }
-      format.js
+    if @event.save
+      respond_to do |format|
+        format.html { redirect_to temporary_shifts_path }
+        format.js
+      end
+    else
+      raise ActiveRecord::Rollback
+      
     end
-    
   end
 
   def create_plan
     @event = current_master.individual_shifts.new(params_plan)
     @event.staff = current_master.staffs.find_by(staff_number: 0)
-    @event.save
-    respond_to do |format|
-      format.html { redirect_to temporary_shifts_path }
-      format.js
+    if @event.save
+      respond_to do |format|
+        format.html { redirect_to temporary_shifts_path }
+        format.js
+      end
     end
   end
 
@@ -56,6 +60,7 @@ class TemporaryShiftsController < ApplicationController
       if @event.staff.staff_number != 0
         @event.deletable = true
         @event.save
+        # 成功処理
       else
         @event.destroy
       end

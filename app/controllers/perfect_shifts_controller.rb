@@ -79,6 +79,7 @@ class PerfectShiftsController < ApplicationController
     end
     
     @event.save
+    # 成功処理
   end
 
   def change
@@ -136,6 +137,7 @@ class PerfectShiftsController < ApplicationController
     @notice.staff_id = current_staff.id
     @notice.shift_id = @event.id
     @notice.save
+    # 成功処理
   end
 
   def delete
@@ -148,6 +150,7 @@ class PerfectShiftsController < ApplicationController
     @notice.staff_id = current_staff.id
     @notice.shift_id = @event.id
     @notice.save
+    # 成功処理
   end
 
   private

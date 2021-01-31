@@ -25,11 +25,13 @@ class NoticesController < ApplicationController
         @shift.mode = nil
         @shift.save
         @notice.destroy!
+        flash[:success] = "申請を反映しました！"
         redirect_to notices_path
     end
 
     def destroy
         @notice = current_master.notices.find(params[:id]).destroy!
+        flash[:dange] = "申請を拒否したので変更はありません"
         redirect_to notices_path
     end
 end
