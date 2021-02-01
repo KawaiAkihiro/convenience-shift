@@ -10,6 +10,7 @@ document.addEventListener('turbolinks:load', function() {
         events: '/comfirmed_shifts.json',
         locale: 'ja',
         timeZone: 'Asia/Tokyo',
+        firstDay: 1,
         scrollTime: '07:00:00',
         headerToolbar: {
             left: '',
@@ -39,7 +40,7 @@ document.addEventListener('turbolinks:load', function() {
 
     calendar.render();
 
-    // $('button').click(function(){
-    //     calendar.refetchEvents();
-    // })
+    $('button').click(function(){
+        calendar.refetchEvents();
+    })
 });
