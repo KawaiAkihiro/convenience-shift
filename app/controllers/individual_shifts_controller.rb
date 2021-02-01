@@ -19,12 +19,22 @@ class IndividualShiftsController < ApplicationController
         
         @pattern = current_staff.patterns.new(params_shift)
         @already_pattern = current_staff.patterns.where(start: @pattern.start).where(finish: @pattern.finish)
-        unless @already_pattern.present?
-            @pattern.save
-        end
         
         unless @already_event.present?
-            @event.save 
+            if @event.save 
+                unless @already_pattern.present?
+                    @pattern.save
+                    # 成功処理
+                end
+            else
+                respond_to do |format|
+                    format.js {render partial: "error" }
+                end
+            end
+        else
+            respond_to do |format|
+                format.js {render partial: "duplicate" }
+            end        
         end 
     end 
 
@@ -43,9 +53,10 @@ class IndividualShiftsController < ApplicationController
         elsif logged_in? && !logged_in_staff?
             @event = current_master.individual_shifts.find(params[:id]).destroy
         end
-        
-        # flash[:danger] = "消去完了しました。"
-        # redirect_to individual_shifts_path
+    end
+
+    def finish
+        redirect_to root_path
     end
 
     private

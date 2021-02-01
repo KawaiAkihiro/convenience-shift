@@ -70,6 +70,7 @@ Rails.application.routes.draw do
       # patch  :confirm,  to: 'individual_shifts#confirm'
       patch  :perfect
       get  :remove
+      post :finish
     end
 
     member do

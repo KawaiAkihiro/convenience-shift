@@ -12,5 +12,6 @@ class DeletableShiftsController < ApplicationController
         @event = current_master.individual_shifts.find(params[:id])
         @event.deletable = false
         @event.save
+        # 成功処理
     end
 end

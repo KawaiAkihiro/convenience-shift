@@ -71,5 +71,5 @@ document.addEventListener('turbolinks:load', function() {
 
     $('button').click(function(){
         calendar.refetchEvents();
-    })
+    });
 });

@@ -1,6 +1,8 @@
 class Pattern < ApplicationRecord
   belongs_to :staff
 
+  default_scope -> { order(start: :asc) }
+
   def start_h
     if self.start.hour < 10
       "0#{self.start.hour}"

@@ -29,7 +29,7 @@ class MastersController < ApplicationController
 
   def show
     @master = Master.find(params[:id])
-    @notices = @master.notices.all
+    @notices = @master.notices.all.count
   end
 
   def shift_onoff

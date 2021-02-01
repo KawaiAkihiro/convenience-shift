@@ -1,6 +1,6 @@
-<%# <button type="button" name="name" class="reload">カレンダーを更新する</button> %>
-
+<button type="button" name="name" class="reload">カレンダーを更新する</button>
 <div id="calendar"></div>
+<button type="button" name="name" class="reload">カレンダーを更新する</button>
 
 <div id="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -15,6 +15,8 @@
     </div>
   </div>
 </div>
+
+<%= link_to "確定する", finish_individual_shifts_path, method: :post, class:"btn btn-primary"%>
 
 <%= javascript_pack_tag 'individual_shifts/calendar' %>
 <%= javascript_pack_tag 'shared/index' %>
