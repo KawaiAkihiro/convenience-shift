@@ -30,8 +30,9 @@ class TemporaryShiftsController < ApplicationController
         format.js
       end
     else
-      raise ActiveRecord::Rollback
-      
+      respond_to do |format|
+        format.js {render partial: "error" }
+      end
     end
   end
 

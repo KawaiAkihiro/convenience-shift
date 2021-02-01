@@ -27,10 +27,14 @@ class IndividualShiftsController < ApplicationController
                     # 成功処理
                 end
             else
-                raise ActiveRecord::Rollback
+                respond_to do |format|
+                    format.js {render partial: "error" }
+                end
             end
         else
-            raise ActiveRecord::Rollback
+            respond_to do |format|
+                format.js {render partial: "duplicate" }
+            end        
         end 
     end 
 
