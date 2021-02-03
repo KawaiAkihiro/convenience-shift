@@ -79,7 +79,6 @@ class PerfectShiftsController < ApplicationController
     end
     
     @event.save
-    # 成功処理
   end
 
   def change
@@ -129,28 +128,32 @@ class PerfectShiftsController < ApplicationController
 
   def instead
     @master = current_staff.master
+
     @event = @master.individual_shifts.find(params[:id])
     @event.mode = "instead"
     @event.save
+
     @notice = @master.notices.new
     @notice.mode = "instead"
     @notice.staff_id = current_staff.id
     @notice.shift_id = @event.id
-    @notice.save
-    # 成功処理
+    if @notice.save
+      NoticeMailer.send_when_create_notice(@notice).deliver
+    end
   end
 
   def delete
     @event = current_staff.individual_shifts.find(params[:id])
     @event.mode = "delete"
     @event.save
+
     @master = current_staff.master
     @notice = @master.notices.new(params_notice)
     @notice.mode = "delete"
     @notice.staff_id = current_staff.id
     @notice.shift_id = @event.id
     @notice.save
-    # 成功処理
+    NoticeMailer.send_when_create_notice(@notice).deliver
   end
 
   private

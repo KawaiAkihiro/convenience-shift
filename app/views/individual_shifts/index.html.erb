@@ -16,7 +16,7 @@
   </div>
 </div>
 
-<%= link_to "確定する", finish_individual_shifts_path, method: :post, class:"btn btn-primary"%>
+<%= link_to "確定する", finish_individual_shifts_path, method: :post, class:"btn btn-primary", data: { confirm: 'Are you sure?' } %>
 
 <%= javascript_pack_tag 'individual_shifts/calendar' %>
 <%= javascript_pack_tag 'shared/index' %>

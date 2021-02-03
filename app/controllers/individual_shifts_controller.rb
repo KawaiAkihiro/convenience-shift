@@ -56,6 +56,7 @@ class IndividualShiftsController < ApplicationController
     end
 
     def finish
+        flash[:success] = "登録を完了しました！"
         redirect_to root_path
     end
 
