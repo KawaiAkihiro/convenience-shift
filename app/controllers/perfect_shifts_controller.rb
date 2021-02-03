@@ -88,14 +88,20 @@ class PerfectShiftsController < ApplicationController
       @already = current_staff.individual_shifts.find_by(start: @event.start)
       if @event.staff != current_staff && @event.allDay == false
         if @already.nil? 
-          render plain: render_to_string(partial: 'form_instead', layout: false, locals: { event: @event })
+          if @event.mode.nil?
+            render plain: render_to_string(partial: 'form_instead', layout: false, locals: { event: @event })
+          elsif @event.mode == "instead"
+            render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
+          end
         else
           render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
         end
       elsif @event.staff != current_staff && @event.allDay == true
         render plain: render_to_string(partial: 'plan_delete', layout: false, locals: { event: @event })
-      elsif @event.staff == current_staff
+      elsif @event.staff == current_staff && @event.mode.nil?
         render plain: render_to_string(partial: 'form_delete', layout: false, locals: { event: @event }) 
+      elsif @event.staff == current_staff && @event.mode == "delete"
+        render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
       end
 
     elsif !logged_in? && logged_in_staff?

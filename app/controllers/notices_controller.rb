@@ -31,7 +31,7 @@ class NoticesController < ApplicationController
 
     def destroy
         @notice = current_master.notices.find(params[:id]).destroy!
-        flash[:dange] = "申請を拒否したので変更はありません"
+        flash[:danger] = "申請を拒否したので変更はありません"
         redirect_to notices_path
     end
 end

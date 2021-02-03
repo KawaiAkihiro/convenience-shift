@@ -62,11 +62,7 @@ class IndividualShift < ApplicationRecord
     if self.staff.staff_number == 0 && self.finish != nil
       "yellow"
     else
-      if self.mode == nil || self.mode == "delete"
-        "white"
-      elsif self.mode == "instead"
-        "lightcoral"
-      end
+      "white"
     end
   end
 end
