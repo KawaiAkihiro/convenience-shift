@@ -13,16 +13,18 @@ document.addEventListener('turbolinks:load', function() {
         locale: 'ja',
         timeZone: 'Asia/Tokyo',
         scrollTime: '07:00:00',
+        expandRows: true,
+        stickyHeaderDates: true,
         headerToolbar: {
-            left: '',
-            center: 'title',
+            left: 'title',
+            center: '',
             right: 'today prev,next' 
         },
         firstDay: 1,
         buttonText: {
             today: '今日'
         }, 
-        allDayText: '営業催事',
+        allDayText: '営業•催事',
         height: "auto",
         dateClick: function(info){
             const year  = info.date.getFullYear();

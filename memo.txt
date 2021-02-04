@@ -125,3 +125,6 @@ class: "btn-link btn-outline-dark bg-dark "
 <% end %>  
 
 test
+
+$('#calendar').fullCalendar( 'rerenderEvents' );
+$('#calendar').fullCalendar( 'addEventSource' );

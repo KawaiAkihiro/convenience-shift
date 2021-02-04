@@ -1,4 +1,7 @@
-<button type="button" name="name" class="reload">カレンダーを更新する</button><br><br>
+<div class="button">
+    <button type="button" name="name" class="reload btn btn-primary">カレンダーを更新する</button>
+    <%= link_to "シフト調整ページに戻る", temporary_shifts_path, class:"btn btn-primary" %>
+</div>    
 <div id="calendar"></div>
 <div id="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -14,7 +17,10 @@
     </div>
 </div>
 
-<%= link_to "シフト調整ページに戻る", temporary_shifts_path %>
+<div class="button">
+    <button type="button" name="name" class="reload btn btn-primary">カレンダーを更新する</button>
+    <%= link_to "シフト調整ページに戻る", temporary_shifts_path, class:"btn btn-primary" %>
+</div>    
 
 <%= javascript_pack_tag 'deletable_shifts/calendar' %>
 <%= javascript_pack_tag 'shared/index' %>
