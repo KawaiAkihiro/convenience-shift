@@ -2,7 +2,7 @@
 <div id="calendar"></div>
 <button type="button" name="name" class="reload btn btn-primary">カレンダーを更新する</button>
 <div class ="submit">
-  <%= link_to "確定する", finish_individual_shifts_path, method: :post, class:"btn btn-primary", data: { confirm: 'Are you sure?' } %>
+  <%= link_to "終了する", finish_individual_shifts_path, method: :post, class:"btn btn-primary", data: { confirm: '終了してよろしいですか？(追加登録は可能です)' } %>
 </div>
 
 <div id="modal" tabindex="-1" role="dialog">

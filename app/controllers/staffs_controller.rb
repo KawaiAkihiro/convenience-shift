@@ -28,7 +28,6 @@ class StaffsController < ApplicationController
         @staff  = current_master.staffs.new(staff_params)
         if @staff.save
             flash[:success] = "従業員登録完了しました"
-            #連続でユーザー登録するかしないか確認して、yes-> 新規登録画面　no-> 一覧に戻る
             redirect_to current_master
         else
             render 'new'

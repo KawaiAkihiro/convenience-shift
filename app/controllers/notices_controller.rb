@@ -31,6 +31,9 @@ class NoticesController < ApplicationController
 
     def destroy
         @notice = current_master.notices.find(params[:id]).destroy!
+        @shift = @shift  = current_master.individual_shifts.find(@notice.shift_id)
+        @shift.mode = nil
+        @shift.save
         flash[:danger] = "申請を拒否したので変更はありません"
         redirect_to notices_path
     end

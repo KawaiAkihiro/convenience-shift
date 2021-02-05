@@ -1,6 +1,6 @@
 <div class="button">
   <button type="button" name="name" class="reload btn btn-primary">カレンダーを更新する</button>
-  <button type="button" name="name" class="plan btn btn-primary">予定を追加する</button>
+  <button type="button" name="name" class="plan btn btn-primary">営業•催事を追加する</button>
   <button type="button" name="name" class="shift btn btn-primary">イエローラインを追加する</button><br>
   <%= link_to "仮削除一覧", deletable_shifts_path , class:"btn btn-primary"%><br>
 </div>  
@@ -22,7 +22,7 @@
 
 <%= link_to "仮削除一覧", deletable_shifts_path , class:"btn btn-primary"%><br>
 
-<%= link_to "確定する", perfect_temporary_shifts_path, method: :patch, class:"btn btn-primary", data: { confirm: 'Are you sure?' } %>
+<%= link_to "確定する", perfect_temporary_shifts_path, method: :patch, class:"btn btn-primary", data: { confirm: 'これで確定して間違いありませんか?' } %>
 
 <%= javascript_pack_tag 'temporary_shifts/calendar' %>
 <%= javascript_pack_tag 'shared/index' %>

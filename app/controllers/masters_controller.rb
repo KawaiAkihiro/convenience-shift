@@ -85,6 +85,6 @@ class MastersController < ApplicationController
 
   private
     def master_params
-      params.require(:master).permit(:store_name, :user_name, :staff_number, :password, :password_confirmation)
+      params.require(:master).permit(:store_name, :user_name, :staff_number, :email, :onoff_email, :password, :password_confirmation)
     end
 end

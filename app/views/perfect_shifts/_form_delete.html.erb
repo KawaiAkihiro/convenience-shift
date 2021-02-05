@@ -4,6 +4,6 @@
       <%= form_with(model: @event, url: delete_perfect_shift_path(@event), html: {method: :patch},remote: true) do |f| %>
          <%= f.label      :comment, "削除理由" %>
          <%= f.text_field :comment, class: 'form-control' %>
-         <%= f.submit "削除申請",   class: "btn btn-primary js-event-create-btn" , data: { confirm: 'Are you sure?' } %>
+         <%= f.submit "削除申請",   class: "btn btn-primary js-event-create-btn" , data: { confirm: '本当に削除申請してよろしいですか?' } %>
       <% end %>
 </div>        

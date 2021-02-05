@@ -143,7 +143,8 @@ class PerfectShiftsController < ApplicationController
     @notice.mode = "instead"
     @notice.staff_id = current_staff.id
     @notice.shift_id = @event.id
-    if @notice.save
+    @notice.save
+    if @master.onoff_email
       NoticeMailer.send_when_create_notice(@notice).deliver
     end
   end
@@ -159,7 +160,9 @@ class PerfectShiftsController < ApplicationController
     @notice.staff_id = current_staff.id
     @notice.shift_id = @event.id
     @notice.save
-    NoticeMailer.send_when_create_notice(@notice).deliver
+    if @master.onoff_email
+      NoticeMailer.send_when_create_notice(@notice).deliver
+    end
   end
 
   private

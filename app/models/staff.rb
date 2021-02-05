@@ -1,6 +1,6 @@
 class Staff < ApplicationRecord
   belongs_to :master
-  has_many :individual_shifts
+  has_many :individual_shifts , dependent: :destroy
   has_many :patterns
   
   default_scope -> { order(staff_number: :desc) }
