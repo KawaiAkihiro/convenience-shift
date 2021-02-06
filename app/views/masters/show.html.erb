@@ -4,12 +4,11 @@
           <%= @master.store_name %> <br>
           <%= @master.user_name %>
         </h1>
-        <%= link_to "プロフィールを変更する", edit_master_path(current_master) %> <br><br>
+        <%= link_to "プロフィールを変更する", edit_master_path(current_master) %> <br>
         <%= link_to "従業員登録", new_staff_path %> <br>
-        <%= link_to "従業員一覧", staffs_path %><br><br>
+        <%= link_to "従業員一覧", staffs_path %><br>
         <%= link_to "シフトのコマを設定する", new_master_shift_separation_path(params[:id]) %><br>
-        <%= link_to "シフトのコマを編集/削除する", master_shift_separations_path(current_master) %>
-        <br>
+        <%= link_to "シフトのコマを編集/削除する", master_shift_separations_path(current_master) %><br>
 
         <%if @master.shift_onoff == false %>
           <%= link_to "募集を開始する",shift_onoff_master_path, method: :patch, class: "btn btn-primary" %>
@@ -17,11 +16,16 @@
           <%= link_to "募集を終了する",shift_onoff_master_path, method: :patch, class: "btn btn-danger" %>
         <% end %> 
 
-        <br><br>
+        <br>
         <%= link_to "シフトを調整する", temporary_shifts_path %>
         <br>
         <%= link_to "スタッフとしてログインする", login_master_path(current_master) %>
         <br>
-        <%= link_to "通知", notices_path %> <p class="number"><%= @notices %></p>
+        <div class="notice">
+          <%= link_to "通知", notices_path ,class:"link"%> 
+          <div class="number">
+            <span><%= @notices %></span>
+          </div>
+        <div>  
       </section>
 </div>

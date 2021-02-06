@@ -1,5 +1,5 @@
 body{
-    height:max-content;
+  height:max-content;
 }
 
 .navbar{
@@ -7,12 +7,12 @@ body{
 }
 
 #logo{
-    font-size: 30px;
-    color:#fff;
-    &:hover{
-        color: lightyellow;
-        text-decoration: none;
-    }
+  font-size: 30px;
+  color:#fff;
+  &:hover{
+      color: lightyellow;
+      text-decoration: none;
+  }
 }
 li{
     margin-right: 20px;
@@ -32,18 +32,18 @@ ul.dropdown-menu{
 }
 
 #error_explanation {
+  color: red;
+  ul {
     color: red;
-    ul {
-      color: red;
-      margin: 0 0 30px 0;
-    }
+    margin: 0 0 30px 0;
+  }
 }
   
 .field_with_errors {
-    /*@extend .has-error;*/
-    .form-control {
-      color: lightcoral;
-    }
+  /*@extend .has-error;*/
+  .form-control {
+    color: lightcoral;
+  }
 }
 
 .alert{
@@ -57,27 +57,26 @@ h1{
 // --form_checked
 
 .checkbox {
-    margin-top: -10px;
-    margin-bottom: 10px;
-    span {
-      margin-left: 20px;
-      font-weight: normal;
-    }
+  margin-bottom: 20px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
   }
+}
   
 #session_remember_me {
-    width: auto;
-    margin-left: 0;
+  width: auto;
+  margin-left: 0;
 }
 
 #staff_training_mode{
-    width: auto;
-    margin-left: 0;
+  width: auto;
+  margin-left: 0;
 }
 
 #staffs_session_remember_me{
-    width: auto;
-    margin-left: 0;
+  width: auto;
+  margin-left: 0;
 }
 
 #master_onoff_email{
@@ -86,14 +85,18 @@ h1{
 }
 
 .form-inline{
-    padding-top: 20px;
-    .form-control{
-        margin-right: 10px;
+  padding-top: 20px;
+  .form-control{
+      margin-right: 10px;
     }
 }
 
 .control-label{
-    padding-right: 10px;
+  padding-right: 10px;
+}
+
+.form-control{
+  margin-bottom: 10px;
 }
 
 //-- fullcalendar--
