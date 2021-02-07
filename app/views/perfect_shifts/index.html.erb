@@ -1,11 +1,11 @@
 <div class="wrapper">
-    <div class="container">
        <div class="button">
         <% if logged_in_staff? || logged_in?%> 
                 <button type="button" name="name" class="reload btn btn-primary">カレンダーを更新する</button>     
             <% if logged_in? %>
-                <button type="button" name="name" class="plan btn btn-primary">営業•催事を追加する</button><br>
+                <button type="button" name="name" class="plan btn btn-primary">営業•催事を追加する</button>
             <% end %>
+            
        </div>
                 <div class ="guide">
                     <% @shift_separation.each do |shift|%>
@@ -19,7 +19,6 @@
             <div class="button">   
                 <button type="button" name="name" class="reload btn btn-primary">カレンダーを更新する</button>
             <div>
-    </div>
             <div id="modal" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">

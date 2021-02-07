@@ -1,13 +1,38 @@
-body{
-  height:max-content;
+$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/brands';
+@import '@fortawesome/fontawesome-free/scss/v4-shims';
+
+html{
+  height: 100%;
 }
+
+body{
+  height: 100%;
+  margin: 0;
+}
+
+
+
+#container{
+  .wrapper{
+  margin: 0;
+  padding: 0 40px;
+  // height: 100vh; /* 全画面表示 */
+  }
+}
+
 
 .navbar{
   background-color :green;
+  height: auto;
 }
+  
 
 #logo{
-  font-size: 30px;
+  font-size: 50px;
   color:#fff;
   &:hover{
       color: lightyellow;
@@ -138,15 +163,17 @@ td.fc-day-sun {
 
 .vertical{
   writing-mode: vertical-lr;
+  text-align: center;
 }
 
-.calendar{
-  padding-top: 50px;
+#calendar{
   font-size: 20px;
 }
 
+
 .button{
   padding-bottom: 20px;
+  width: 100%;
 }
 
 //--- modal---//
@@ -170,3 +197,46 @@ td.fc-day-sun {
   }
 }
 
+ul {
+  margin: 0;
+  padding-left: 0;
+}
+ 
+li {
+  list-style: none;
+}
+ 
+a {
+  text-decoration: none;
+  color: #fff;
+}
+ 
+#menu {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: -340px; /* メニューのwidth + padding */
+  width: 300px; /* メニューのwidth */
+  height: 100%;
+  padding: 20px;
+  transition: left .5s, right .5s; /* アニメーション */
+  background-color: rgba(86, 86, 86, .7);
+}
+ 
+.toggle {
+  font-size: 50px;
+  cursor: pointer;
+  padding-right: 150px;
+}
+ 
+// .toggle:hover {
+//   text-decoration: underline;
+// }
+ 
+#open {
+  display: none;
+}
+
+#close{
+  display: none;
+}
