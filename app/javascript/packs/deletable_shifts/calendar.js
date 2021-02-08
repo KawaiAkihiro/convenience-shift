@@ -21,7 +21,7 @@ document.addEventListener('turbolinks:load', function() {
         buttonText: {
             today: '今日'
         }, 
-        allDayText: '営業•催事',
+        allDayText: '営業 催事',
         height: "auto",
         eventClick: function(info){
             var id = info.event.id

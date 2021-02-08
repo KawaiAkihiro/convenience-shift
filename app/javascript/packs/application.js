@@ -30,7 +30,7 @@ ReactRailsUJS.useContext(componentRequireContext);
 
 $(function(){
     $("#open").click(function(){
-            $("#menu").css("right","0px");   
+            $("#menu").css("right","0px");    
     })
 
     $("#close").click(function(){
