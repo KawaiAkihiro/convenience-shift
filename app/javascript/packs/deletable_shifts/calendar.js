@@ -50,7 +50,7 @@ document.addEventListener('turbolinks:load', function() {
 
     calendar.render();
 
-    $('button.reload').click(function(){
+    $(".error").click(function(){
         calendar.refetchEvents();
     });
 });

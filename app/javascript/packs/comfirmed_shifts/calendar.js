@@ -40,7 +40,7 @@ document.addEventListener('turbolinks:load', function() {
 
     calendar.render();
 
-    $('button').click(function(){
+    $(".error").click(function(){
         calendar.refetchEvents();
-    })
+    });
 });
