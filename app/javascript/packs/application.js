@@ -34,7 +34,7 @@ $(function(){
     })
 
     $("#close").click(function(){
-            $("#menu").css("right","-340px")
+            $("#menu").css("right","-370px")
     })
 
 })  

@@ -11,49 +11,20 @@
                   <label class="toggle" for="close"><i class="fas fa-times"></i></label>
                   <input id="close" type="checkbox">
                </li>
-               <li class="nav-link"><%= link_to "ヘルプ", help_path %>
-                        
+               <li><%= link_to "ヘルプ", help_path, class:"help" %></li>
+               <div class="line"></div>
+               
                <% if logged_in? && logged_in_staff? %>
-                     <li class="dropdown nav-link">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                           店長 <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                           <li class="nav-link"><%= link_to "設定",        current_master %></li>
-                           <li class="nav-link"><%= link_to "ログアウト",   logout_path, {:method=> :post} %></li>
-                        </ul>   
-                     </li>
-                     <li class="dropdown nav-link">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                           従業員 <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                           <li class="nav-link"><%= link_to "設定", staff_path(current_staff) %></li>
-                        </ul>   
-                     </li>   
-
+                  <%= render "layouts/menu_master" %>
+                  <br>
+                  <div class="line"></div>
+                  <%= render "layouts/menu_staff" %>
                <% elsif !logged_in? && logged_in_staff? %>
-                     <li class="dropdown nav-link">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                           従業員 <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                           <li class="nav-link"><%= link_to "個人ページ",      staff_path(current_staff) %></li>
-                        </ul>   
-                     </li>   
-                     <li class="nav-link"><%= link_to "店長ログイン",     login_path %></li>
-
+                  <%= render "layouts/menu_staff" %>
                <% elsif logged_in? && !logged_in_staff? %>  
-                     <li class="dropdown nav-link">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                           店長 <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                           <li class="nav-link"><%= link_to "設定",        current_master %></li>
-                           <li class="nav-link"><%= link_to "ログアウト",   logout_path, {:method=> :post} %></li>
-                        </ul>   
-                     </li>
-                              
+                  <%= render "layouts/menu_master" %>
+               <% else%>
+                  <li class="nav-link"><%= link_to "店長ログイン",     login_path %></li>   
                <% end %>  
             </ul>
          </nav>

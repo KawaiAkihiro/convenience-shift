@@ -1,4 +1,5 @@
-    alert("[success] 削除成功");
     $('#modal').fadeOut();
-    $('#calendar').fullCalendar( 'rerenderEvents' );
-    $('#calendar').fullCalendar( 'addEventSource' );
+    $('.response-modal-body').html('<h1>削除しました</h1>');
+    $('#response-modal').fadeIn();
+    <%# $('#calendar').fullCalendar( 'rerenderEvents' );
+    $('#calendar').fullCalendar( 'addEventSource' ); %>

@@ -29,18 +29,17 @@ class MastersController < ApplicationController
 
   def show
     @master = Master.find(params[:id])
-    @notices = @master.notices.all.count
+    @notices = @master.notices.count
   end
 
   def shift_onoff
-    @master = Master.find(params[:id])
-    if @master.shift_onoff == false
-      @master.shift_onoff = true
+    if current_master.shift_onoff == false
+      current_master.shift_onoff = true
     else
-      @master.shift_onoff = false
+      current_master.shift_onoff = false
     end
-    @master.save
-    redirect_to @master
+    current_master.save
+    redirect_to root_url
   end
 
   def edit
@@ -60,7 +59,7 @@ class MastersController < ApplicationController
   def login_form
     @master = Master.find(params[:id])
      if logged_in_staff?
-      redirect_to current_staff
+      redirect_to root_url
       flash[:success] = "現在　#{current_staff.staff_name}さん　としてログイン中です"
      end
   end

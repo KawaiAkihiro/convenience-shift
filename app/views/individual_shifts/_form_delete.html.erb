@@ -1,4 +1,4 @@
-<h1><%= @event.time %></h1>
+<h1><%= @event.fulltime %></h1>
 
 <div class="row">
     <%= form_with(model: @event, url: individual_shift_path(@event), html: { method: :delete }, remote: true) do |f| %>

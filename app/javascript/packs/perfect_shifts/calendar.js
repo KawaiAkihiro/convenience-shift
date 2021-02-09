@@ -16,8 +16,8 @@ document.addEventListener('turbolinks:load', function() {
         expandRows: true,
         stickyHeaderDates: true,
         headerToolbar: {
-            left: 'title',
-            center: '',
+            left: '',
+            center: 'title',
             right: 'today prev,next' 
         },
         firstDay: 1,

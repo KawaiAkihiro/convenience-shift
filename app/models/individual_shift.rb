@@ -58,7 +58,7 @@ class IndividualShift < ApplicationRecord
   end
 
   def time
-    str = [ "#{self.start.strftime("%H")}" + "時", "#{self.finish.strftime("%H")}" + "時" ]
+    str = [ "#{self.start.strftime("%H")}", "#{self.finish.strftime("%H")}" ]
     return str.join(" ~ ")
     
   end

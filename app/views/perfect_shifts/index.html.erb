@@ -1,47 +1,56 @@
 <div class="wrapper">
-       <div class="button">
-        <% if logged_in_staff? || logged_in?%> 
-                <button type="button" name="name" class="reload btn btn-primary">カレンダーを更新する</button>     
-            <% if logged_in? %>
-                <button type="button" name="name" class="plan btn btn-primary">営業•催事を追加する</button>
+    <div class="button">
+    <div class="shift_onoff">
+        <% if logged_in? %>
+           <%if current_master.shift_onoff == false %>
+                    <%= link_to "募集を開始する",shift_onoff_masters_path, method: :patch, class: "btn btn-primary" %>
+                <% else %>
+                    <%= link_to "募集を終了する",shift_onoff_masters_path, method: :patch, class: "btn btn-danger" %>
+                <% end %>
+        <% end %> 
+    </div>
+    <% if logged_in_staff? || logged_in?%> 
+            <button type="button" name="name" class="reload btn btn-primary">カレンダーを更新する</button>     
+        <% if logged_in? %>
+            <button type="button" name="name" class="plan btn btn-primary">営業•催事を追加する</button>
+        <% end %> 
+    </div>
+        <div class ="guide">
+            <% @shift_separation.each do |shift|%>
+                    <%= shift.name %>
+                    <%= shift.start_time.strftime("%H:%M")%>~<%= shift.finish_time.strftime("%H:%M") %><br><br>
             <% end %>
-            
-       </div>
-                <div class ="guide">
-                    <% @shift_separation.each do |shift|%>
-                            <%= shift.name %>
-                            <%= shift.start_time.strftime("%H:%M")%>~<%= shift.finish_time.strftime("%H:%M") %><br><br>
-                    <% end %>
-                </div>
-                <div id="calendar-container">
-                    <div id="calendar"></div>
-                </div>
-            <div class="button">   
-                <button type="button" name="name" class="reload btn btn-primary">カレンダーを更新する</button>
-            <div>
-            <div id="modal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                        </div>
+        </div>
+        <div id="calendar-container">
+            <div id="calendar"></div>
+        </div>
+        <div class="button">   
+            <button type="button" name="name" class="reload btn btn-primary">カレンダーを更新する</button>
+        <div>
+
+        <div id="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
                     </div>
                 </div>
             </div>
-        <% else %>
-            <div class="center jumbtron ">
-                <div class="container">
-                    <h1 class="display-3">シフト管理アプリへようこそ</h1>
-                    <h2>今すぐシフトを決めてしまおう！</h2>
+        </div>
+    <% else %>
+        <div class="center jumbtron ">
+            <div class="container">
+                <h1 class="display-3">シフト管理アプリへようこそ</h1>
+                <h2>今すぐシフトを決めてしまおう！</h2>
 
-                    <%= link_to "新規登録", signup_path, class:"btn btn-lg btn-primary" %>
-                </div>
-            </div>  
-        <% end %>   
+                <%= link_to "新規登録", signup_path, class:"btn btn-lg btn-primary" %>
+            </div>
+        </div>  
+    <% end %>   
 </div>    
 
 <%= javascript_pack_tag 'perfect_shifts/calendar' %>

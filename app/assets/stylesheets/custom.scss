@@ -123,6 +123,12 @@ ul.dropdown-menu{
   margin-bottom: 10px;
 }
 
+//--shift_onoff button--//
+.shift_onoff{
+  text-align: right;
+  margin-bottom:-70px;
+}
+
 //-- fullcalendar--//
 
 // 平日
@@ -178,8 +184,8 @@ td.fc-day-sun {
 
 //--- modal---//
 
-#modal{
-  z-index: 2;
+@mixin modal($z:2) {
+  z-index: $z;
   display: none;
   height: 100vh;
   position: fixed;
@@ -196,6 +202,18 @@ td.fc-day-sun {
     padding: 0 20px
   }
 }
+
+#modal{
+  @include modal($z:2);
+}
+
+#response-modal{
+  @include  modal($z:3);
+}
+
+
+
+//---sidebar---//
 
 ul {
   margin: 0;
@@ -215,12 +233,25 @@ a {
   position: fixed;
   z-index: 10;
   top: 0;
-  right: -340px; /* メニューのwidth + padding */
-  width: 300px; /* メニューのwidth */
+  right: -370px; /* メニューのwidth + padding */
+  width: 350px; /* メニューのwidth */
   height: 100%;
   padding: 20px;
   transition: left .5s, right .5s; /* アニメーション */
-  background-color: rgba(86, 86, 86, .7);
+  background-color: rgba(86, 86, 86, 1);
+  overflow-y: auto;
+  li{
+    font-size: 20px;
+    margin: 15px;
+  }
+  a{
+    color: white;
+  }
+  h1{
+    color:hotpink;
+    font-size: 30px;
+    padding-top: 15px;
+  }
 }
  
 .toggle {
@@ -229,14 +260,32 @@ a {
   
 }
  
-// .toggle:hover {
-//   text-decoration: underline;
-// }
- 
 #open {
   display: none;
 }
 
 #close{
   display: none;
+}
+
+#menu_open{
+  margin-right: -30px;
+}
+
+.number{
+  color:black;
+}
+
+.wrapper{
+  h1{
+    padding-top: 30px;
+  }
+}
+
+.line{
+  border: 1px #ff0000 solid;
+}
+
+.help{
+  font-size: 30px;
 }
