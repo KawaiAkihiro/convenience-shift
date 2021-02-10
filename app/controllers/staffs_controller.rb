@@ -3,7 +3,7 @@ class StaffsController < ApplicationController
     before_action :corrent_staff,   only: [:show, :edit, :update]
 
     def index
-        @staffs = current_master.staffs.where.not(staff_number:0).paginate(page:params[:page])
+        @staffs = current_master.staffs.where.not(staff_number:0)
     end
 
     def show
@@ -63,7 +63,7 @@ class StaffsController < ApplicationController
           @staff = current_staff
           if @staff.update(staff_params)
               flash[:success] = "従業員情報を変更しました"
-              redirect_to @staff
+              redirect_to root_path
           else
               render 'edit'
           end

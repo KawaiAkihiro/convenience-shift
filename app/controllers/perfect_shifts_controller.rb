@@ -2,7 +2,6 @@ class PerfectShiftsController < ApplicationController
   def index
     if logged_in?
         @events = current_master.individual_shifts.where(Temporary: true)
-        @shift_separation = current_master.shift_separations.all
     end
 
     if logged_in_staff?

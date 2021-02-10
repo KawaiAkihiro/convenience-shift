@@ -35,15 +35,44 @@ li{
     margin-right: 20px;
 }
 
-.nav-link{
-  a{
-    color :white;
+//--url共有ゾーン--//
+
+.form-group{
+  padding-top: 10px;
+}
+
+#CopyTarget{
+  font-size: 15px
+}
+
+#copy{
+  margin-top:10px
+}
+
+.form-group{
+  p{
+    color:white;
+
   }
 }
 
-ul.dropdown-menu{
-  a{
-    color: orange;
+.copy{
+  display: inline-flex;
+  p{
+    padding-top:30px;
+    padding-left: 20px;
+  }
+}
+
+.store_info, .title{
+  display: inline-flex;
+  h1{
+    margin-top: 5px;
+    padding-left: 40px;
+  }
+  p{
+    margin-top: 25px;
+    padding-right: 40px;
   }
 }
 
@@ -52,7 +81,7 @@ ul.dropdown-menu{
 #container{
   .wrapper{
   margin: 0;
-  padding: 0 40px;
+  padding: 0 40px 40px;
   // height: 100vh; /* 全画面表示 */
   }
 }
@@ -75,7 +104,8 @@ ul.dropdown-menu{
 }
 
 .alert{
-    margin-top: 30px;
+    padding: 0 40px;
+    text-align: center;
 }
 
 //--form--//
@@ -126,7 +156,7 @@ ul.dropdown-menu{
 //--shift_onoff button--//
 .shift_onoff, .confirm{
   text-align: right;
-  margin-bottom:-70px;
+  margin-bottom:-60px;
 }
 
 //-- fullcalendar--//
@@ -176,6 +206,9 @@ td.fc-day-sun {
   font-size: 25px;
 }
 
+.all-calendar{
+  margin-top: -80px;
+}
 
 .button{
   padding-bottom: 20px;
@@ -209,6 +242,9 @@ td.fc-day-sun {
 
 #response-modal{
   @include  modal($z:3);
+  .response-modal-body{
+    padding:60px
+  }
 }
 
 
@@ -228,21 +264,26 @@ a {
   text-decoration: none;
   color: #fff;
 }
- 
-#menu {
+
+@mixin sidebar($top:0, $width:350px){
   position: fixed;
   z-index: 10;
-  top: 0;
-  right: -370px; /* メニューのwidth + padding */
-  width: 350px; /* メニューのwidth */
-  height: 100%;
-  padding: 20px;
+  top: $top;
+  width: $width; /* メニューのwidth */
   transition: left .5s, right .5s; /* アニメーション */
+  padding: 20px;
+}
+ 
+#menu{
+  @include sidebar($top:0, $width:350px);
+  right: -370px; /* メニューのwidth + padding */
+  height: 100%;
   background-color: rgba(86, 86, 86, 1);
   overflow-y: auto;
   li{
     font-size: 20px;
     margin: 15px;
+  
   }
   a{
     color: white;
@@ -252,6 +293,28 @@ a {
     font-size: 30px;
     padding-top: 15px;
   }
+  .logout{
+    color:hotpink;
+  }
+  p{
+    color: white;
+  }
+}
+
+#navi{
+  @include sidebar($top:95px, $width:290px);
+  left: -290px; /* メニューのwidth + padding */
+  height: auto;
+  background-color: rgb(219, 210, 210);
+  overflow-y: auto;
+}
+
+.navi{
+  margin-top:-70px;
+  li{
+    padding-bottom: 20px;
+    font-size: 20px;
+  }
 }
  
 .toggle {
@@ -260,21 +323,25 @@ a {
   
 }
  
-#open {
+#open, #navi-open{
   display: none;
 }
 
-#close{
+#close, #navi-close{
   display: none;
 }
 
-#menu_open{
+#menu_open, #navi-open{
   margin-right: -30px;
 }
+
+
 
 .number{
   color:black;
 }
+
+
 
 .wrapper{
   h1{
@@ -282,10 +349,38 @@ a {
   }
 }
 
+
+
 .line{
   border: 1px #ff0000 solid;
 }
 
 .help{
   font-size: 30px;
+}
+
+//--root-urlの微調整--//
+.gap-root{
+  padding:40px
+}
+
+.create_plan{
+  padding-bottom: 40px;
+}
+
+@mixin box($color:black) {
+  width:120px;
+  background-color: #ffffff;
+  border: solid 2px $color;
+  margin-bottom: 10px;
+  height: 30px;
+  text-align: center;
+}
+
+.training{
+  @include box($color:red);
+}
+
+.normal{
+  @include box($color:black);
 }

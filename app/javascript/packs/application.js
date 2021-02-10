@@ -37,4 +37,26 @@ $(function(){
             $("#menu").css("right","-370px")
     })
 
+    $("#copy").click(function(){
+        var copyTarget = document.getElementById("CopyTarget");
+
+        // コピー対象のテキストを選択する
+        copyTarget.select();
+
+        // 選択しているテキストをクリップボードにコピーする
+        document.execCommand("Copy");
+
+        // コピーをお知らせする
+        alert("コピーできました！");
+    })
+
+    $("#navi-open").click(function(){
+        $("#navi").css("left","0px");    
+    })
+
+    $("#navi-close").click(function(){
+        $("#navi").css("left","-290px");
+    })
+
+
 })  

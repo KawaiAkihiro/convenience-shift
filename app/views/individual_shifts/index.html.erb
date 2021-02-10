@@ -2,10 +2,32 @@
   <div class ="submit">
     <%= link_to "終了する", finish_individual_shifts_path, method: :post, class:"btn btn-primary", data: { confirm: '終了してよろしいですか？(追加登録は可能です)' } %>
   </div>
+  <% if current_staff.training_mode == true %>
+    <div id="navi_open" class="navi">
+      <label class="toggle" for="navi-open"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></label>
+      <input id="navi-open" type="checkbox">
+      <div id="navi">
+        <nav>
+          <ul>
+            <li>
+              <div class="title">
+                <p>シフトの時間割</p>
+                <label class="toggle" for="navi-close"><i class="fas fa-times"></i></label>
+                <input id="navi-close" type="checkbox">
+              </div>
+              <% @shift_separation.each do |shift|%>
+                <li>
+                  <%= shift.name %>
+                  <%= shift.start_time.strftime("%H:%M")%>~<%= shift.finish_time.strftime("%H:%M") %>
+                </li>
+              <% end %>
+          </ul> 
+        </nav>
+      </div>   
+    </div>  
+  <% end %>
+           
   <div id="calendar"></div>
-  <div class ="submit">
-    <%= link_to "終了する", finish_individual_shifts_path, method: :post, class:"btn btn-primary", data: { confirm: '終了してよろしいですか？(追加登録は可能です)' } %>
-  </div>
 
   <div id="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">

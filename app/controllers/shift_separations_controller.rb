@@ -10,7 +10,7 @@ class ShiftSeparationsController < ApplicationController
         @shift_separation = current_master.shift_separations.new(separation_params)
         if @shift_separation.save 
             flash[:success] = "シフトコマを作成完了しました！"
-            redirect_to current_master
+            redirect_to root_path
         else
             render 'new'
         end

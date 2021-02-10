@@ -1,8 +1,7 @@
-<li>    
-    <h1>
-        <%= current_staff.staff_name %>
-    </h1>
-</li>    
+<p>従業員</p>  
+<h1>
+    <%= current_staff.staff_name %>
+</h1>
 <li><%= link_to "ユーザー情報変更", edit_staff_path(current_staff)%></li>
 <% if current_staff.master.shift_onoff == true %>
     <li><%= link_to "シフト提出",individual_shifts_path %></li>
@@ -12,4 +11,4 @@
   <li><%= link_to "店長ログイン", login_path %></li>
 <% end %>
 
-<li><%= link_to "ログアウト", logout_master_path(current_staff), {:method=> :delete} %></li>
+<li><%= link_to "ログアウト", logout_master_path(current_staff), {:method=> :delete, class:"logout"} %></li>
