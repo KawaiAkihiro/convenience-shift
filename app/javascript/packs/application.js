@@ -23,3 +23,40 @@ import "../stylesheets/application.scss";
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+// Support component names relative to this directory:
+var componentRequireContext = require.context("components", true);
+var ReactRailsUJS = require("react_ujs");
+ReactRailsUJS.useContext(componentRequireContext);
+
+$(function(){
+    $("#open").click(function(){
+            $("#menu").css("right","0px");    
+    })
+
+    $("#close").click(function(){
+            $("#menu").css("right","-370px")
+    })
+
+    $("#copy").click(function(){
+        var copyTarget = document.getElementById("CopyTarget");
+
+        // コピー対象のテキストを選択する
+        copyTarget.select();
+
+        // 選択しているテキストをクリップボードにコピーする
+        document.execCommand("Copy");
+
+        // コピーをお知らせする
+        alert("コピーできました！");
+    })
+
+    $("#navi-open").click(function(){
+        $("#navi").css("left","0px");    
+    })
+
+    $("#navi-close").click(function(){
+        $("#navi").css("left","-290px");
+    })
+
+
+})  

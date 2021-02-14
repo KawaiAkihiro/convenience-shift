@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if master &.authenticate(params[:session][:password])
       log_in master
       params[:session][:remember_me] == '1' ? remember(master): forget(master)
-      redirect_to master
+      redirect_to root_url
     else
       flash.now[:danger] = '店舗名,またはパスワードが間違っています。'
       render 'new'

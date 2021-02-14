@@ -16,7 +16,7 @@
 
   <body data-turbolinks="false">
     <%= render 'layouts/header' %>
-    <div class="container">
+    <div id="container">
       <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>
       <% end %>

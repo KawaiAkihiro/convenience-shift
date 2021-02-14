@@ -29,18 +29,18 @@ input {
 	border-color: #43a047;
 }
 
-.data{
-    font-size:small;
-}
-
-.calendar-heading2{
-    display:none;
-}
-
-#Yobi{
-    text-align: center;
-}
-
-#Yobi2{
-    display: none;
+.notice{
+    display: flex;
+    align-items: center;
+    position:absolute;
+    .number{
+        height:50px;
+        width:50px;
+        border-radius:50%;
+        line-height:50px;
+        text-align:center;
+        background:pink;
+        font-size:24px;
+        margin-left:20px;
+    }
 }

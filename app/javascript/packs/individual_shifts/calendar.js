@@ -18,7 +18,7 @@ document.addEventListener('turbolinks:load', function() {
 
         },
         buttonText: {
-            today: '今日'
+            today: '今月'
         }, 
         headerToolbar: {
             start: '',

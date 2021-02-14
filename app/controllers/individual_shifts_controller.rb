@@ -4,6 +4,7 @@ class IndividualShiftsController < ApplicationController
 
     def index
         @events = current_staff.individual_shifts.where(Temporary: false)
+        @shift_separation = current_staff.master.shift_separations.all
     end
 
     def new

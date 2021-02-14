@@ -18,6 +18,8 @@ gem 'bcrypt',         '3.1.13'
 gem 'rails-i18n'
 gem "simple_calendar"
 
+# gem 'react-rails'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

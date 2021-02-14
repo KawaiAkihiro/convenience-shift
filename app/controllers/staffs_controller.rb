@@ -3,7 +3,7 @@ class StaffsController < ApplicationController
     before_action :corrent_staff,   only: [:show, :edit, :update]
 
     def index
-        @staffs = current_master.staffs.where.not(staff_number:0).paginate(page:params[:page])
+        @staffs = current_master.staffs.where.not(staff_number:0)
     end
 
     def show
@@ -28,7 +28,6 @@ class StaffsController < ApplicationController
         @staff  = current_master.staffs.new(staff_params)
         if @staff.save
             flash[:success] = "従業員登録完了しました"
-            #連続でユーザー登録するかしないか確認して、yes-> 新規登録画面　no-> 一覧に戻る
             redirect_to current_master
         else
             render 'new'
@@ -64,7 +63,7 @@ class StaffsController < ApplicationController
           @staff = current_staff
           if @staff.update(staff_params)
               flash[:success] = "従業員情報を変更しました"
-              redirect_to @staff
+              redirect_to root_path
           else
               render 'edit'
           end

@@ -1,104 +1,172 @@
-body{
-    height:max-content;
+$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/brands';
+@import '@fortawesome/fontawesome-free/scss/v4-shims';
+
+html{
+  height: 100%;
 }
+
+body{
+  height: 100%;
+  margin: 0;
+}
+
+//---header---//
+
+.navbar{
+  background-color :green;
+  height: auto;
+}
+  
 
 #logo{
-    font-size: 40px;
-    color:#fff;
-    &:hover{
-        color: lightyellow;
-        text-decoration: none;
-    }
+  font-size: 50px;
+  color:#fff;
+  &:hover{
+      color: lightyellow;
+      text-decoration: none;
+  }
+  margin-left: -60px;
 }
-
-h1{
-    font-size:100px;
-}
-
 li{
     margin-right: 20px;
 }
 
+//--url共有ゾーン--//
+
+.form-group{
+  padding-top: 10px;
+}
+
+#CopyTarget{
+  font-size: 15px
+}
+
+#copy{
+  margin-top:10px
+}
+
+.form-group{
+  p{
+    color:white;
+
+  }
+}
+
+.copy{
+  display: inline-flex;
+  p{
+    padding-top:30px;
+    padding-left: 20px;
+  }
+}
+
+.store_info, .title{
+  display: inline-flex;
+  h1{
+    margin-top: 5px;
+    padding-left: 40px;
+  }
+  p{
+    margin-top: 25px;
+    padding-right: 40px;
+  }
+}
+
+//---main_contents---//
+
+#container{
+  .wrapper{
+    margin: 0;
+    padding: 0 40px 40px;
+    // height: 100vh; /* 全画面表示 */
+  }
+}
+
+//---error---//
+
 #error_explanation {
+  color: red;
+  ul {
     color: red;
-    ul {
-      color: red;
-      margin: 0 0 30px 0;
-    }
+    margin: 0 0 30px 0;
+  }
 }
   
 .field_with_errors {
-    /*@extend .has-error;*/
-    .form-control {
-      color: lightcoral;
-    }
+  /*@extend .has-error;*/
+  .form-control {
+    color: lightcoral;
+  }
 }
 
 .alert{
-    margin-top: 30px;
+    padding: 0 40px;
+    text-align: center;
 }
 
+//--form--//
+
 .checkbox {
-    margin-top: -10px;
-    margin-bottom: 10px;
-    span {
-      margin-left: 20px;
-      font-weight: normal;
-    }
+  margin-bottom: 20px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
   }
+}
   
 #session_remember_me {
-    width: auto;
-    margin-left: 0;
+  width: auto;
+  margin-left: 0;
 }
 
 #staff_training_mode{
-    width: auto;
-    margin-left: 0;
+  width: auto;
+  margin-left: 0;
 }
 
 #staffs_session_remember_me{
-    width: auto;
-    margin-left: 0;
+  width: auto;
+  margin-left: 0;
+}
+
+#master_onoff_email{
+  width: auto;
+  margin-left: 0;
 }
 
 .form-inline{
-    padding-top: 20px;
-    .form-control{
-        margin-right: 10px;
+  padding-top: 20px;
+  .form-control{
+      margin-right: 10px;
     }
 }
 
 .control-label{
-    padding-right: 10px;
+  padding-right: 10px;
 }
 
-
-.fc-day-mon{
-  .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
-    color: black;
-  }
+.form-control{
+  margin-bottom: 10px;
 }
 
-.fc-day-tue{
-  .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
-    color: black;
-  }
+//--shift_onoff button--//
+.shift_onoff, .confirm{
+  text-align: right;
+  margin-bottom:-60px;
 }
 
-.fc-day-wed{
-  .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
-    color: black;
-  }
+//-- fullcalendar--//
+.fc-toolbar h2 {
+  padding-left: 100px;
 }
 
-.fc-day-thu{
-  .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
-    color: black;
-  }
-}
-
-.fc-day-fri{
+// 平日
+.fc-day-mon, .fc-day-tue,
+.fc-day-wed, .fc-day-thu, .fc-day-fri{
   .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
     color: black;
   }
@@ -126,15 +194,203 @@ td.fc-day-sat {
 td.fc-day-sun {
   background-color: #ffeaea;
 }
+
 .horizon{
   writing-mode: horizontal-tb;
+  text-align: center;
 }
 
 .vertical{
   writing-mode: vertical-lr;
+  text-align: center;
 }
 
 #calendar{
-  padding-top: 50px;
-  font-size: 20px;
+  font-size: 25px;
+}
+
+.all-calendar{
+  margin-top: -80px;
+}
+
+.button{
+  padding-bottom: 20px;
+  width: 100%;
+}
+
+//--- modal---//
+
+@mixin modal($z:2) {
+  z-index: $z;
+  display: none;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  // width: 1000px;
+  top: 0;
+  left: 0;
+  .modal-content{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    padding: 0 20px
+  }
+}
+
+#modal{
+  @include modal($z:2);
+}
+
+#response-modal{
+  @include  modal($z:3);
+  .response-modal-body{
+    padding:60px
+  }
+}
+
+
+
+//---sidebar---//
+
+ul {
+  margin: 0;
+  padding-left: 0;
+}
+ 
+li {
+  list-style: none;
+}
+ 
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+@mixin sidebar($top:0, $width:350px){
+  position: fixed;
+  z-index: 10;
+  top: $top;
+  width: $width; /* メニューのwidth */
+  transition: left .5s, right .5s; /* アニメーション */
+  padding: 20px;
+}
+ 
+#menu{
+  @include sidebar($top:0, $width:350px);
+  right: -370px; /* メニューのwidth + padding */
+  height: 100%;
+  background-color: rgba(86, 86, 86, 1);
+  overflow-y: auto;
+  li{
+    font-size: 20px;
+    margin: 15px;
+  
+  }
+  a{
+    color: white;
+  }
+  h1{
+    color:hotpink;
+    font-size: 30px;
+    padding-top: 15px;
+  }
+  .logout{
+    color:hotpink;
+  }
+  p{
+    color: white;
+  }
+}
+
+#navi{
+  @include sidebar($top:95px, $width:290px);
+  left: -290px; /* メニューのwidth + padding */
+  height: auto;
+  background-color: rgb(219, 210, 210);
+  overflow-y: auto;
+}
+
+.navi{
+  margin-top:-70px;
+  li{
+    padding-bottom: 20px;
+    font-size: 20px;
+  }
+}
+ 
+.toggle {
+  font-size: 50px;
+  cursor: pointer;
+  
+}
+ 
+#open, #navi-open{
+  display: none;
+}
+
+#close, #navi-close{
+  display: none;
+}
+
+#menu_open, #navi-open{
+  margin-right: -30px;
+}
+
+
+
+.number{
+  color:black;
+}
+
+
+
+.wrapper{
+  h1{
+    padding-top: 30px;
+    
+  }
+}
+
+
+
+.line{
+  border: 1px #ff0000 solid;
+}
+
+.help{
+  font-size: 30px;
+}
+
+//--root-urlの微調整--//
+.gap-root{
+  padding:40px
+}
+
+.create_plan{
+  padding-bottom: 40px;
+}
+
+@mixin box($color:black) {
+  width:120px;
+  background-color: #ffffff;
+  border: solid 2px $color;
+  margin-bottom: 10px;
+  height: 30px;
+  text-align: center;
+}
+
+.training{
+  @include box($color:red);
+}
+
+.normal{
+  @include box($color:black);
+}
+
+.open_title{
+  h1{
+    margin-bottom: -100px;
+  }
 }

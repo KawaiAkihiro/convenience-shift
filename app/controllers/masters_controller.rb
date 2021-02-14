@@ -20,8 +20,7 @@ class MastersController < ApplicationController
       @staff.save
 
       flash[:success] = "ユーザー登録が完了しました！"
-      redirect_to @master
-      #最終的にはsettingページに飛ばしたい。
+      redirect_to root_path
     else
       render 'new'
     end
@@ -29,18 +28,23 @@ class MastersController < ApplicationController
 
   def show
     @master = Master.find(params[:id])
-    @notices = @master.notices.all.count
+    @notices = @master.notices.count
   end
 
   def shift_onoff
-    @master = Master.find(params[:id])
-    if @master.shift_onoff == false
-      @master.shift_onoff = true
+    if !current_master.shift_onoff
+      current_master.shift_onoff = true
     else
-      @master.shift_onoff = false
+      current_master.shift_onoff = false
     end
-    @master.save
-    redirect_to @master
+    current_master.save
+    redirect_to root_url
+    if current_master.shift_onoff
+      flash[:success] = "シフト募集を開始しました"
+    else
+      flash[:success] = "シフト募集を終了しました"
+    end
+    
   end
 
   def edit
@@ -51,7 +55,7 @@ class MastersController < ApplicationController
     @master = Master.find(params[:id])
     if @master.update(master_params)
       flash[:success] = "プロフィールを変更しました"
-      redirect_to @master
+      redirect_to root_url
     else
       render 'edit'
     end
@@ -60,7 +64,7 @@ class MastersController < ApplicationController
   def login_form
     @master = Master.find(params[:id])
      if logged_in_staff?
-      redirect_to current_staff
+      redirect_to root_url
       flash[:success] = "現在　#{current_staff.staff_name}さん　としてログイン中です"
      end
   end
@@ -71,9 +75,9 @@ class MastersController < ApplicationController
     if @staff && @staff.authenticate(params[:staffs_session][:password])
       log_in_staff(@staff)
       #params[:session][:remember_me] == '1' ? remember(staff): forget(staff)
-      redirect_to perfect_shifts_path
+      redirect_to root_path
     else
-      flash.now[:danger] = "従業員番号もしくはパスワードが間違っています"
+      flash[:danger] = "従業員番号もしくはパスワードが間違っています"
       render 'login_form'
     end
   end
@@ -85,6 +89,6 @@ class MastersController < ApplicationController
 
   private
     def master_params
-      params.require(:master).permit(:store_name, :user_name, :staff_number, :password, :password_confirmation)
+      params.require(:master).permit(:store_name, :user_name, :staff_number, :email, :onoff_email, :password, :password_confirmation)
     end
 end

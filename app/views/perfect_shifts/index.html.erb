@@ -1,38 +1,70 @@
-<% if logged_in? %>
-    <button type="button" name="name" class="plan">予定を追加する</button>
-<% end %>
-<% if logged_in_staff? || logged_in?%> 
-    <button type="button" name="name" class="reload">カレンダーを更新する</button><br>
-    <% @shift_separation.each do |shift|%>
-        <%= shift.name %>
-        <%= shift.start_time.strftime("%H:%M")%> ~ 
-        <%= shift.finish_time.strftime("%H:%M") %>
-    <% end %>
-    <div id="calendar"></div>
-    <button type="button" name="name" class="reload">カレンダーを更新する</button><br>
-    <div id="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+<div class="wrapper">
+        <div class="shift_onoff">
+            <% if logged_in? %>
+            <%if current_master.shift_onoff == false %>
+                        <%= link_to "募集を開始する",shift_onoff_masters_path, method: :patch, class: "btn btn-primary" %>
+                    <% else %>
+                        <%= link_to "募集を終了する",shift_onoff_masters_path, method: :patch, class: "btn btn-danger" %>
+                    <% end %>
+            <% end %> 
+        </div>
+        <% if logged_in_staff? || logged_in?%>  
+            <div class = "create_plan">
+                <% if logged_in? %>
+                    <button type="button" name="name" class="plan btn btn-primary">営業•催事を追加する</button>
+                <% end %> 
+            </div>
+        <% if !logged_in? && logged_in_staff? %>
+          <div class="gap-root"></div>
+        <% end %>
+
+        <div class="training">
+            <p>トレーニング中</p>
+        </div>
+        <div class="normal">
+            <p>通常</p>
+        </div>
+        <div class="all-calendar">
+            <div id="calendar"></div>
+        </div>
+
+        <div id="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-<% else %>
-    <div class="center jumbtron ">
-        <div class="container">
-            <h1 class="display-3">シフト管理アプリへようこそ</h1>
-            <h2>今すぐシフトを決めてしまおう！</h2>
 
-            <%= link_to "新規登録", signup_path, class:"btn btn-lg btn-primary" %>
+        <div id="response-modal" tabindex="0" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="error" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="response-modal-body">
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>  
-<% end %>   
+    <% else %>
+        <div class="center jumbtron ">
+                <h1 class="display-3">シフト管理アプリへようこそ</h1>
+                <h2>今すぐシフトを決めてしまおう！</h2>
+
+                <%= link_to "新規登録", signup_path, class:"btn btn-lg btn-primary" %>
+        </div>  
+    <% end %>   
+</div>    
 
 <%= javascript_pack_tag 'perfect_shifts/calendar' %>
 <%= javascript_pack_tag 'shared/index' %>
+<%= javascript_pack_tag 'shared/reload' %>

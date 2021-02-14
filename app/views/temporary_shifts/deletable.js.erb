@@ -1,3 +1,4 @@
 $('#modal').fadeOut();
-$('#calendar').fullCalendar( 'rerenderEvents' );
-$('#calendar').fullCalendar( 'addEventSource' );
+$('.response-modal-body').html('<h1>削除対象に変更しました</h1>');
+$('#response-modal').fadeIn();
+$('#calendar').fullCalendar( 'render' );

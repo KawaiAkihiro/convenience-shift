@@ -12,6 +12,9 @@ document.addEventListener('turbolinks:load', function() {
         timeZone: 'Asia/Tokyo',
         firstDay: 1,
         scrollTime: '07:00:00',
+        buttonText: {
+            today: '今月'
+        }, 
         headerToolbar: {
             left: '',
             center: 'title',
@@ -40,7 +43,7 @@ document.addEventListener('turbolinks:load', function() {
 
     calendar.render();
 
-    $('button').click(function(){
+    $(".error").click(function(){
         calendar.refetchEvents();
-    })
+    });
 });

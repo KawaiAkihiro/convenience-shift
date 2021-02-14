@@ -7,6 +7,18 @@
   <%= f.label :user_name %>
   <%= f.text_field :user_name, class: 'form-control' %>
 
+  <%= f.label :email %>
+  <%= f.text_field :email, class: 'form-control' %>
+
+  <% if controller.action_name == "edit" %>
+    <br>
+    <%= f.label :onoff_email, class: "checkbox inline" do %>
+      <%= f.check_box :onoff_email %>
+      <span>メールで通知を知らせる</span>
+    <% end %>
+    <br>
+  <% end %>
+
   <% if controller.action_name == "new" %>
     <%= f.label :staff_number, "従業員番号" %>
     <%= f.number_field :staff_number, class: 'form-control' %>
