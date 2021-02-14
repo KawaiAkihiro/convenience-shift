@@ -12,6 +12,9 @@ document.addEventListener('turbolinks:load', function() {
         timeZone: 'Asia/Tokyo',
         firstDay: 1,
         scrollTime: '07:00:00',
+        buttonText: {
+            today: '今月'
+        }, 
         headerToolbar: {
             left: '',
             center: 'title',

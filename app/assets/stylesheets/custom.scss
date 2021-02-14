@@ -80,9 +80,9 @@ li{
 
 #container{
   .wrapper{
-  margin: 0;
-  padding: 0 40px 40px;
-  // height: 100vh; /* 全画面表示 */
+    margin: 0;
+    padding: 0 40px 40px;
+    // height: 100vh; /* 全画面表示 */
   }
 }
 
@@ -160,6 +160,9 @@ li{
 }
 
 //-- fullcalendar--//
+.fc-toolbar h2 {
+  padding-left: 100px;
+}
 
 // 平日
 .fc-day-mon, .fc-day-tue,
@@ -346,6 +349,7 @@ a {
 .wrapper{
   h1{
     padding-top: 30px;
+    
   }
 }
 
@@ -383,4 +387,10 @@ a {
 
 .normal{
   @include box($color:black);
+}
+
+.open_title{
+  h1{
+    margin-bottom: -100px;
+  }
 }

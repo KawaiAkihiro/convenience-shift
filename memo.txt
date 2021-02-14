@@ -107,3 +107,8 @@ $('#calendar').fullCalendar( 'addEventSource' );
       <li class="nav-link"><%= link_to "ログアウト",   logout_path, {:method=> :post} %></li>
    </ul>   
 </li>
+
+$('#modal').fadeOut();
+$('.response-modal-body').html('<h1>交代申請をしました！</h1>');
+$('#response-modal').fadeIn();
+$('#calendar').fullCalendar( 'render' );

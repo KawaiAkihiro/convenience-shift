@@ -1,16 +1,20 @@
 // Place all the styles related to the Staffs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-h1{
-    padding-bottom: 15px;
+
+.info{
+        h1{
+            padding-bottom: 30px;
+        }
+        li{
+            font-size: x-large;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #000000;
+            padding-top: 20px;
+            
+        }
 }
 
-ul.staffs{
-    list-style: none;
-    li{
-        padding-bottom: 10px;
-        .edit,.delete{
-            padding-left: 10px;
-        }
-    }
+.edit,.delete{
+    padding-left: 30px;
 }
