@@ -7,11 +7,7 @@
             <% @notices.each do |notice| %>
                 <div class="one-part">
                     <div class="create_time">
-                        <% if notice.created_at.day == Date.today.day %>
-                            <%=  notice.created_at.strftime("%H:%M") %>
-                        <% else %>
-                            <%=  notice.created_at.strftime("%m/%d %H:%M") %>
-                        <% end %>
+                        <%=  time_ago_in_words(notice.created_at) + "前"%>  
                     </div>
                     <% if notice.mode == "instead"%>
                         <h3>交代申請 #<%= notice.id %></h3>

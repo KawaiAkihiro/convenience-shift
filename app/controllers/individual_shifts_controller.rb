@@ -40,9 +40,13 @@ class IndividualShiftsController < ApplicationController
     end 
 
     def remove
-        @id = params[:shift_id]
-        @event = current_staff.individual_shifts.find(@id)
-        render plain: render_to_string(partial: 'form_delete', layout: false, locals: { event: @event })
+        begin
+            @id = params[:shift_id]
+            @event = current_staff.individual_shifts.find(@id)
+            render plain: render_to_string(partial: 'form_delete', layout: false, locals: { event: @event })
+        rescue => exception
+            #何もしない
+        end
     end
 
 

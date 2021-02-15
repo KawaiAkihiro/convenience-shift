@@ -2,13 +2,24 @@
 import { Calendar, whenTransitionDone } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid'
+import googleCalendarApi from '@fullcalendar/google-calendar'
 
 document.addEventListener('turbolinks:load', function() {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new Calendar(calendarEl, {
-        plugins: [ dayGridPlugin, interactionPlugin ],
+        plugins: [ dayGridPlugin, interactionPlugin, googleCalendarApi ],
         events: '/individual_shifts.json',
+        googleCalendarApiKey: 'AIzaSyBJgxvPtAdElMF6qlcqWqIwFludRmesnOI',
+        eventSources : [
+            {
+              googleCalendarId: 'japanese__ja@holiday.calendar.google.com',
+              borderColor:"#ffffff",
+              textColor: "black",
+              backgroungColor:"#ffd0d0",
+              className: 'event_holiday'	
+            }
+        ],
         locale: 'ja',
         timeZone: 'Asia/Tokyo',
         firstDay: 1,
@@ -46,7 +57,7 @@ document.addEventListener('turbolinks:load', function() {
                 // 成功処理
             }).fail(function (result) {
                 // 失敗処理
-                alert("failed");
+                // alert("failed");
             });
         },
         eventClick: function(info){
@@ -62,7 +73,7 @@ document.addEventListener('turbolinks:load', function() {
             $('#modal').fadeIn();
             }).fail(function (result) {
                 // 失敗処理
-                alert("failed");
+                // alert("failed");
             });
         }
     });

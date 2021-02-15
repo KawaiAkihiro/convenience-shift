@@ -1,6 +1,8 @@
 import { Calendar, whenTransitionDone } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import weekGridPlugin from '@fullcalendar/timegrid'
+import googleCalendarApi from '@fullcalendar/google-calendar'
+
 import { event } from 'jquery';
 //import dayGridPlugin from '@fullcalendar/daygrid'
 
@@ -8,8 +10,18 @@ document.addEventListener('turbolinks:load', function() {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new Calendar(calendarEl, {
-        plugins: [ weekGridPlugin, interactionPlugin ],
+        plugins: [ weekGridPlugin, interactionPlugin, googleCalendarApi ],
         events: '/perfect_shifts.json',
+        googleCalendarApiKey: 'AIzaSyBJgxvPtAdElMF6qlcqWqIwFludRmesnOI',
+        eventSources : [
+            {
+              googleCalendarId: 'japanese__ja@holiday.calendar.google.com',
+              backgroundColor:"#ffd0d0",
+              borderColor:"#ffffff",
+              textColor: "black"
+
+            }
+        ],
         locale: 'ja',
         timeZone: 'Asia/Tokyo',
         scrollTime: '07:00:00',
@@ -76,7 +88,6 @@ document.addEventListener('turbolinks:load', function() {
         },
         eventClick: function(info){
             var id = info.event.id
-
             if(info.el.style.backgroundColor == "yellow"){
                 $.ajax({
                     type: "GET",
@@ -106,6 +117,7 @@ document.addEventListener('turbolinks:load', function() {
                     alert("failed");
                 });
             }
+            
         }
     });
     calendar.render();

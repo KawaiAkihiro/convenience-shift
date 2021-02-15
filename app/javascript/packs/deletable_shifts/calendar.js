@@ -1,14 +1,23 @@
 import { Calendar, whenTransitionDone } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import weekGridPlugin from '@fullcalendar/timegrid'
+import googleCalendarApi from '@fullcalendar/google-calendar'
 //import dayGridPlugin from '@fullcalendar/daygrid'
 
 document.addEventListener('turbolinks:load', function() {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new Calendar(calendarEl, {
-        plugins: [ weekGridPlugin, interactionPlugin ],
+        plugins: [ weekGridPlugin, interactionPlugin, googleCalendarApi ],
         events: '/deletable_shifts.json',
+        googleCalendarApiKey: 'AIzaSyBJgxvPtAdElMF6qlcqWqIwFludRmesnOI',
+        eventSources : [
+            {
+              googleCalendarId: 'japanese__ja@holiday.calendar.google.com',
+              display: 'background',
+              color:"#ffd0d0"
+            }
+        ],
         locale: 'ja',
         timeZone: 'Asia/Tokyo',
         scrollTime: '07:00:00',
@@ -23,6 +32,7 @@ document.addEventListener('turbolinks:load', function() {
         }, 
         allDayText: '営業 催事',
         height: "auto",
+
         eventClick: function(info){
             var id = info.event.id
             $.ajax({
@@ -39,6 +49,7 @@ document.addEventListener('turbolinks:load', function() {
                 alert("failed");
             });
         },
+
         eventClassNames: function(arg){
             if(arg.event.allDay){
                 return [ 'horizon' ]

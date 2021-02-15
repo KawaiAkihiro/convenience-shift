@@ -81,54 +81,61 @@ class PerfectShiftsController < ApplicationController
   end
 
   def change
-    if logged_in? && logged_in_staff?
-      @master = current_staff.master
-      @event = @master.individual_shifts.find(params[:shift_id])
-      @already = current_staff.individual_shifts.find_by(start: @event.start)
-      if @event.staff != current_staff && @event.allDay == false
-        if @already.nil? 
-          if @event.mode.nil?
-            render plain: render_to_string(partial: 'form_instead', layout: false, locals: { event: @event })
-          elsif @event.mode == "instead"
+    begin
+        if logged_in? && logged_in_staff?
+        @master = current_staff.master
+        @event = @master.individual_shifts.find(params[:shift_id])
+        @already = current_staff.individual_shifts.find_by(start: @event.start)
+        if @event.staff != current_staff && @event.allDay == false
+          if @already.nil? 
+            if @event.mode.nil?
+              render plain: render_to_string(partial: 'form_instead', layout: false, locals: { event: @event })
+            elsif @event.mode == "instead"
+              render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
+            elsif @event.mode == "delete"
+              render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
+            end
+          else
             render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
           end
-        else
-          render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
-        end
-      elsif @event.staff != current_staff && @event.allDay == true
-        render plain: render_to_string(partial: 'plan_delete', layout: false, locals: { event: @event })
-      elsif @event.staff == current_staff && @event.mode.nil?
-        render plain: render_to_string(partial: 'form_delete', layout: false, locals: { event: @event }) 
-      elsif @event.staff == current_staff && @event.mode == "delete"
-        render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
-      end
-
-    elsif !logged_in? && logged_in_staff?
-      @master = current_staff.master
-      @event = @master.individual_shifts.find(params[:shift_id])
-      @already = current_staff.individual_shifts.find_by(start: @event.start)
-      if @event.staff != current_staff && @event.allDay == false
-        if @already.nil? 
-          render plain: render_to_string(partial: 'form_instead', layout: false, locals: { event: @event })
-        else
-          render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
-        end
-      elsif @event.staff != current_staff && @event.allDay == true
-        render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
-      elsif @event.staff == current_staff
-        render plain: render_to_string(partial: 'form_delete', layout: false, locals: { event: @event }) 
-      end
-
-    elsif logged_in? && !logged_in_staff?
-      if logged_in?
-        @event = current_master.individual_shifts.find(params[:shift_id])
-        unless @event.allDay
-          render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
-        else
+        elsif @event.staff != current_staff && @event.allDay == true
           render plain: render_to_string(partial: 'plan_delete', layout: false, locals: { event: @event })
+        elsif @event.staff == current_staff && @event.mode.nil?
+          render plain: render_to_string(partial: 'form_delete', layout: false, locals: { event: @event }) 
+        elsif @event.staff == current_staff && @event.mode == "delete"
+          render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
+        end
+
+      elsif !logged_in? && logged_in_staff?
+        @master = current_staff.master
+        @event = @master.individual_shifts.find(params[:shift_id])
+        @already = current_staff.individual_shifts.find_by(start: @event.start)
+        if @event.staff != current_staff && @event.allDay == false
+          if @already.nil? 
+            render plain: render_to_string(partial: 'form_instead', layout: false, locals: { event: @event })
+          else
+            render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
+          end
+        elsif @event.staff != current_staff && @event.allDay == true
+          render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
+        elsif @event.staff == current_staff
+          render plain: render_to_string(partial: 'form_delete', layout: false, locals: { event: @event }) 
+        end
+
+      elsif logged_in? && !logged_in_staff?
+        if logged_in?
+          @event = current_master.individual_shifts.find(params[:shift_id])
+          unless @event.allDay
+            render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
+          else
+            render plain: render_to_string(partial: 'plan_delete', layout: false, locals: { event: @event })
+          end
         end
       end
+    rescue => exception
+      #何もしない
     end
+    
   end
 
   def instead

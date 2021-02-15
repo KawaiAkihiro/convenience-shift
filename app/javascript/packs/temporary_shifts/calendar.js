@@ -2,13 +2,22 @@ import { Calendar, whenTransitionDone } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import weekGridPlugin from '@fullcalendar/timegrid'
 //import dayGridPlugin from '@fullcalendar/daygrid'
+import googleCalendarApi from '@fullcalendar/google-calendar'
 
 document.addEventListener('turbolinks:load', function() {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new Calendar(calendarEl, {
-        plugins: [ weekGridPlugin, interactionPlugin ],
+        plugins: [ weekGridPlugin, interactionPlugin, googleCalendarApi ],
         events: '/temporary_shifts.json',
+        googleCalendarApiKey: 'AIzaSyBJgxvPtAdElMF6qlcqWqIwFludRmesnOI',
+        eventSources : [
+            {
+              googleCalendarId: 'japanese__ja@holiday.calendar.google.com',
+              display: 'background',
+              color:"#ffd0d0"
+            }
+        ],
         locale: 'ja',
         timeZone: 'Asia/Tokyo',
         scrollTime: '07:00:00',

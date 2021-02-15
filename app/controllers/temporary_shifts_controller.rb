@@ -47,10 +47,14 @@ class TemporaryShiftsController < ApplicationController
     end
   end
 
-  def delete 
-    @id = params[:shift_id]
-    @event = current_master.individual_shifts.find(@id)
-    render plain: render_to_string(partial: 'form_deletable', layout: false, locals: { event: @event })
+  def delete
+    begin
+      @id = params[:shift_id]
+      @event = current_master.individual_shifts.find(@id)
+      render plain: render_to_string(partial: 'form_deletable', layout: false, locals: { event: @event })
+    rescue => exception
+      #何もしない
+    end
   end
 
   def deletable
