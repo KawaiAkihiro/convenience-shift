@@ -103,7 +103,9 @@ class PerfectShiftsController < ApplicationController
         elsif @event.staff == current_staff && @event.mode.nil?
           render plain: render_to_string(partial: 'form_delete', layout: false, locals: { event: @event }) 
         elsif @event.staff == current_staff && @event.mode == "delete"
-          render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
+          render plain: render_to_string(partial: 'already_delete', layout: false, locals: { event: @event })
+        elsif @event.staff == current_staff && @event.mode == "instead"
+          render plain: render_to_string(partial: 'already_instead', layout: false, locals: { event: @event })
         end
 
       elsif !logged_in? && logged_in_staff?

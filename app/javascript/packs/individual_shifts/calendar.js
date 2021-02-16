@@ -14,10 +14,8 @@ document.addEventListener('turbolinks:load', function() {
         eventSources : [
             {
               googleCalendarId: 'japanese__ja@holiday.calendar.google.com',
-              borderColor:"#ffffff",
-              textColor: "black",
-              backgroungColor:"#ffd0d0",
-              className: 'event_holiday'	
+              display: 'background',
+              color:"#ffd0d0"
             }
         ],
         locale: 'ja',
@@ -61,20 +59,25 @@ document.addEventListener('turbolinks:load', function() {
             });
         },
         eventClick: function(info){
-            var id = info.event.id
-            $.ajax({
-                type: "GET",
-                url:  "/individual_shifts/remove",
-                data: { shift_id : id },
-                datatype: "html",
-            }).done(function(res){
-            
-            $('.modal-body').html(res)
-            $('#modal').fadeIn();
-            }).fail(function (result) {
-                // 失敗処理
-                // alert("failed");
-            });
+            if (info.event.backgroundColor == "white"){
+                var id = info.event.id
+                $.ajax({
+                    type: "GET",
+                    url:  "/individual_shifts/remove",
+                    data: { shift_id : id },
+                    datatype: "html",
+                }).done(function(res){
+                
+                    $('.modal-body').html(res)
+                    $('#modal').fadeIn();
+                }).fail(function (result) {
+                    // 失敗処理
+                    // alert("failed");
+                });
+            }
+        },
+        eventClassNames: function(arg){
+            return [ 'horizon' ]
         }
     });
 

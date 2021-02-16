@@ -16,10 +16,8 @@ document.addEventListener('turbolinks:load', function() {
         eventSources : [
             {
               googleCalendarId: 'japanese__ja@holiday.calendar.google.com',
-              backgroundColor:"#ffd0d0",
-              borderColor:"#ffffff",
-              textColor: "black"
-
+              display: 'background',
+              color:"#FF8C00"
             }
         ],
         locale: 'ja',

@@ -206,11 +206,17 @@ td.fc-day-sun {
 .horizon{
   writing-mode: horizontal-tb;
   text-align: center;
+  :hover{
+    cursor : pointer;
+  }
 }
 
 .vertical{
   writing-mode: vertical-lr;
   text-align: center;
+  :hover{
+    cursor : pointer;
+  }
 }
 
 #calendar{

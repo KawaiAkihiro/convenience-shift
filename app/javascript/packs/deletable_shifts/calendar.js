@@ -15,7 +15,7 @@ document.addEventListener('turbolinks:load', function() {
             {
               googleCalendarId: 'japanese__ja@holiday.calendar.google.com',
               display: 'background',
-              color:"#ffd0d0"
+              color:"#FF8C00"
             }
         ],
         locale: 'ja',
@@ -34,20 +34,22 @@ document.addEventListener('turbolinks:load', function() {
         height: "auto",
 
         eventClick: function(info){
-            var id = info.event.id
-            $.ajax({
-                type: "GET",
-                url:  "/deletable_shifts/restore",
-                data: { shift_id : id },
-                datatype: "html",
-            }).done(function(res){
-            
-            $('.modal-body').html(res)
-            $('#modal').fadeIn();
-            }).fail(function (result) {
-                // 失敗処理
-                alert("failed");
-            });
+            if (info.event.backgroundColor == "white"){
+                var id = info.event.id
+                $.ajax({
+                    type: "GET",
+                    url:  "/deletable_shifts/restore",
+                    data: { shift_id : id },
+                    datatype: "html",
+                }).done(function(res){
+                
+                $('.modal-body').html(res)
+                $('#modal').fadeIn();
+                }).fail(function (result) {
+                    // 失敗処理
+                    alert("failed");
+                });
+            }
         },
 
         eventClassNames: function(arg){
