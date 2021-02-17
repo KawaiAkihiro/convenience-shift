@@ -1,4 +1,4 @@
-import { Calendar, whenTransitionDone } from '@fullcalendar/core';
+import { Calendar} from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import weekGridPlugin from '@fullcalendar/timegrid'
 import googleCalendarApi from '@fullcalendar/google-calendar'
