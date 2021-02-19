@@ -14,10 +14,6 @@ class IndividualShift < ApplicationRecord
     end
   end
 
-  def start_time
-    self.start
-  end
-
   def parent
     if self.staff.staff_number == 0
       if self.plan == nil

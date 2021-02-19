@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   def new
   end
 
+  #ログイン処理
   def create
     master = Master.find_by(store_name: params[:session][:store_name])
     if master &.authenticate(params[:session][:password])
@@ -14,6 +15,7 @@ class SessionsController < ApplicationController
     end
   end
 
+  #ログアウト処理
   def destroy
     log_out if logged_in?
     redirect_to root_url

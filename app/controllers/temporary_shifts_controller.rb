@@ -53,7 +53,7 @@ class TemporaryShiftsController < ApplicationController
       @event = current_master.individual_shifts.find(@id)
       render plain: render_to_string(partial: 'form_deletable', layout: false, locals: { event: @event })
     rescue => exception
-      #何もしない
+      #何もしない(祝日イベント対策)
     end
   end
 
@@ -65,7 +65,6 @@ class TemporaryShiftsController < ApplicationController
       if @event.staff.staff_number != 0
         @event.deletable = true
         @event.save
-        # 成功処理
       else
         @event.destroy
       end

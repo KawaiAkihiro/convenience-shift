@@ -31,6 +31,7 @@ class MastersController < ApplicationController
     @notices = @master.notices.count
   end
 
+  #シフトを募集開始と終了を判定
   def shift_onoff
     if !current_master.shift_onoff
       current_master.shift_onoff = true
@@ -61,6 +62,7 @@ class MastersController < ApplicationController
     end
   end
 
+  #従業員用ログインページ
   def login_form
     @master = Master.find(params[:id])
      if logged_in_staff?
@@ -68,13 +70,13 @@ class MastersController < ApplicationController
       flash[:success] = "現在　#{current_staff.staff_name}さん　としてログイン中です"
      end
   end
-
+  
+  #従業員用ログイン処理
   def login
     @master = Master.find(params[:id])
     @staff  = @master.staffs.find_by(staff_number: params[:staffs_session][:staff_number])  
     if @staff && @staff.authenticate(params[:staffs_session][:password])
       log_in_staff(@staff)
-      #params[:session][:remember_me] == '1' ? remember(staff): forget(staff)
       redirect_to root_path
     else
       flash[:danger] = "従業員番号もしくはパスワードが間違っています"
@@ -82,6 +84,7 @@ class MastersController < ApplicationController
     end
   end
 
+  #従業員用ログアウト
   def logout
     log_out_staff if logged_in_staff?
     redirect_to root_url
