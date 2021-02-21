@@ -1,5 +1,6 @@
 class DeletableShiftsController < ApplicationController
     def index
+        #このページで全てのアクションを実行していく
         @events = current_master.individual_shifts.where(Temporary: false).where(deletable: true)
     end
 

@@ -2,6 +2,8 @@ class ShiftSeparationsController < ApplicationController
     before_action :logged_in_master, except: [:destroy]
     before_action :corrent_master,   except: [:destroy]
 
+    #シフトの時間割のcrud機能
+
     def new
         @shift_separation = current_master.shift_separations.new
     end

@@ -6,20 +6,6 @@ class StaffsController < ApplicationController
         @staffs = current_master.staffs.where.not(staff_number:0)
     end
 
-    def show
-        if logged_in?
-            begin
-                @staff = current_master.staffs.find(params[:id])
-                @master = current_master
-            rescue
-                redirect_to current_master
-            end
-        else
-            @staff  = current_staff
-            @master = Master.find(@staff.master_id)
-        end
-    end
-
     def new
         @staff = current_master.staffs.new
     end
@@ -28,7 +14,7 @@ class StaffsController < ApplicationController
         @staff  = current_master.staffs.new(staff_params)
         if @staff.save
             flash[:success] = "従業員登録完了しました"
-            redirect_to current_master
+            redirect_to root_url
         else
             render 'new'
         end
@@ -38,8 +24,9 @@ class StaffsController < ApplicationController
         if logged_in?
             begin
                 @staff = current_master.staffs.find(params[:id])  
+            #店長の中にいないidのユーザ-のページにいこうとした時
             rescue
-                redirect_to root_url
+                redirect_to staffs_path
             end
         else
           @staff = current_staff
@@ -56,6 +43,7 @@ class StaffsController < ApplicationController
                 else
                     render 'edit'
                 end
+            #店長の中にいないidのユーザ-の変更を直接しようとした時
             rescue
                 redirect_to root_url
             end

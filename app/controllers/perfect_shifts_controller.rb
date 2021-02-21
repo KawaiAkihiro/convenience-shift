@@ -1,5 +1,6 @@
 class PerfectShiftsController < ApplicationController
   def index
+    #このページで全てのアクションを起こす
     if logged_in?
         @events = current_master.individual_shifts.where(Temporary: true)
     end
@@ -82,60 +83,54 @@ class PerfectShiftsController < ApplicationController
 
   def change
     begin
-        if logged_in? && logged_in_staff?
-        @master = current_staff.master
-        @event = @master.individual_shifts.find(params[:shift_id])
-        @already = current_staff.individual_shifts.find_by(start: @event.start)
-        if @event.staff != current_staff && @event.allDay == false
-          if @already.nil? 
-            if @event.mode.nil?
-              render plain: render_to_string(partial: 'form_instead', layout: false, locals: { event: @event })
-            elsif @event.mode == "instead"
-              render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
-            elsif @event.mode == "delete"
-              render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
-            end
-          else
+      #両方ログイン時
+      if logged_in? && logged_in_staff?
+        @event = current_master.individual_shifts.find(params[:shift_id])
+        #終日の予定をクリックした時
+        unless @event.allDay
+          render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
+        else
+          render plain: render_to_string(partial: 'plan_delete', layout: false, locals: { event: @event })
+        end
+
+      #従業員のみログイン時
+      elsif !logged_in? && logged_in_staff?
+        @event = current_staff.master.individual_shifts.find(params[:shift_id])
+        
+        #他人のシフトをクリック
+        if @event.staff != current_staff && @event.allDay == false 
+          #モードによってmodalのhtmlを変更する
+          if @event.mode.nil?
+            render plain: render_to_string(partial: 'form_instead', layout: false, locals: { event: @event })
+          elsif @event.mode == "delete"
+            render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
+          elsif @event.mode == "instead"
             render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
           end
-        elsif @event.staff != current_staff && @event.allDay == true
-          render plain: render_to_string(partial: 'plan_delete', layout: false, locals: { event: @event })
-        elsif @event.staff == current_staff && @event.mode.nil?
-          render plain: render_to_string(partial: 'form_delete', layout: false, locals: { event: @event }) 
+        #終日の予定をクリック
+        elsif @event.allDay == true
+          render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
+        #自分の予定でモードを持っている場合
         elsif @event.staff == current_staff && @event.mode == "delete"
           render plain: render_to_string(partial: 'already_delete', layout: false, locals: { event: @event })
         elsif @event.staff == current_staff && @event.mode == "instead"
           render plain: render_to_string(partial: 'already_instead', layout: false, locals: { event: @event })
-        end
-
-      elsif !logged_in? && logged_in_staff?
-        @master = current_staff.master
-        @event = @master.individual_shifts.find(params[:shift_id])
-        @already = current_staff.individual_shifts.find_by(start: @event.start)
-        if @event.staff != current_staff && @event.allDay == false
-          if @already.nil? 
-            render plain: render_to_string(partial: 'form_instead', layout: false, locals: { event: @event })
-          else
-            render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
-          end
-        elsif @event.staff != current_staff && @event.allDay == true
-          render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
-        elsif @event.staff == current_staff
+        elsif @event.staff == current_staff && @event.mode.nil?
           render plain: render_to_string(partial: 'form_delete', layout: false, locals: { event: @event }) 
         end
 
+      #店長のみログイン時
       elsif logged_in? && !logged_in_staff?
-        if logged_in?
-          @event = current_master.individual_shifts.find(params[:shift_id])
-          unless @event.allDay
-            render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
-          else
-            render plain: render_to_string(partial: 'plan_delete', layout: false, locals: { event: @event })
-          end
+        @event = current_master.individual_shifts.find(params[:shift_id])
+        #終日の予定をクリックした時
+        unless @event.allDay
+          render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
+        else
+          render plain: render_to_string(partial: 'plan_delete', layout: false, locals: { event: @event })
         end
       end
     rescue => exception
-      #何もしない
+      #何もしない(祝日イベント対策)
     end
     
   end
@@ -143,31 +138,40 @@ class PerfectShiftsController < ApplicationController
   def instead
     @master = current_staff.master
 
+    #シフトのモードを変更
     @event = @master.individual_shifts.find(params[:id])
     @event.mode = "instead"
     @event.save
 
+    #通知を作成
     @notice = @master.notices.new
     @notice.mode = "instead"
     @notice.staff_id = current_staff.id
     @notice.shift_id = @event.id
     @notice.save
+
+    #メール機能がオンなら通知を送信
     if @master.onoff_email
       NoticeMailer.send_when_create_notice(@notice).deliver
     end
   end
 
   def delete
+    #シフトのモードを変更
+    @master = current_staff.master
+
     @event = current_staff.individual_shifts.find(params[:id])
     @event.mode = "delete"
     @event.save
 
-    @master = current_staff.master
+    #通知を作成
     @notice = @master.notices.new(params_notice)
     @notice.mode = "delete"
     @notice.staff_id = current_staff.id
     @notice.shift_id = @event.id
     @notice.save
+
+    #メール機能がオンなら通知を送信
     if @master.onoff_email
       NoticeMailer.send_when_create_notice(@notice).deliver
     end

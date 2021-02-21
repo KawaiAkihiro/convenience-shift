@@ -1,5 +1,6 @@
 class NoticesController < ApplicationController
     def index
+        #通知一覧
         @notices = current_master.notices.all
     end
     

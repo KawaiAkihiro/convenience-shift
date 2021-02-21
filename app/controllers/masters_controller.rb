@@ -11,7 +11,8 @@ class MastersController < ApplicationController
     @master = Master.new(master_params)
     if @master.save
       log_in @master
-
+      
+      #店長用の従業員データを作成
       @staff = current_master.staffs.new
       @staff.staff_name = current_master.user_name
       @staff.staff_number = current_master.staff_number
@@ -19,16 +20,19 @@ class MastersController < ApplicationController
       @staff.password_confirmation = "0000"
       @staff.save
 
+      #空きシフトを作るための空従業員を作成
+      @empty_staff = current_master.staffs.new
+      @empty_staff.staff_name = "empty"
+      @empty_staff.staff_number = 0
+      @empty_staff.password = "0000"
+      @empty_staff.password_confirmation = "0000"
+      @empty_staff.save
+
       flash[:success] = "ユーザー登録が完了しました！"
       redirect_to root_path
     else
       render 'new'
     end
-  end
-
-  def show
-    @master = Master.find(params[:id])
-    @notices = @master.notices.count
   end
 
   #シフトを募集開始と終了を判定

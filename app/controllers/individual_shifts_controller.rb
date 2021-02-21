@@ -2,8 +2,8 @@ class IndividualShiftsController < ApplicationController
     before_action :logged_in_staff
     require 'date'
 
-    #シフト登録をする基盤のページ
     def index
+        #このページで全てのアクションを実行していく
         @events = current_staff.individual_shifts.where(Temporary: false)
         @shift_separation = current_staff.master.shift_separations.all
     end

@@ -1,25 +1,24 @@
 class TemporaryShiftsController < ApplicationController
 
   def index
-    @event = current_master.individual_shifts.new
+    #このページで全てのアクションを実行していく
     @events = current_master.individual_shifts.where(Temporary: false).where(deletable: false)
   end
-
+  
   def new_shift
     @event = current_master.individual_shifts.new
     @separations = current_master.shift_separations.all
+    #空きシフト追加modal用のhtmlを返す
     render plain: render_to_string(partial: 'form_new_shift', layout: false, locals: { event: @event, separations:@separations })
   end
 
   def new_plan
-    if logged_in?
-      @event = current_master.individual_shifts.new
-      render plain: render_to_string(partial: 'form_new_plan', layout: false, locals: { event: @event })
-    else
-      render plain: render_to_string(partial: 'alert', layout: false, locals: { event: @event })
-    end
+    @event = current_master.individual_shifts.new
+    #終日予定追加modal用のhtmlを返す
+    render plain: render_to_string(partial: 'form_new_plan', layout: false, locals: { event: @event })
   end
 
+  #空きシフトを追加する
   def create_shift
     @event = current_master.individual_shifts.new(params_shift)
     @event.staff = current_master.staffs.find_by(staff_number: 0)
@@ -36,6 +35,7 @@ class TemporaryShiftsController < ApplicationController
     end
   end
 
+  #終日の予定を追加する
   def create_plan
     @event = current_master.individual_shifts.new(params_plan)
     @event.staff = current_master.staffs.find_by(staff_number: 0)
@@ -49,19 +49,22 @@ class TemporaryShiftsController < ApplicationController
 
   def delete
     begin
-      @id = params[:shift_id]
-      @event = current_master.individual_shifts.find(@id)
+      @event = current_master.individual_shifts.find(params[:shift_id])
+      #削除するmodalのhtmlを返す
       render plain: render_to_string(partial: 'form_deletable', layout: false, locals: { event: @event })
     rescue => exception
       #何もしない(祝日イベント対策)
     end
   end
 
+  #シフト仮削除
   def deletable
     @event = current_master.individual_shifts.find(params[:id])
+    #終日の予定なら削除
     if @event.allDay == true
       @event.destroy
     else
+      #空きシフトは削除、それ以外は復活可能
       if @event.staff.staff_number != 0
         @event.deletable = true
         @event.save
@@ -72,9 +75,12 @@ class TemporaryShiftsController < ApplicationController
     
   end
 
+  #シフト確定する(仮削除対象を削除)
   def perfect
     @events = current_master.individual_shifts.where(Temporary: false)
+    #調整用に上がってきた全シフト対象
     @events.each do |shift|
+        #仮削除がonのものを削除、それ以外は確定に変更していく
         if shift.deletable == true
             shift.destroy!
         else
