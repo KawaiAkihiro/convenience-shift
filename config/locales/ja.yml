@@ -6,6 +6,7 @@ ja:
           user_name:  氏名
           password:   パスワード
           password_confirmation: パスワード(確認用)
+          email: メールアドレス
 
         shift_separation:
           name: 時間帯名

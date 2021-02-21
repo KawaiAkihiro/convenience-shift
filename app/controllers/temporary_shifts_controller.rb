@@ -1,5 +1,7 @@
 class TemporaryShiftsController < ApplicationController
 
+  before_action :logged_in_master
+
   def index
     #このページで全てのアクションを実行していく
     @events = current_master.individual_shifts.where(Temporary: false).where(deletable: false)
@@ -15,10 +17,10 @@ class TemporaryShiftsController < ApplicationController
   def new_plan
     @event = current_master.individual_shifts.new
     #終日予定追加modal用のhtmlを返す
-    render plain: render_to_string(partial: 'form_new_plan', layout: false, locals: { event: @event })
+    return_html("form_new_plan")
   end
 
-  #空きシフトを追加する
+  #空きシフト(イエローシフト)を追加する
   def create_shift
     @event = current_master.individual_shifts.new(params_shift)
     @event.staff = current_master.staffs.find_by(staff_number: 0)
@@ -47,15 +49,17 @@ class TemporaryShiftsController < ApplicationController
     end
   end
 
+
   def delete
     begin
       @event = current_master.individual_shifts.find(params[:shift_id])
       #削除するmodalのhtmlを返す
-      render plain: render_to_string(partial: 'form_deletable', layout: false, locals: { event: @event })
+      return_html("form_deletable")
     rescue => exception
       #何もしない(祝日イベント対策)
     end
   end
+
 
   #シフト仮削除
   def deletable
@@ -72,7 +76,6 @@ class TemporaryShiftsController < ApplicationController
         @event.destroy
       end
     end
-    
   end
 
   #シフト確定する(仮削除対象を削除)
@@ -82,10 +85,10 @@ class TemporaryShiftsController < ApplicationController
     @events.each do |shift|
         #仮削除がonのものを削除、それ以外は確定に変更していく
         if shift.deletable == true
-            shift.destroy!
+          shift.destroy!
         else
-            shift.Temporary = true
-            shift.save
+          shift.Temporary = true
+          shift.save
         end
     end
     flash[:success] = "シフトが完成しました！従業員の皆さんに共有しましょう！"

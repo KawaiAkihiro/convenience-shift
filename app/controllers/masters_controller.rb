@@ -13,20 +13,10 @@ class MastersController < ApplicationController
       log_in @master
       
       #店長用の従業員データを作成
-      @staff = current_master.staffs.new
-      @staff.staff_name = current_master.user_name
-      @staff.staff_number = current_master.staff_number
-      @staff.password = "0000"
-      @staff.password_confirmation = "0000"
-      @staff.save
+      create_staff(@master.user_name, @master.staff_number)
 
       #空きシフトを作るための空従業員を作成
-      @empty_staff = current_master.staffs.new
-      @empty_staff.staff_name = "empty"
-      @empty_staff.staff_number = 0
-      @empty_staff.password = "0000"
-      @empty_staff.password_confirmation = "0000"
-      @empty_staff.save
+      create_staff("empty", 0)
 
       flash[:success] = "ユーザー登録が完了しました！"
       redirect_to root_path
@@ -44,12 +34,7 @@ class MastersController < ApplicationController
     end
     current_master.save
     redirect_to root_url
-    if current_master.shift_onoff
-      flash[:success] = "シフト募集を開始しました"
-    else
-      flash[:success] = "シフト募集を終了しました"
-    end
-    
+    current_master.shift_onoff ? flash[:success] = "シフト募集を開始しました" : flash[:success] = "シフト募集を終了しました"
   end
 
   def edit
@@ -59,7 +44,7 @@ class MastersController < ApplicationController
   def update
     @master = Master.find(params[:id])
     if @master.update(master_params)
-      flash[:success] = "プロフィールを変更しました"
+      flash[:success] = "ユーザー情報を変更しました"
       redirect_to root_url
     else
       render 'edit'
@@ -83,7 +68,7 @@ class MastersController < ApplicationController
       log_in_staff(@staff)
       redirect_to root_path
     else
-      flash[:danger] = "従業員番号もしくはパスワードが間違っています"
+      flash.now[:danger]= "従業員番号もしくはパスワードが間違っています"
       render 'login_form'
     end
   end
@@ -98,4 +83,14 @@ class MastersController < ApplicationController
     def master_params
       params.require(:master).permit(:store_name, :user_name, :staff_number, :email, :onoff_email, :password, :password_confirmation)
     end
+
+    def create_staff(name, number)
+      @staff = @master.staffs.new
+      @staff.staff_name = name
+      @staff.staff_number = number
+      @staff.password = "0000"
+      @staff.password_confirmation = "0000"
+      @staff.save
+    end
+
 end

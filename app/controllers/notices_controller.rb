@@ -1,4 +1,6 @@
 class NoticesController < ApplicationController
+    before_action :logged_in_master
+
     def index
         #通知一覧
         @notices = current_master.notices.all

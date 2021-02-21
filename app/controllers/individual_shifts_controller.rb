@@ -1,5 +1,6 @@
 class IndividualShiftsController < ApplicationController
-    before_action :logged_in_staff
+    before_action :logged_in_staff, except: [:destroy]
+
     require 'date'
 
     def index
@@ -11,13 +12,14 @@ class IndividualShiftsController < ApplicationController
     def new
         @event = current_staff.individual_shifts.new
         @patterns = current_staff.patterns.all
-        #modal用のhtmlを返す
+        #新規作成のmodal用のhtmlを返す
         render plain: render_to_string(partial: 'form_new', layout: false, locals: { event: @event, patterns: @patterns })
     end
 
     def create
         @event = current_staff.individual_shifts.new(params_shift)
-        change_finishDate #日付を自動調整
+        #日付を自動調整
+        change_finishDate 
         #同じ時間のシフトを捜索
         @already_event = current_staff.individual_shifts.where(start:@event.start).where(finish:@event.finish)
         
@@ -50,8 +52,8 @@ class IndividualShiftsController < ApplicationController
         begin
             @id = params[:shift_id]
             @event = current_staff.individual_shifts.find(@id)
-            #削除する用の
-            render plain: render_to_string(partial: 'form_delete', layout: false, locals: { event: @event })
+            #削除する用のmodalのhtmlを返す
+            return_html("form_delete")
         rescue => exception
             #何もしない(祝日のイベントに反応しない対策)
         end
@@ -80,13 +82,6 @@ class IndividualShiftsController < ApplicationController
     private
       def params_shift
         params.require(:individual_shift).permit(:start, :finish)
-      end
-
-      def logged_in_staff
-        unless logged_in_staff?
-            flash[:danger] = "ログインしてください"
-            redirect_to staffs_login_path
-        end
       end
 end
 

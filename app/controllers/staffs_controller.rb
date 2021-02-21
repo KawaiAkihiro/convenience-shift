@@ -68,24 +68,4 @@ class StaffsController < ApplicationController
         def staff_params
          params.require(:staff).permit(:staff_name, :staff_number, :password, :password_confirmation, :training_mode)
         end
-
-        def corrent_staff
-            unless logged_in? 
-                unless logged_in_staff?
-                    flash[:danger] = "ログインしてください"
-                    redirect_to staffs_login_url
-                else
-                    begin
-                        @master = Master.find(current_staff.master_id)
-                        @other_staff = @master.staffs.find(params[:id])
-                        unless current_staff?(@other_staff) 
-                            flash[:danger] = "他のユーザの情報は見ることができません"
-                            redirect_to(current_staff) 
-                        end
-                    rescue
-                        redirect_to current_staff
-                    end  
-                end
-            end
-        end 
 end
