@@ -93,22 +93,20 @@ document.addEventListener('turbolinks:load', function() {
             }        
         },
         eventClick: function(info){
-            if (info.event.backgroundColor == "white"){
-                var id = info.event.id
-                $.ajax({
-                    type: "GET",
-                    url:  "/temporary_shifts/delete",
-                    data: { shift_id : id },
-                    datatype: "html",
-                }).done(function(res){
-                
-                $('.modal-body').html(res)
-                $('#modal').fadeIn();
-                }).fail(function (result) {
-                    // 失敗処理
-                    alert("failed");
-                });
-            }
+            var id = info.event.id
+            $.ajax({
+                type: "GET",
+                url:  "/temporary_shifts/delete",
+                data: { shift_id : id },
+                datatype: "html",
+            }).done(function(res){
+            
+            $('.modal-body').html(res)
+            $('#modal').fadeIn();
+            }).fail(function (result) {
+                // 失敗処理
+                alert("failed");
+            });
         },
         eventClassNames: function(arg){
             if(arg.event.allDay){

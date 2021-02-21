@@ -14,6 +14,7 @@ class ShiftSeparation < ApplicationRecord
     end
   end
 
+  #空きシフトの自動入力に使う
   def start_h
     if self.start_time.hour < 10
       "0#{self.start_time.hour}"
@@ -22,6 +23,7 @@ class ShiftSeparation < ApplicationRecord
     end
   end
 
+  #空きシフトの自動入力に使う
   def finish_h
     if self.finish_time.hour < 10
       "0#{self.finish_time.hour}"
@@ -30,6 +32,7 @@ class ShiftSeparation < ApplicationRecord
     end
   end
 
+  #新人従業員ようにナビを表示するためにシフト時間割の時刻を返す
   def start_to_finish
     "#{self.start_time.strftime("%H:%M")}-#{self.finish_time.strftime("%H:%M")}"
   end

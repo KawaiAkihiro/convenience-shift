@@ -39,7 +39,7 @@ class StaffsController < ApplicationController
                 @staff = current_master.staffs.find(params[:id])
                 if @staff.update(staff_params)
                     flash[:success] = "従業員情報を変更しました"
-                    redirect_to staffs_path
+                    redirect_to root_path
                 else
                     render 'edit'
                 end

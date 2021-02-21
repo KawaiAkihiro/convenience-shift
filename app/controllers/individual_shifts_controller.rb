@@ -49,14 +49,8 @@ class IndividualShiftsController < ApplicationController
 
 
     def remove
-        begin
-            @id = params[:shift_id]
-            @event = current_staff.individual_shifts.find(@id)
-            #削除する用のmodalのhtmlを返す
-            return_html("form_delete")
-        rescue => exception
-            #何もしない(祝日のイベントに反応しない対策)
-        end
+        @event = current_staff.individual_shifts.find(params[:shift_id])
+        return_html("form_delete")
     end
 
 

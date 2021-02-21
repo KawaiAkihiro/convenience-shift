@@ -25,7 +25,7 @@ class MastersController < ApplicationController
     end
   end
 
-  #シフトを募集開始と終了を判定
+  #シフトを募集開始or終了する処理
   def shift_onoff
     if !current_master.shift_onoff
       current_master.shift_onoff = true

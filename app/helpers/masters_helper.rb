@@ -11,6 +11,8 @@ module MastersHelper
       redirect_to(root_url) unless current_master?(@master)
     end 
 
+    #以下 staff モデルに関するもの
+
     def log_in_staff(staff)
       session[:staff_id] = staff.id
     end

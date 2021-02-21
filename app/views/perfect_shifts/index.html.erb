@@ -57,10 +57,11 @@
         </div>
     <% else %>
         <div id="static_page">
-            <h1 class="display-3">シフト管理アプリへようこそ</h1>
-            <h2>今すぐシフトを決めてしまおう！</h2>
+            <h1>セブンルールを使えば...</h1>
+            <h1>面倒なシフト作業を<span>一括管理できる</span>！</h1>
 
-            <%= link_to "新規登録", signup_path, class:"btn btn-lg btn-primary" %> 
+            <%= link_to "新規登録", signup_path, class:"btn btn-lg btn-primary signup" %> 
+            <%= link_to "店長ログイン", login_path,class:"btn btn-lg btn-primary login" %> 
         </div> 
     <% end %>   
 </div>    

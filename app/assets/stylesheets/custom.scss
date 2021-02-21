@@ -20,15 +20,20 @@ body{
   background-color :green;
   height: auto;
 }
+
+#help{
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: none;
+}
   
 
 #logo{
   font-size: 50px;
+  font-weight: bold;
   color:#fff;
-  &:hover{
-      color: lightyellow;
-      text-decoration: none;
-  }
+  text-decoration: none;
   margin-left: -60px;
 }
 li{
@@ -84,8 +89,21 @@ li{
     padding: 0 40px 40px;
     // height: 100vh; /* 全画面表示 */
     #static_page{
-      padding-top: 50px;
+      padding-top: 100px;
       text-align:center;
+      span{
+        font-weight: bold;
+      }
+      h1{
+        font-size: 50px;
+        padding-bottom: 20px;
+      }
+      .btn{
+        margin-right: 50px;
+      }
+      .signup{
+        background-color: red;
+      }
     }
   }
 }
@@ -325,6 +343,11 @@ a {
   }
   a{
     color: white;
+    &:hover{
+      text-decoration: none;
+      border-bottom: 1px solid white;
+      padding-bottom: 5px;
+    }
   }
   h1{
     color:hotpink;
@@ -348,10 +371,13 @@ a {
 }
 
 .navi{
-  margin-top:-70px;
+  margin-top:-30px;
   li{
     padding-bottom: 20px;
     font-size: 20px;
+  }
+  .fa-angle-double-right{
+    color: rgb(77, 62, 62)
   }
 }
  

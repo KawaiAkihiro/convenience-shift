@@ -10,7 +10,7 @@ class NoticesController < ApplicationController
     def update
         @notice = current_master.notices.find(params[:id])
         @shift  = current_master.individual_shifts.find(@notice.shift_id)
-        #htmlで表示する時、用の抽出
+        #htmlで使用
         @old_staff = @shift.staff
 
         #申請の種類によって変更する人を選択する
