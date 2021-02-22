@@ -259,10 +259,10 @@ td.fc-day-sun {
 @mixin modal($z:2) {
   z-index: $z;
   display: none;
-  height: 100vh;
+  height: 100vmax;
   position: fixed;
   top: 0;
-  // width: 1000px;
+  width: 1000px;
   top: 0;
   left: 0;
   .modal-content{
@@ -271,7 +271,7 @@ td.fc-day-sun {
     left: 50%;
     transform: translate(-50%, -50%);
     width: auto;
-    padding: 0 20px
+    padding: 0 20px;
   }
 }
 

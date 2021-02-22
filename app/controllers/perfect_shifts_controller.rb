@@ -44,6 +44,7 @@ class PerfectShiftsController < ApplicationController
     elsif !logged_in? && logged_in_staff?
       @event = current_staff.master.individual_shifts.find(params[:shift_id])
       @already_event = current_staff.individual_shifts.find_by(start: @event.start)
+      #シフトが重複しない用にする
       if @already_event.nil?
         return_html("form_fill")
       else
@@ -94,24 +95,25 @@ class PerfectShiftsController < ApplicationController
       elsif !logged_in? && logged_in_staff?
         @event = current_staff.master.individual_shifts.find(params[:shift_id])
         @already_event = current_staff.individual_shifts.find_by(start: @event.start)
-        #重複チェック
-        if @already_event.nil?
+        #終日判定
+        unless @event.allDay
           #他人のシフトをクリック
-          if @event.staff != current_staff && @event.allDay == false 
-            #モードによってmodalのhtmlを変更する
-            change_modal('form_instead', 'alert', 'alert')
-          end
-        else
-          if @event.staff != current_staff && @event.allDay == false
-            return_html("alert")
-          #終日の予定をクリック
-          elsif @event.staff != current_staff && @event.allDay == true
-            return_html("alert")
-          #自分の予定の場合
+          if @event.staff != current_staff 
+            #シフト重複を避ける
+            if @already_event.present?
+              return_html("alert")
+            else
+              #モードによってmodalのhtmlを変更する
+              change_modal('form_instead', 'alert', 'alert')
+            end
+            
+          # 自分の予定の場合
           elsif @event.staff == current_staff
             #モードによってmodalのhtmlを変更する
             change_modal('form_delete','already_delete', "already_instead")
           end
+        else
+          return_html("alert")
         end
 
       #店長のみログイン時
