@@ -28,4 +28,17 @@ RSpec.describe SessionsHelper, type: :helper do
     end
   end
 
+  # describe "current_staffに関するテスト" do
+  #   let!(:master) { FactoryBot.create(:master) }
+  #   let!(:staff)  { FactoryBot.create(:staff, master_id: master.id) }
+  #    before do
+  #        log_in_staff(staff)
+  #    end
+
+  #    example "current_staffは正しいstaffを返してくれるのか" do
+  #        expect(current_staff).to eq (staff)
+  #        expect(logged_in_staff?).to be_truthy
+  #    end
+  # end
+
 end
