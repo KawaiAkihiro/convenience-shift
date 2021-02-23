@@ -7,6 +7,7 @@ import { event } from 'jquery';
 //import dayGridPlugin from '@fullcalendar/daygrid'
 
 document.addEventListener('turbolinks:load', function() {
+
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new Calendar(calendarEl, {
@@ -40,24 +41,8 @@ document.addEventListener('turbolinks:load', function() {
             const year  = info.date.getFullYear();
             const month = (info.date.getMonth() + 1);
             const day   = info.date.getDate();
-            const hour  = (info.date.getHours());
 
-            var ja_hour = 0
-
-            if(hour < 9){
-                ja_hour = hour + 15;
-            }else{
-                ja_hour = hour - 9;
-            }
-
-            var str_hour = ""
-
-            if(ja_hour < 10){
-                str_hour = "0" + ja_hour
-            }else
-                str_hour = ja_hour
-
-            if(hour == 9){
+            if(info.allDay){
                 $.ajax({
                     type: 'GET',
                     url:  '/perfect_shifts/new_plan',

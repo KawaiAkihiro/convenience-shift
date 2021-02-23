@@ -53,7 +53,7 @@ document.addEventListener('turbolinks:load', function() {
             }else
                 str_hour = ja_hour
 
-            if(hour == 9){
+            if(info.allDay){
                 $.ajax({
                     type: 'GET',
                     url:  '/temporary_shifts/new_plan',
@@ -81,7 +81,12 @@ document.addEventListener('turbolinks:load', function() {
                     
                     $('#individual_shift_start_1i').val(year);
                     $('#individual_shift_start_2i').val(month);
-                    $('#individual_shift_start_3i').val(day);
+                    
+                    if (str_hour >= 15){
+                        $('#individual_shift_start_3i').val(day-1);
+                    }else{
+                        $('#individual_shift_start_3i').val(day);
+                    }
                     $('#individual_shift_start_4i').val(str_hour);
                 
                     $('#modal').fadeIn();

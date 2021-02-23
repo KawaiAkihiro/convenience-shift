@@ -38,8 +38,7 @@ document.addEventListener('turbolinks:load', function() {
             const year  = info.date.getFullYear();
             const month = (info.date.getMonth() + 1);
             const day   = info.date.getDate();
-
-            
+      
             $.ajax({
                 type: 'GET',
                 url:  '/individual_shifts/new',
