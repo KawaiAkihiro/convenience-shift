@@ -149,7 +149,7 @@ class PerfectShiftsController < ApplicationController
       #重複を避ける
       @master_staff = current_master.staffs.find_by(staff_number: current_master.staff_number)
       @already_event = @master_staff.individual_shifts.where(start:@event.start)
-      if @already_event.nil?
+      unless @already_event.present?
         return_html("form_fill")
       else
         return_html("alert")
@@ -165,7 +165,7 @@ class PerfectShiftsController < ApplicationController
     #変更に関して店長ができることを表示する
     def masters_action
       unless @event.allDay
-        return_html("alert")
+        return_html("form_direct_delete")
       else
         return_html("plan_delete")
       end
