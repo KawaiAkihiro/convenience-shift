@@ -56,13 +56,7 @@
             </div>
         </div>
     <% else %>
-        <div id="static_page">
-            <h1>セブンルールを使えば...</h1>
-            <h1>面倒なシフト作業を<span>一括管理できる</span>！</h1>
-
-            <%= link_to "新規登録", signup_path, class:"btn btn-lg btn-primary signup" %> 
-            <%= link_to "店長ログイン", login_path,class:"btn btn-lg btn-primary login" %> 
-        </div> 
+        <%= render 'static_pages/how_to_use' %>
     <% end %>   
 </div>    
 

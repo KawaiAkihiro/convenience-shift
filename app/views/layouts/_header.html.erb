@@ -39,7 +39,10 @@
             </div>   
          </div>
       <% else %>
-         <%= link_to "ヘルプ", help_path, id:"help" %>
+         <div class="nav-btn">
+            <%= link_to "新規登録", signup_path, class:"btn btn-lg btn-danger signup" %> 
+            <%= link_to "店長ログイン", login_path,class:"btn btn-lg btn-primary login" %> 
+         </div>
       <% end %>
    </div>   
 </header>   

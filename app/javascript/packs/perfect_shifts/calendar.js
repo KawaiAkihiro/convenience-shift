@@ -21,9 +21,14 @@ document.addEventListener('turbolinks:load', function() {
               color:"#FF8C00"
             }
         ],
+        slotDuration: "01:00:00" ,
         locale: 'ja',
         timeZone: 'Asia/Tokyo',
         scrollTime: '07:00:00',
+        dayCellContent: function(e) {
+            e.dayNumberText = e.dayNumberText.replace('時', '');
+
+        },
         expandRows: true,
         stickyHeaderDates: true,
         headerToolbar: {
@@ -127,3 +132,4 @@ $(function(){
         });
     });
 });
+

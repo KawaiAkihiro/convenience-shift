@@ -5,8 +5,8 @@
 <li><%= link_to "ユーザー情報を変更する", edit_master_path(current_master) %> </li>
 <li><%= link_to "従業員登録", new_staff_path %> </li>
 <li><%= link_to "従業員一覧", staffs_path %></li>
-<li><%= link_to "シフト時間を登録する", new_master_shift_separation_path(current_master)%></li>
-<li><%= link_to "シフト時間一覧", master_shift_separations_path(current_master) %> </li>
+<li><%= link_to "シフト時間割を追加する", new_master_shift_separation_path(current_master)%></li>
+<li><%= link_to "シフト時間割一覧", master_shift_separations_path(current_master) %> </li>
 <li><%= link_to "スタッフとしてログインする", login_master_path(current_master) %></li>
 <% if current_master.shift_onoff == false %>
   <li><%= link_to "シフトを調整する", temporary_shifts_path %></li>

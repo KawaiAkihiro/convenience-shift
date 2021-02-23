@@ -50,6 +50,9 @@ document.addEventListener('turbolinks:load', function() {
                 });
             }
             
+        },
+        eventClassNames: function(arg){
+            return [ 'horizon' ]
         }
     });
 

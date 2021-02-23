@@ -40,6 +40,16 @@ li{
     margin-right: 20px;
 }
 
+.nav-btn{
+  .signup{
+    margin-right: 20px;
+  }
+  margin-bottom: 30px;
+  .login{
+    margin-right: -100px;
+  }
+}
+
 //--url共有ゾーン--//
 
 .form-group{
@@ -97,12 +107,6 @@ li{
       h1{
         font-size: 50px;
         padding-bottom: 20px;
-      }
-      .btn{
-        margin-right: 50px;
-      }
-      .signup{
-        background-color: red;
       }
     }
   }
@@ -194,6 +198,10 @@ li{
   user-select: none;
 }
 
+.fc-time{
+  margin: 10px 0 ;
+}
+
 // 平日
 .fc-day-mon, .fc-day-tue,
 .fc-day-wed, .fc-day-thu, .fc-day-fri{
@@ -206,6 +214,7 @@ li{
 .fc-day-sat {
   .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
     color: blue;
+    z-index: 3;
   }
 }
 
@@ -213,6 +222,7 @@ li{
 .fc-day-sun{
   .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
     color: red;
+    z-index: 3;
   }
 }
 
@@ -244,6 +254,51 @@ td.fc-day-sun {
 #calendar{
   font-size: 25px;
 }
+
+.fc-daygrid-event{
+  .fc-event-title{
+    color: black;
+    font-size: 25px;
+  }
+}
+
+.fc{
+  .fc-bg-event{
+    .fc-event-title{
+      text-align: left;
+    }
+  }
+  
+}
+
+.fc-daygrid-event-dot{
+  display: none;
+}
+
+.fc-timegrid-slot-label-frame{
+  padding: 10px 0;
+}
+
+.fc-daygrid-day-number{
+  color:black
+}
+
+.fc-timegrid-col{
+  :hover{
+    cursor : pointer;
+  }
+}
+
+.fc-event-title{
+  font-size: 17.5px;
+}
+
+.fc-timegrid-event-harness{
+  a.fc-timegrid-event{
+  margin: 0;
+  }
+}
+
 
 .all-calendar{
   margin-top: -80px;
@@ -408,10 +463,11 @@ a {
 
 
 .wrapper{
-  h1{
+  h1,h2{
     padding-top: 30px;
     
   }
+
 }
 
 
