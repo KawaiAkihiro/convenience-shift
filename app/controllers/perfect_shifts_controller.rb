@@ -165,6 +165,7 @@ class PerfectShiftsController < ApplicationController
     #変更に関して店長ができることを表示する
     def masters_action
       unless @event.allDay
+        #店長権限でシフトをダイレクトに削除する
         return_html("form_direct_delete")
       else
         return_html("plan_delete")
