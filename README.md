@@ -1,24 +1,116 @@
-# README
+# セブンルール
+  アルバイト先のシフトの提出、調整、交代、削除を全てクラウド上で管理、表示するサービスです。
+  
+# 操作デモ
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
 
-* Ruby version
+# URL
+現在デプロイ作業中です...
 
-* System dependencies
+# 環境
 
-* Configuration
+・Mac OS Catalina
 
-* Database creation
+・Ruby 2.7.2
 
-* Database initialization
+・Rails 6.0.3.2
 
-* How to run the test suite
+・MySQL 8.0
 
-* Services (job queues, cache servers, search engines, etc.)
+・bootstrap 4.5.3
 
-* Deployment instructions
+・jquery 3.5.1
 
-* ...
+　　・fullcalendar 5.0
+   
+・Rspec
+
+・google calendar api
+
+・AWS
+
+# AWS 構成図
+
+
+
+
+# 機能一覧
+
+## 店長側
+
+・新規ユーザー登録
+
+・ログイン
+
+・従業員の新規登録
+
+・従業員の編集削除
+
+・シフト時間割の新規登録
+
+・シフト時間割の編集削除
+
+・従業員としてログイン
+
+・従業員からの申請(通知)をとして受け取る。(メールに送信もできる)
+
+・各申請に対して許可or却下を下す
+
+・集められたシフトを消す対象にしたり、戻したりする
+
+・集められたシフトを確定シフトにする
+
+・空きシフトを追加する
+
+・終日予定を追加する
+
+・確定した従業員のシフトをダイレクトに削除する。
+
+## 従業員側
+
+・ログイン
+
+・シフトを提出(新規登録)
+
+・提出したシフトを削除
+
+・確定されたシフトを確認
+
+・確定されたシフトを交代、削除する申請(通知)を出す
+
+・空いているシフトに入る
+
+## 共通ページ(root_path)
+
+・確定したシフトたちが全て並んでいる
+
+# モデル相関図
+
+
+<img width="657" alt="スクリーンショット 2021-02-25 6 24 11" src="https://user-images.githubusercontent.com/72666840/109068273-f6588a80-7732-11eb-9bea-99b121e017e7.png">
+
+
+# こだわりポイント
+
+## 高齢者も使えるほどに使いやすいシンプルなUI/UX
+
+僕のバイト先には高齢者の方も働いています。
+
+このサービスは全従業員が使い方を理解して初めて効果を発揮してくれるので、
+
+高齢者のスマホをあまり利用されない方にも使っていただきやすいようにシンプルなUIと
+
+すぐに使い慣れていただけるUXを意識して作りました。
+
+
+## 何度も同じ作業をさせない機能の実装
+
+シフトを提出する際に毎回日付と時間を選択するのがどうも面倒なので、カレンダーの日付をクリックすると自動的に日付を入力し
+
+一度登録した時間割は使い回し可能な機能を実装し、一度入力してしまえば次回からはボタンをクリックするだけでシフト提出が可能になるようにしました。
+
+
+
+
+
