@@ -1,0 +1,23 @@
+// Place all the styles related to the Temporary_shifts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.master_plan{
+    display: none;
+}
+.button{
+    margin-top: -30px;
+    .reload, .shift, .plan{
+    margin-right: 20px;
+    margin-bottom: 20px;
+    } 
+    a{
+        margin-right: 20px;
+        padding-top: -10px;
+    }
+
+}
+
+.submit{
+    padding: 20px 0;
+    text-align: right;
+}

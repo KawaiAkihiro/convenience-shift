@@ -1,0 +1,12 @@
+<div class="wrapper">
+ <h1><%= @staff.staff_name %></h1> <br>
+  <ul>
+      <li><%= link_to "ユーザー情報変更", edit_staff_path(@staff)%></li>
+      <% if @master.shift_onoff == true %>
+        <li><%= link_to "シフト提出",individual_shifts_path %></li>
+      <% end %>  
+      <li><%= link_to "シフトを確認する", comfirmed_shifts_path %></li>
+      <li><%= link_to "店長ログイン", login_path %></li>
+      <li><%= link_to "ログアウト", logout_master_path(@master), {:method=> :delete} %></li>
+  </ul>  
+</div>  

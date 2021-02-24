@@ -1,0 +1,11 @@
+<h2>新規通知のお知らせ</h2>
+<p><%= @shift.start.strftime("%F  %H:%M") %> - <%= @shift.finish.strftime("%H:%M") %> に関して</p><br>
+
+<% if @notice.mode == "instead" %>
+    <p><%= @old_staff.staff_name%>さんが<%= @new_staff.staff_name%>さんと交代を申請しています。</p><br>
+<% elsif @notice.mode == "delete" %>
+    <p><%= @old_staff.staff_name %>さんがシフト削除を申請しています。</p><br>
+    <p>削除理由：<%= @notice.comment %></p><br>
+<% end %>
+
+<p><%= link_to "通知をみる", notice_url(@notice) %></p>

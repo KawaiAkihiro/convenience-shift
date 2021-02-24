@@ -1,0 +1,114 @@
+#ログイン機能のレイアウトテスト(保留中)
+describe 'ログイン' do
+    let!(:master){ create(:master,store_name: 'loginStore')}
+    before do
+      find(".form_text").set("loginStore")
+      find(".form_pass").set("foobar")
+      click_button 'ログイン'
+    end
+    subject { page }
+
+    example 'ログイン時のレイアウトテスト' do
+      is_expected.to have_current_path user_path(master)
+      is_expected.to_not have_link nil, href: login_path
+      is_expected.to     have_link 'ログアウト', href: logout_path
+    end
+end
+
+
+#_header.html.erb button_to のクラス
+class: "btn-link btn-outline-dark bg-dark "
+
+#生javascript_calendar
+<button id="prev" type="button">前の月</button>
+<button id="next" type="button">次の月</button>
+<div id="calendar"></div>
+
+<%= javascript_pack_tag "calendar/calendar" %>   
+
+<% if calendar.number_of_weeks == 1 %>
+      <span class="calendar-title">Week <%= calendar.week_number %></span>
+    <%else%>
+        <span class="calendar-title">Week <%= calendar.week_number %> - <%= calendar.end_week %></span>
+    <%end%>
+
+#confirmed_shift.html.erb
+<p>消去するやつ</p>
+<%= week_calendar events:@deletable_shifts do |date, shifts|%>
+    <%= date.strftime("%m/%d") %>
+    <% if shifts.count > 0%>
+    <hr class="cp_hr01" />
+  <% end %>
+  <% shifts.each do |shift| %>
+    <div class="data">
+      <hr class="cp_hr01" />
+      <%=link_to shift.staff.staff_name,  deletable_individual_shift_path(shift), method: :patch %> <br>
+      <%= shift.start.strftime("%H") %>時~
+      <%= shift.finish.strftime("%H") %>時
+    </div>  
+  <% end %>
+<% end %>
+
+
+
+<div class="row">
+    <%= form_with(model: @event, url: individual_shifts_path, html: { method: :delete }, remote: true) do |f| %>
+        <%= f.submit "Unfollow", class: "btn btn-primary" %>
+    <% end %>
+</div>    
+
+<% @patterns.count > 0 %>
+    <% @patterns.each do |pattern| %>
+          <%= link_to "#{pattern.start.strftime("%H:%M")}-#{pattern.finish.strftime("%H:%M")}"%>
+    <% end %>
+<% end %>  
+
+test
+
+$('#calendar').fullCalendar( 'rerenderEvents' );
+$('#calendar').fullCalendar( 'addEventSource' );
+
+#_header.html.erb
+
+<li class="dropdown nav-link">
+   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      店長 <b class="caret"></b>
+   </a>
+   <ul class="dropdown-menu">
+      <li class="nav-link"><%= link_to "設定",        current_master %></li>
+      <li class="nav-link"><%= link_to "ログアウト",   logout_path, {:method=> :post} %></li>
+   </ul>   
+</li>
+<li class="dropdown nav-link">
+   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      従業員 <b class="caret"></b>
+   </a>
+   <ul class="dropdown-menu">
+      <li class="nav-link"><%= link_to "設定", staff_path(current_staff) %></li>
+   </ul>   
+</li>   
+
+<li class="dropdown nav-link">
+   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      従業員 <b class="caret"></b>
+   </a>
+   <ul class="dropdown-menu">
+      <li class="nav-link"><%= link_to "個人ページ",      staff_path(current_staff) %></li>
+   </ul>   
+</li>   
+<li class="nav-link"><%= link_to "店長ログイン",     login_path %></li>
+
+<li class="dropdown nav-link">
+   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      店長 <b class="caret"></b>
+   </a>
+   <ul class="dropdown-menu">
+      <li class="nav-link"><%= link_to "設定",        current_master %></li>
+      <li class="nav-link"><%= link_to "ログアウト",   logout_path, {:method=> :post} %></li>
+   </ul>   
+</li>
+
+$('#modal').fadeOut();
+$('.response-modal-body').html('<h1>交代申請をしました！</h1>');
+$('#response-modal').fadeIn();
+$('#calendar').fullCalendar( 'render' );
