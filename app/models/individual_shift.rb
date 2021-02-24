@@ -14,10 +14,7 @@ class IndividualShift < ApplicationRecord
     end
   end
 
-  def start_time
-    self.start
-  end
-
+  #カレンダーで表示する名前
   def parent
     if self.staff.staff_number == 0
       if self.plan == nil
@@ -31,11 +28,7 @@ class IndividualShift < ApplicationRecord
     
   end
 
-  def id_parent
-    str = [self.id.to_s, self.staff.staff_name]
-    return str.join(" ")
-  end
-
+  #終日判定
   def allDay
     unless self.finish.present?
       true
@@ -44,6 +37,7 @@ class IndividualShift < ApplicationRecord
     end
   end
 
+  #トレーニング中の従業員の枠線は赤にする
   def color
     if self.staff.training_mode == true
       "red"
@@ -57,12 +51,14 @@ class IndividualShift < ApplicationRecord
     return str.join(" ~ ")
   end
 
+  #個人シフト提出中に表示する時刻
   def time
     str = [ "#{self.start.strftime("%H")}", "#{self.finish.strftime("%H")}" ]
     return str.join(" ~ ")
     
   end
 
+  #空きシフトは背景を黄色で表示
   def backgroundColor
     if self.staff.staff_number == 0 && self.finish != nil
       "yellow"

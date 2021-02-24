@@ -56,15 +56,9 @@
             </div>
         </div>
     <% else %>
-        <div class="center jumbtron ">
-                <h1 class="display-3">シフト管理アプリへようこそ</h1>
-                <h2>今すぐシフトを決めてしまおう！</h2>
-
-                <%= link_to "新規登録", signup_path, class:"btn btn-lg btn-primary" %>
-        </div>  
+        <%= render 'static_pages/how_to_use' %>
     <% end %>   
 </div>    
 
 <%= javascript_pack_tag 'perfect_shifts/calendar' %>
 <%= javascript_pack_tag 'shared/index' %>
-<%= javascript_pack_tag 'shared/reload' %>

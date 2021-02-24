@@ -20,19 +20,34 @@ body{
   background-color :green;
   height: auto;
 }
+
+#help{
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: none;
+}
   
 
 #logo{
   font-size: 50px;
+  font-weight: bold;
   color:#fff;
-  &:hover{
-      color: lightyellow;
-      text-decoration: none;
-  }
+  text-decoration: none;
   margin-left: -60px;
 }
 li{
     margin-right: 20px;
+}
+
+.nav-btn{
+  .signup{
+    margin-right: 20px;
+  }
+  margin-bottom: 30px;
+  .login{
+    margin-right: -100px;
+  }
 }
 
 //--url共有ゾーン--//
@@ -83,6 +98,17 @@ li{
     margin: 0;
     padding: 0 40px 40px;
     // height: 100vh; /* 全画面表示 */
+    #static_page{
+      padding-top: 100px;
+      text-align:center;
+      span{
+        font-weight: bold;
+      }
+      h1{
+        font-size: 50px;
+        padding-bottom: 20px;
+      }
+    }
   }
 }
 
@@ -164,6 +190,18 @@ li{
   padding-left: 100px;
 }
 
+.event_holiday{
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.fc-time{
+  margin: 10px 0 ;
+}
+
 // 平日
 .fc-day-mon, .fc-day-tue,
 .fc-day-wed, .fc-day-thu, .fc-day-fri{
@@ -176,6 +214,7 @@ li{
 .fc-day-sat {
   .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
     color: blue;
+    z-index: 3;
   }
 }
 
@@ -183,6 +222,7 @@ li{
 .fc-day-sun{
   .fc-daygrid-day-top, .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion, .fc-list-day-cushion {
     color: red;
+    z-index: 3;
   }
 }
 
@@ -198,16 +238,67 @@ td.fc-day-sun {
 .horizon{
   writing-mode: horizontal-tb;
   text-align: center;
+  :hover{
+    cursor : pointer;
+  }
 }
 
 .vertical{
   writing-mode: vertical-lr;
   text-align: center;
+  :hover{
+    cursor : pointer;
+  }
 }
 
 #calendar{
   font-size: 25px;
 }
+
+.fc-daygrid-event{
+  .fc-event-title{
+    color: black;
+    font-size: 25px;
+  }
+}
+
+.fc{
+  .fc-bg-event{
+    .fc-event-title{
+      text-align: left;
+    }
+  }
+  
+}
+
+.fc-daygrid-event-dot{
+  display: none;
+}
+
+.fc-timegrid-slot-label-frame{
+  padding: 10px 0;
+}
+
+.fc-daygrid-day-number{
+  color:black
+}
+
+.fc-timegrid-col{
+  :hover{
+    cursor : pointer;
+  }
+}
+
+.fc-event-title{
+  font-size: 17.5px;
+}
+
+.fc-timegrid-event-harness{
+  a.fc-timegrid-event{
+  margin: 0;
+  }
+}
+
 
 .all-calendar{
   margin-top: -80px;
@@ -223,10 +314,10 @@ td.fc-day-sun {
 @mixin modal($z:2) {
   z-index: $z;
   display: none;
-  height: 100vh;
+  height: 100vmax;
   position: fixed;
   top: 0;
-  // width: 1000px;
+  width: 1000px;
   top: 0;
   left: 0;
   .modal-content{
@@ -235,7 +326,7 @@ td.fc-day-sun {
     left: 50%;
     transform: translate(-50%, -50%);
     width: auto;
-    padding: 0 20px
+    padding: 0 20px;
   }
 }
 
@@ -253,6 +344,23 @@ td.fc-day-sun {
 
 
 //---sidebar---//
+
+//通知数
+.notice{
+  display: flex;
+  align-items: center;
+  position:absolute;
+  .number{
+      height:50px;
+      width:50px;
+      border-radius:50%;
+      line-height:50px;
+      text-align:center;
+      background:pink;
+      font-size:24px;
+      margin-left:20px;
+  }
+}
 
 ul {
   margin: 0;
@@ -290,6 +398,11 @@ a {
   }
   a{
     color: white;
+    &:hover{
+      text-decoration: none;
+      border-bottom: 1px solid white;
+      padding-bottom: 5px;
+    }
   }
   h1{
     color:hotpink;
@@ -313,10 +426,13 @@ a {
 }
 
 .navi{
-  margin-top:-70px;
+  margin-top:-30px;
   li{
     padding-bottom: 20px;
     font-size: 20px;
+  }
+  .fa-angle-double-right{
+    color: rgb(77, 62, 62)
   }
 }
  
@@ -347,10 +463,11 @@ a {
 
 
 .wrapper{
-  h1{
+  h1,h2{
     padding-top: 30px;
     
   }
+
 }
 
 

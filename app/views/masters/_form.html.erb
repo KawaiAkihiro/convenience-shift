@@ -8,7 +8,7 @@
   <%= f.text_field :user_name, class: 'form-control' %>
 
   <%= f.label :email %>
-  <%= f.text_field :email, class: 'form-control' %>
+  <%= f.email_field :email, class: 'form-control' %>
 
   <% if controller.action_name == "edit" %>
     <br>

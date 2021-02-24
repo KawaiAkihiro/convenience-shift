@@ -2,16 +2,26 @@ import { Calendar, whenTransitionDone } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import weekGridPlugin from '@fullcalendar/timegrid'
 //import dayGridPlugin from '@fullcalendar/daygrid'
+import googleCalendarApi from '@fullcalendar/google-calendar'
 
 document.addEventListener('turbolinks:load', function() {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new Calendar(calendarEl, {
-        plugins: [ weekGridPlugin, interactionPlugin ],
+        plugins: [ weekGridPlugin, interactionPlugin, googleCalendarApi ],
         events: '/temporary_shifts.json',
+        googleCalendarApiKey: 'AIzaSyBJgxvPtAdElMF6qlcqWqIwFludRmesnOI',
+        eventSources : [
+            {
+              googleCalendarId: 'japanese__ja@holiday.calendar.google.com',
+              display: 'background',
+              color:"#FF8C00"
+            }
+        ],
         locale: 'ja',
         timeZone: 'Asia/Tokyo',
         scrollTime: '07:00:00',
+        slotDuration: "01:00:00" ,
         firstDay: 1,
         headerToolbar: {
             start: '',
@@ -44,7 +54,7 @@ document.addEventListener('turbolinks:load', function() {
             }else
                 str_hour = ja_hour
 
-            if(hour == 9){
+            if(info.allDay){
                 $.ajax({
                     type: 'GET',
                     url:  '/temporary_shifts/new_plan',
@@ -72,7 +82,12 @@ document.addEventListener('turbolinks:load', function() {
                     
                     $('#individual_shift_start_1i').val(year);
                     $('#individual_shift_start_2i').val(month);
-                    $('#individual_shift_start_3i').val(day);
+                    
+                    if (str_hour >= 15){
+                        $('#individual_shift_start_3i').val(day-1);
+                    }else{
+                        $('#individual_shift_start_3i').val(day);
+                    }
                     $('#individual_shift_start_4i').val(str_hour);
                 
                     $('#modal').fadeIn();
