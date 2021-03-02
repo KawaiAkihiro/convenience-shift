@@ -112,3 +112,8 @@ $('#modal').fadeOut();
 $('.response-modal-body').html('<h1>交代申請をしました！</h1>');
 $('#response-modal').fadeIn();
 $('#calendar').fullCalendar( 'render' );
+
+
+if @event.start.hour < @event.finish.hour #日付を跨がない場合はそのまま,日付を跨ぐ場合は1日プラスする。
+   @event.finish = @event.finish.change(year: @event.start.year, month: @event.start.month, day: @event.start.day) 
+else  
