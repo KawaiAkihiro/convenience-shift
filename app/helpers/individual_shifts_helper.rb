@@ -1,9 +1,8 @@
 module IndividualShiftsHelper
     #退勤時間の日付を出勤時間の日付に合わせる
     def change_finishDate 
-        if @event.start.hour < @event.finish.hour #日付を跨がない場合はそのまま,日付を跨ぐ場合は1日プラスする。
-            @event.finish = @event.finish.change(year: @event.start.year, month: @event.start.month, day: @event.start.day) 
-        else  
+        #日付を跨がない場合はそのまま,日付を跨ぐ場合は1日プラスする。
+        if @event.start.hour > @event.finish.hour  
             last_day = Date.new(@event.start.year,@event.start.month,-1).day #月末の日にちを取得
             if @event.start.month == 12 && @event.start.day == 31            #大晦日
                 @event.finish = @event.finish.change(year: @event.start.year + 1 ,  month: 1, day: 1)

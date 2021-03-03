@@ -17,14 +17,14 @@ class IndividualShiftsController < ApplicationController
     end
 
     def create
-        @event = current_staff.individual_shifts.new(params_shift)
+        @event = current_staff.individual_shifts.new(params_event)
         #日付を自動調整
         change_finishDate 
         #同じ時間のシフトを捜索
         @already_event = current_staff.individual_shifts.where(start:@event.start).where(finish:@event.finish)
         
         #シフトパターンを作成
-        @pattern = current_staff.patterns.new(params_shift) 
+        @pattern = current_staff.patterns.new(params_event) 
         @already_pattern = current_staff.patterns.where(start: @pattern.start).where(finish: @pattern.finish)
         
         #すでに同じシフトを登録していないか判定
@@ -74,7 +74,7 @@ class IndividualShiftsController < ApplicationController
 
 
     private
-      def params_shift
+      def params_event
         params.require(:individual_shift).permit(:start, :finish)
       end
 end
