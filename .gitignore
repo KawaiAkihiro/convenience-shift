@@ -35,7 +35,4 @@
 yarn-debug.log*
 .yarn-integrity
 
-Dockerfile
-docler-compose.yml
-
 
