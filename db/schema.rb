@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_02_05_152535) do
 
-  create_table "individual_shifts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "individual_shifts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "start"
     t.datetime "finish"
     t.bigint "staff_id", null: false
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_152535) do
     t.index ["staff_id"], name: "index_individual_shifts_on_staff_id"
   end
 
-  create_table "masters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "masters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "store_name"
     t.string "user_name"
     t.datetime "created_at", precision: 6, null: false
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_152535) do
     t.boolean "onoff_email", default: true
   end
 
-  create_table "notices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "notices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "mode"
     t.integer "shift_id"
     t.integer "staff_id"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_152535) do
     t.index ["master_id"], name: "index_notices_on_master_id"
   end
 
-  create_table "patterns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "patterns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.time "start"
     t.time "finish"
     t.bigint "staff_id", null: false
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_152535) do
     t.index ["staff_id"], name: "index_patterns_on_staff_id"
   end
 
-  create_table "shift_separations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "shift_separations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.time "start_time"
     t.time "finish_time"
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_152535) do
     t.index ["master_id"], name: "index_shift_separations_on_master_id"
   end
 
-  create_table "staffs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "staffs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "staff_name"
     t.integer "staff_number"
     t.boolean "training_mode"
