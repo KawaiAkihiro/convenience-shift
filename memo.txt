@@ -117,3 +117,7 @@ $('#calendar').fullCalendar( 'render' );
 if @event.start.hour < @event.finish.hour #日付を跨がない場合はそのまま,日付を跨ぐ場合は1日プラスする。
    @event.finish = @event.finish.change(year: @event.start.year, month: @event.start.month, day: @event.start.day) 
 else  
+
+
+#credentials.yml.enc
+ayDE/eX380t0yMjNATjk+D/y28/OGNQsqNXs4eT41VBGgnuPhbaZT2JNT9yzqMjGyAfod4NRmE4P5yIFCwp1GUh3f5tFiYJjOqU4/FPf4ibj7Jrfn4ldgujE19yrCtZm7Atyv1+DdN+MFmAqPHLtH5eA9Moluj0cncoAzjPnsMDj+qAfLR65M8KfJecQnPCBb6xSyBYyG7n8JaSwYUtObcTLlRYx0mG+UVp44yHRoF4BpvAZ723mNDt85OFxSlCbnRE4aXZ+pJVibxsT4r02SE1G9l/jLPInqbz6JDUFLY5Adx/iglg/o14FSIwo1bwLG+2rBBPVVmkYgqLk6DkYbSBuWrf7lCvHz82JoeuHsIbc12PtcG6HYSCt1khqT93NgIGRqjnZ1AaxFfCkzOv30nl4AVJhmOEX0ynj--CRgqHjTfpoaAnsq2--sjHPJDtheGC2/ltI0g6n/Q==

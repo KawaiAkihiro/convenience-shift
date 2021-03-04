@@ -36,3 +36,6 @@ yarn-debug.log*
 .yarn-integrity
 
 
+credentials.yml.enc
+docker-compose.yml
+/.env
