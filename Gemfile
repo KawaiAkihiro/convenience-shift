@@ -9,6 +9,7 @@ gem 'puma',       '4.3.4'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.4.4'
 gem 'sass-rails'
+gem 'sassc', '2.3.0'
 gem 'webpacker',  '4.0.7'
 gem 'turbolinks', '5.2.0'
 gem 'jbuilder',   '2.9.1'
