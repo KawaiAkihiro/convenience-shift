@@ -12,7 +12,7 @@ require("bootstrap");
 require("@fortawesome/fontawesome-free");
 
 //require("custom.js");
-require("jquery");
+// require("jquery");
 
 import '@fortawesome/fontawesome-free/js/all';
 import "../stylesheets/application.scss";
