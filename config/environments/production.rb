@@ -86,6 +86,8 @@ Rails.application.configure do
   end
 
   config.assets.js_compressor = Uglifier.new(harmony: true)
+  config.assets.compile = true
+  config.assets.initialize_on_precompile=false
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
